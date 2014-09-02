@@ -1,0 +1,1 @@
+SELECT value FROM BACKEND_PARAMS WHERE name = ?
