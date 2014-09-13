@@ -19,8 +19,6 @@ public class RuntimeParams {
     static {
         // default params
         params.put("DriverClass", "com.mysql.jdbc.Driver");
-        params.put("DBUser", "main");
-        params.put("DBPass", "r0f3lc0pt3r!");
         params.put("DBURL", "jdbc:mysql://gweizman.noip.me/main?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull");
         params.put("MaxPoolSize", 10);
         params.put("MaxStatementsPerConnection", 20);
@@ -62,7 +60,7 @@ public class RuntimeParams {
         if(!f.exists()) {
             return false;
         }
-        params = new HashMap<>();
+      //  params = new HashMap<>();
         BufferedReader br = new BufferedReader(new FileReader(f));
         String line;
         StringBuilder sb = new StringBuilder();
@@ -75,7 +73,7 @@ public class RuntimeParams {
         String key;
         Iterator<String> keyIterator = jsonFormat.keys();
         while(keyIterator.hasNext()) {
-            key = keyIterator.next();
+            key = keyIterator.next();                            
             params.put(key, jsonFormat.get(key));
         }
         

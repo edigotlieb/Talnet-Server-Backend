@@ -49,6 +49,7 @@ public class ThreadHandler {
         
         garbageKeyCollectorTimer = new Timer();
         
+        
         try {            
             RuntimeParams.readParams(paramFileName);       // read all the params from a config file
         } catch (Exception ex) {
