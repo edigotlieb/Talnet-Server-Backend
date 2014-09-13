@@ -16,7 +16,7 @@ public class Main {
      //   String source = "{ \"RequesterCredentials\": { \"appName\":\"testApp\" , \"appKey\":\"testKey\" , \"username\":\"testUsername\", \"password\":\"testPassword\" } , \"RequestInfo\": { \"requestType\":\"USER\" , \"requestAction\":\"SIGN_IN\" } , \"RequestData\": {} }";
      //   Request req = RequestFactory.createRequestFromString(source);
     //    System.out.println(req.getType().toString());
-        ThreadHandler.init("");
+        ThreadHandler.init(args[0]);
         ThreadHandler.run();
     }
     
