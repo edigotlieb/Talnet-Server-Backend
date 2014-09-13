@@ -122,7 +122,8 @@ public class RequestFactory {
 	private static UserRequest buildUserRequest(Credentials creds, USER_ACTION_TYPE actionType, JSONObject requestData) {
 		switch (actionType) {
 			case SIGN_IN: {
-				return new UserSigninRequest(creds);
+				String requesting_app = requestData.getString("requestingApp");
+				return new UserSigninRequest(requesting_app, creds);
 			}
 			case SIGN_UP: {
 				String username = requestData.getString("username");

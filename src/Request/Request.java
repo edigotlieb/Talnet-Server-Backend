@@ -63,6 +63,7 @@ public abstract class Request {
 		}
 
 		final String username = this.creds.getUsername();
+		final String appname = this.creds.getAppName();
 		rset = sqlExc.executePreparedStatement("getUserPermissionGroups", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
@@ -74,7 +75,20 @@ public abstract class Request {
 		}
 		String hashed_pass = rset.getString("PASSWORD");
 
-		if (!this.creds.getHashedPassword().equals(Hashing.MD5Hash(hashed_pass + challenge))) {
+		ResultSet rset1 = sqlExc.executePreparedStatement("GetKey", new StatementPreparer() {
+			@Override
+			public void prepareStatement(PreparedStatement ps) throws SQLException {
+				ps.setString(1, username);
+				ps.setString(2, appname);
+			}
+		});                
+		if (!rset1.next()) {
+			throw new ValidationException(4);
+		}
+		String hashed_temp_key = rset1.getString("KEY");
+
+		if (!this.creds.getHashedPassword().equals(Hashing.MD5Hash(hashed_temp_key + challenge)) &&
+				(!this.creds.isMasterApplication() || !this.creds.getHashedPassword().equals(Hashing.MD5Hash(hashed_pass + challenge)))) {
 			throw new ValidationException(4);
 		}
 		this.creds.setMoreInfo(rset.getString("NAME"),
