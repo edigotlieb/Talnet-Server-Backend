@@ -1,4 +1,4 @@
-Sep 13, 2014 5:17:50 PM ThreadHandler init
+Sep 13, 2014 5:20:17 PM ThreadHandler init
 INFO: finished initiallizing...
-Sep 13, 2014 5:17:50 PM ThreadHandler run
+Sep 13, 2014 5:20:17 PM ThreadHandler run
 INFO: waiting for incoming connection...
