@@ -99,6 +99,9 @@ public class ThreadHandler {
         
         logger.setLevel(Level.parse((String) RuntimeParams.getParams("LogLvl")));
         
+        System.out.println((String) RuntimeParams.getParams("LogLvl"));
+        
+        
         logger.log(Level.INFO, "finished initiallizing...");
         wasInit = true;
         return true;
