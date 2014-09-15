@@ -259,6 +259,7 @@ public class ClientRequestThread extends Thread {
                //  System.out.println(response);
                 this.out.print(response);
             
+            	logMSG(response, Level.FINEST);
             //this.writer.flush();
             this.out.flush();
 

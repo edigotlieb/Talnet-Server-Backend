@@ -30,6 +30,7 @@ public class RuntimeParams {
         params.put("ResponseWaitInterval",50);
         params.put("LogFileName", "logger.txt"); // time in millis
         params.put("BufferSize", 16384); // time in millis
+        params.put("LogLvl","INFO");
         
         params.put("keyLifeTime",1800); // time in sec (30 min)
         params.put("GarbageKeyCollectorPeriod",300000L); // time in millis (5 min)
