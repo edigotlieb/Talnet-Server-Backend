@@ -320,12 +320,7 @@ public class ClientRequestThread extends Thread {
                         
                         obj.put(column_name, stripEdges(JSONObject.quote(rs.getNString(column_name))));
                         break;
-                    case java.sql.Types.VARCHAR:
-                        byte[] bts = rs.getBytes(column_name);                        
-                        for(int j=0;j<bts.length;j++)  {
-                            System.out.print((char) bts[j]+ " ");
-                            System.out.println((int) bts[j]);
-                        }
+                    case java.sql.Types.VARCHAR:                                                                      
                         obj.put(column_name, stripEdges(JSONObject.quote(rs.getString(column_name))));
                         break;
                     case java.sql.Types.TINYINT:
