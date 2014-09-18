@@ -23,7 +23,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import SQL.Utilities.Utils;
-import java.io.UnsupportedEncodingException;
 
 /**
  * This class handles a user request from start to finish.
@@ -32,35 +31,36 @@ public class ClientRequestThread extends Thread {
 
     // the db connection
     Connection con;
-
+    
     // the tcp socket
     Socket socket;
-
+    
     // the logger being used
     static final Logger log = Logger.getGlobal();
-
+    
     // the socket reader
-    BufferedReader reader;
-
+    BufferedReader reader;    
+    
     // the socket printer
     PrintWriter out;
-
+    
     // the thread ID
     private final int ID;
-
+    
     // the LOG format
     private final static String LOG_FORMAT_MSG = "CRT-%d: %s";
 
     // response format
     final static String RESPONSE_FORMAT = "{\"Status\":\"%d\" , \"Message\":\"%s\", \"Data\":%s}";
-
+    
     // final String ERROR_FORMAT = "{'ERROR':'%s'}";
     // final String SUCCESS_MSG = "{'ACK':'Request performed'}\n";
+
     /**
-     *
-     * @param con    the db connection
+     * 
+     * @param con the db connection
      * @param socket the tcp socket
-     * @param ID     the thread ID
+     * @param ID the thread ID
      */
     public ClientRequestThread(Connection con, Socket socket, int ID) {
         this.con = con;
@@ -70,7 +70,7 @@ public class ClientRequestThread extends Thread {
 
     /**
      * logs a string message
-     *
+     * 
      * @param msg the message to log
      * @param lvl the log level
      */
@@ -80,17 +80,18 @@ public class ClientRequestThread extends Thread {
 
     /**
      * logs an exception.
-     *
-     * @param ex  the exception to log
+     * 
+     * @param ex the exception to log
      * @param lvl the log level
      */
     public void logException(Exception ex, Level lvl) {
         log.log(lvl, String.format(LOG_FORMAT_MSG, ID, ex.getMessage()), ex);
     }
 
+    
     @Override
     /**
-     * the run() function of the thread that handles the user request
+     *  the run() function of the thread that handles the user request
      */
     public synchronized void run() {
 
@@ -98,7 +99,7 @@ public class ClientRequestThread extends Thread {
         try {
             logMSG("opening streams...", Level.INFO);
             // open a stream
-            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));            
             this.out = new PrintWriter(this.socket.getOutputStream());
         } catch (IOException ex) {
             logMSG("failed to open streams...", Level.INFO);
@@ -124,7 +125,7 @@ public class ClientRequestThread extends Thread {
             int timeInterval = (int) RuntimeParams.getParams("ResponseWaitInterval");
             logMSG(String.format("waiting for client request max %d millis...", time), Level.INFO);
             int i = 0;
-            while (i * timeInterval < time && !reader.ready()) {
+            while(i*timeInterval < time && !reader.ready()) {
                 Thread.sleep(timeInterval);
             }
             // Thread.sleep(time);
@@ -166,7 +167,7 @@ public class ClientRequestThread extends Thread {
             // logMSG("REQUEST: "+(new String(buffer)),Level.INFO);
             // process response to request
             clientRequest = RequestFactory.createRequestFromString(new String(buffer));
-            if (clientRequest == null) {
+            if(clientRequest == null) {
                 throw new JSONException("RequestFactory Fail...");
             }
             this.logMSG("proc client request...", Level.INFO);
@@ -238,10 +239,10 @@ public class ClientRequestThread extends Thread {
             this.logMSG(ErrorMsg.getErrorMsg(51), Level.INFO);
             return;
         } catch (Exception ex) {
-
+            
             this.out.print(this.createErrorResponse(500));
             this.out.flush();
-
+            
             ex.printStackTrace();
             // something else went wrong
             this.closeThread();
@@ -253,20 +254,20 @@ public class ClientRequestThread extends Thread {
 //<editor-fold defaultstate="collapsed" desc="response for client">
         try {
             // send resultSet                    
-            //this.writer.write(createResponse(resultSet));
-            String response = createResponse(resultSet, 1, "");
-            //  System.out.println(response);
-            this.out.print(response);
-
-            logMSG(response, Level.FINEST);
+                //this.writer.write(createResponse(resultSet));
+                String response = createResponse(resultSet, 1, "");
+               //  System.out.println(response);
+                this.out.print(response);
+            
+            	logMSG(response, Level.FINEST);
             //this.writer.flush();
             this.out.flush();
 
         } catch (SQLException ex) {
             // cant write result or read result set
-            logMSG("cant write result or read result set", Level.INFO);
-            this.out.print(createErrorResponse(500));
-            this.out.flush();
+             logMSG("cant write result or read result set", Level.INFO);
+             this.out.print(createErrorResponse(500));
+             this.out.flush();
         }
         logMSG("Response sent to client", Level.INFO);
         this.closeThread();
@@ -276,16 +277,15 @@ public class ClientRequestThread extends Thread {
 
     /**
      * This method converts a resultSet into a JSON data value
-     *
+     * 
      * @param rs the result set to convert
-     *
      * @return the JSON format string
      * @throws SQLException if the result set throws it
      */
     private synchronized String valueOf(ResultSet rs) throws SQLException {
         JSONArray json = new JSONArray();
         ResultSetMetaData rsmd = rs.getMetaData();
-        rs.beforeFirst();
+        rs.beforeFirst();        
         while (rs.next()) {
             int numColumns = rsmd.getColumnCount();
             JSONObject obj = new JSONObject();
@@ -317,38 +317,30 @@ public class ClientRequestThread extends Thread {
                         obj.put(column_name, rs.getInt(column_name));
                         break;
                     case java.sql.Types.NVARCHAR:
-
+                        
                         obj.put(column_name, stripEdges(JSONObject.quote(rs.getNString(column_name))));
                         break;
-                    case java.sql.Types.VARCHAR: {
-                        String result = "";
-                        try {
-                            result = new String(rs.getString(column_name).getBytes(), "utf-8");
-                        } catch (UnsupportedEncodingException ex) {
-                            Logger.getLogger(ClientRequestThread.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        //  obj.put(column_name, stripEdges(JSONObject.quote(rs.getString(column_name))));
-                        obj.put(column_name, stripEdges(JSONObject.quote(result)));
-                    }
-                    break;
+                    case java.sql.Types.VARCHAR:                                                                      
+                        obj.put(column_name, stripEdges(JSONObject.quote(rs.getString(column_name))));
+                        break;
                     case java.sql.Types.TINYINT:
                         obj.put(column_name, rs.getInt(column_name));
                         break;
                     case java.sql.Types.SMALLINT:
                         obj.put(column_name, rs.getInt(column_name));
                         break;
-                    case java.sql.Types.DATE: {
-                        // obj.put(column_name, rs.getString(column_name));
-                        Date d = rs.getDate(column_name);
-                        obj.put(column_name, d == null ? "" : d.toString());
-                    }
-                    break;
-                    case java.sql.Types.TIMESTAMP: {
-                        // obj.put(column_name, rs.getString(column_name));
-                        Timestamp d = rs.getTimestamp(column_name);
-                        obj.put(column_name, d == null ? "" : d.toString());
-                    }
-                    break;
+                    case java.sql.Types.DATE:    {
+                       // obj.put(column_name, rs.getString(column_name));
+                        Date d = rs.getDate(column_name);                        
+                        obj.put(column_name, d==null ? "": d.toString());
+                    }                                             
+                        break;
+                    case java.sql.Types.TIMESTAMP:  {
+                       // obj.put(column_name, rs.getString(column_name));
+                        Timestamp d = rs.getTimestamp(column_name);                        
+                        obj.put(column_name, d==null ? "": d.toString());
+                    }                        
+                        break;
                     default:
                         obj.put(column_name, rs.getObject(column_name));
                         break;
@@ -363,25 +355,23 @@ public class ClientRequestThread extends Thread {
 
     /**
      * Create the final response string to be sent back to the user,
-     *
-     * @param rs   the data result set
+     * 
+     * @param rs the data result set
      * @param stat the handle status (0 - fail, 1 - success)
-     * @param msg  the message to append to the responce
-     *
+     * @param msg the message to append to the responce
      * @return the string to send to the user (raw)
      * @throws SQLException if the ResultSet throws it
      */
     private synchronized String createResponse(ResultSet rs, int stat, String msg) throws SQLException {
         String message = (stat == 0) ? msg : "";
-        String data = (rs == null || !rs.next()) ? "[]" : valueOf(rs);
+        String data = (rs == null || !rs.next()) ? "[]":valueOf(rs);
         return String.format(RESPONSE_FORMAT, stat, message, data);
     }
 
     /**
      * Creates a generic error response with the given message
-     *
-     * @param msg the error message
-     *
+     * 
+     * @param msg the error message 
      * @return the string to send to the user (raw)
      */
     private synchronized String createErrorResponse(String msg) {
@@ -390,9 +380,8 @@ public class ClientRequestThread extends Thread {
 
     /**
      * Creates a error response with a given errorCode as to the ErrorMsg class
-     *
+     * 
      * @param errorCode the message error code (as defined by ErrorMsg)
-     *
      * @return the string to send to the user (raw)
      */
     private synchronized String createErrorResponse(int errorCode) {
@@ -417,8 +406,8 @@ public class ClientRequestThread extends Thread {
         }
     }
 
-    private static String stripEdges(String quote) {
-        return quote.substring(1, quote.length() - 1);
-    }
+	private static String stripEdges(String quote) {
+		return quote.substring(1, quote.length()-1);
+	}
 
 }
