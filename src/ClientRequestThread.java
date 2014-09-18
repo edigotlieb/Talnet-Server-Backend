@@ -324,7 +324,7 @@ public class ClientRequestThread extends Thread {
                     case java.sql.Types.VARCHAR:  {
                         String result = "";
                     try {
-                        result = new String(rs.getString(column_name).getBytes(),"utf-8");
+                        result = new String(rs.getString(column_name).getBytes(),"utf-16");
                     } catch (UnsupportedEncodingException ex) {
                         Logger.getLogger(ClientRequestThread.class.getName()).log(Level.SEVERE, null, ex);
                     }

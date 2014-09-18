@@ -77,7 +77,7 @@ public class ThreadHandler {
             ds.setMaxPoolSize((int) RuntimeParams.getParams("MaxPoolSize"));
             ds.setMaxStatementsPerConnection((int) RuntimeParams.getParams("MaxStatementsPerConnection"));
             ds.setMaxIdleTime((int) RuntimeParams.getParams("MaxIdleTime"));                     
-                           
+             
             ds.getConnection();
             
             fh = new FileHandler((String)RuntimeParams.getParams("LogFileName"));
