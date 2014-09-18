@@ -49,10 +49,6 @@ public class ThreadHandler {
         
         garbageKeyCollectorTimer = new Timer();
         
-        System.setProperty("file.encoding","UTF-8");
-        Field charset = Charset.class.getDeclaredField("defaultCharset");
-        charset.setAccessible(true);
-        charset.set(null,null);
         
         
         try {            
