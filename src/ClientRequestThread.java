@@ -298,7 +298,7 @@ public class ClientRequestThread extends Thread {
         try {
             // send resultSet                    
                 //this.writer.write(createResponse(resultSet));
-                String response = toValid3ByteUTF8String(createResponse(resultSet, 1, ""));
+                String response = createResponse(resultSet, 1, "");
                 // System.out.println("Resonse: " + response);
                 this.out.print(response);
             
@@ -366,7 +366,7 @@ public class ClientRequestThread extends Thread {
                     case java.sql.Types.VARCHAR:  {
                         String result = "";
                     try {                       
-                        result = new String(rs.getString(column_name).getBytes(),"utf-8");
+                        result = toValid3ByteUTF8String(rs.getString(column_name));
                     } catch (UnsupportedEncodingException ex) {
                         Logger.getLogger(ClientRequestThread.class.getName()).log(Level.SEVERE, null, ex);
                     }
