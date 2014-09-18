@@ -89,7 +89,7 @@ public class ClientRequestThread extends Thread {
 				// if so, the codepoint must be stored on a 32bit int as char is only 16bit
 				int codePoint = s.codePointAt(i);
 				// show the code point and the char
-				System.out.println(String.format("%6d:%s", codePoint, new String(new int[]{codePoint}, 0, 1)));
+				System.out.println(String.format("Surrogate: %6d:%s", codePoint, new String(new int[]{codePoint}, 0, 1)));
 				++i;
 			}
 			// else this can only be a "normal" char
