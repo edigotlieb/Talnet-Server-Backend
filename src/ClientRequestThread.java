@@ -85,9 +85,9 @@ public class ClientRequestThread extends Thread {
 			char c = b.charAt(i);
 			// If there's a char left, we chan check if the current and the next char 
 			// form a surrogate pair
-			if(i<poo.length()-1 && Character.isSurrogatePair(c, poo.charAt(i+1))) {
+			if(i<b.length()-1 && Character.isSurrogatePair(c, b.charAt(i+1))) {
 				// if so, the codepoint must be stored on a 32bit int as char is only 16bit
-				int codePoint = poo.codePointAt(i);
+				int codePoint = b.codePointAt(i);
 				// show the code point and the char
 				this.out.println(String.format("%6d:%s", codePoint, new String(new int[]{codePoint}, 0, 1)));
 				++i;
