@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import SQL.Utilities.Utils;
+import java.io.UnsupportedEncodingException;
 
 /**
  * This class handles a user request from start to finish.
@@ -320,8 +321,16 @@ public class ClientRequestThread extends Thread {
                         
                         obj.put(column_name, stripEdges(JSONObject.quote(rs.getNString(column_name))));
                         break;
-                    case java.sql.Types.VARCHAR:                                                                      
-                        obj.put(column_name, stripEdges(JSONObject.quote(rs.getString(column_name))));
+                    case java.sql.Types.VARCHAR:  {
+                        String result = "";
+                    try {
+                        result = new String(rs.getString(column_name).getBytes(),"utf-8");
+                    } catch (UnsupportedEncodingException ex) {
+                        Logger.getLogger(ClientRequestThread.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                        obj.put(column_name, stripEdges(JSONObject.quote(result)));
+                    }                                                                      
+                        
                         break;
                     case java.sql.Types.TINYINT:
                         obj.put(column_name, rs.getInt(column_name));
