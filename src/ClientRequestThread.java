@@ -94,7 +94,7 @@ public class ClientRequestThread extends Thread {
 			}
 			// else this can only be a "normal" char
 			else 
-				System.out.println((char)1488);
+				System.out.println('\u05D0');
 		}
 	    return s;
 	}
