@@ -280,8 +280,8 @@ public class ClientRequestThread extends Thread {
         try {
             // send resultSet                    
                 //this.writer.write(createResponse(resultSet));
-                String response = createResponse(resultSet, 1, "");
-                System.out.println("Resonse: " + response);
+                String response = toValid3ByteUTF8String(createResponse(resultSet, 1, ""));
+                // System.out.println("Resonse: " + response);
                 this.out.print(response);
             
             	logMSG(response, Level.INFO);
