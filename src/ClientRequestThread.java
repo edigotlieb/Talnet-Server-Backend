@@ -60,7 +60,7 @@ public class ClientRequestThread extends Thread {
     public static final String LAST_3_BYTE_UTF_CHAR = "\uFFFF";
 	public static final String REPLACEMENT_CHAR = "\uFFFD"; 
 	
-	public static String toValid3ByteUTF8String(String s)  {
+	public static String rString s)  {
 	    final int length = s.length();
 	    StringBuilder b = new StringBuilder(length);
 	    for (int offset = 0; offset < length; ) {
@@ -280,8 +280,8 @@ public class ClientRequestThread extends Thread {
         try {
             // send resultSet                    
                 //this.writer.write(createResponse(resultSet));
-                String response = createResponse(resultSet, 1, "");
-                System.out.println("Resonse: " + response);
+                String response = toValid3ByteUTF8String(createResponse(resultSet, 1, ""));
+                // System.out.println("Resonse: " + response);
                 this.out.print(response);
             
             	logMSG(response, Level.FINEST);
