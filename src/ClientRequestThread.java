@@ -61,6 +61,7 @@ public class ClientRequestThread extends Thread {
 	public static final String REPLACEMENT_CHAR = "\uFFFD"; 
 	
 	public static String toValid3ByteUTF8String(String s)  {
+	    /*
 	    final int length = s.length();
 	    StringBuilder b = new StringBuilder(length);
 	    for (int offset = 0; offset < length; ) {
@@ -79,6 +80,23 @@ public class ClientRequestThread extends Thread {
 	       offset += Character.charCount(codepoint);
 	    }
 	    return b.toString();
+	    */
+	    for(int i=0; i<b.length();++i) {
+			char c = b.charAt(i);
+			// If there's a char left, we chan check if the current and the next char 
+			// form a surrogate pair
+			if(i<poo.length()-1 && Character.isSurrogatePair(c, poo.charAt(i+1))) {
+				// if so, the codepoint must be stored on a 32bit int as char is only 16bit
+				int codePoint = poo.codePointAt(i);
+				// show the code point and the char
+				this.out.println(String.format("%6d:%s", codePoint, new String(new int[]{codePoint}, 0, 1)));
+				++i;
+			}
+			// else this can only be a "normal" char
+			else 
+				this.out.println(String.format("%6d:%s", (int)c, c));
+		}
+	    return b;
 	}
     
     /**
