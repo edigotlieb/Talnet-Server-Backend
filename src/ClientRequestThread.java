@@ -60,7 +60,7 @@ public class ClientRequestThread extends Thread {
     public static final String LAST_3_BYTE_UTF_CHAR = "\uFFFF";
 	public static final String REPLACEMENT_CHAR = "\uFFFD"; 
 	
-	public static String rString s)  {
+	public static String toValid3ByteUTF8String(String s)  {
 	    final int length = s.length();
 	    StringBuilder b = new StringBuilder(length);
 	    for (int offset = 0; offset < length; ) {
