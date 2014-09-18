@@ -57,48 +57,6 @@ public class ClientRequestThread extends Thread {
     // final String ERROR_FORMAT = "{'ERROR':'%s'}";
     // final String SUCCESS_MSG = "{'ACK':'Request performed'}\n";
     
-    public static final String LAST_3_BYTE_UTF_CHAR = "\uFFFF";
-	public static final String REPLACEMENT_CHAR = "\uFFFD"; 
-	
-	public static String toValid3ByteUTF8String(String s)  {
-	    /*
-	    final int length = s.length();
-	    StringBuilder b = new StringBuilder(length);
-	    for (int offset = 0; offset < length; ) {
-	       final int codepoint = s.codePointAt(offset);
-	
-	       // do something with the codepoint
-	       if (codepoint > CharUtils.LAST_3_BYTE_UTF_CHAR.codePointAt(0)) {
-	           b.append(CharUtils.REPLACEMENT_CHAR);
-	       } else {
-	           if (Character.isValidCodePoint(codepoint)) {
-	               b.appendCodePoint(codepoint);
-	           } else {
-	               b.append(CharUtils.REPLACEMENT_CHAR);
-	           }
-	       }
-	       offset += Character.charCount(codepoint);
-	    }
-	    return b.toString();
-	    */
-	    for(int i=0; i<s.length();++i) {
-			char c = s.charAt(i);
-			// If there's a char left, we chan check if the current and the next char 
-			// form a surrogate pair
-			if(i<s.length()-1 && Character.isSurrogatePair(c, s.charAt(i+1))) {
-				// if so, the codepoint must be stored on a 32bit int as char is only 16bit
-				int codePoint = s.codePointAt(i);
-				// show the code point and the char
-				System.out.println(String.format("Surrogate: %6d:%s", codePoint, new String(new int[]{codePoint}, 0, 1)));
-				++i;
-			}
-			// else this can only be a "normal" char
-			else 
-			        log.log(Level.INFO,"\u05D0");
-		}
-	    return s;
-	}
-    
     /**
      * 
      * @param con the db connection
@@ -366,7 +324,7 @@ public class ClientRequestThread extends Thread {
                     case java.sql.Types.VARCHAR:  {
                         String result = "";
                     //try {                       
-                        result = toValid3ByteUTF8String(rs.getString(column_name));
+                        result = rs.getString(column_name);
                     //} catch (UnsupportedEncodingException ex) {
                     //    Logger.getLogger(ClientRequestThread.class.getName()).log(Level.SEVERE, null, ex);
                     //}
