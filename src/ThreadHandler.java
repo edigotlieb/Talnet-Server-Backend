@@ -50,6 +50,7 @@ public class ThreadHandler {
         garbageKeyCollectorTimer = new Timer();
         
         
+        
         try {            
             RuntimeParams.readParams(paramFileName);       // read all the params from a config file
         } catch (Exception ex) {
@@ -98,6 +99,9 @@ public class ThreadHandler {
         logger.setLevel(Level.INFO);
         
         logger.setLevel(Level.parse((String) RuntimeParams.getParams("LogLvl")));
+        
+        System.out.println((String) RuntimeParams.getParams("LogLvl"));
+        
         
         logger.log(Level.INFO, "finished initiallizing...");
         wasInit = true;
