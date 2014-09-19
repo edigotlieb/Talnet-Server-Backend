@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import SQL.Utilities.Utils;
+import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -100,7 +101,7 @@ public class ClientRequestThread extends Thread {
         try {
             logMSG("opening streams...", Level.INFO);
             // open a stream
-            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));            
+            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));            
             this.out = new PrintWriter(this.socket.getOutputStream());
         } catch (IOException ex) {
             logMSG("failed to open streams...", Level.INFO);
@@ -165,10 +166,9 @@ public class ClientRequestThread extends Thread {
                 this.closeThread();
                 return;
             }
-            String requestString = new String(buffer);
-            requestString = new String(requestString.getBytes(),"utf-8");
-            System.out.println(buffer);
+            String requestString = new String(buffer);                        
              logMSG("REQUEST: "+requestString,Level.INFO);
+             
             // process response to request
              
             clientRequest = RequestFactory.createRequestFromString(requestString);
