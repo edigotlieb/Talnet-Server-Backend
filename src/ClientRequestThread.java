@@ -165,7 +165,7 @@ public class ClientRequestThread extends Thread {
                 this.closeThread();
                 return;
             }
-            // logMSG("REQUEST: "+(new String(buffer)),Level.INFO);
+             logMSG("REQUEST: "+(new String(buffer)),Level.INFO);
             // process response to request
             clientRequest = RequestFactory.createRequestFromString(new String(buffer));
             if(clientRequest == null) {
