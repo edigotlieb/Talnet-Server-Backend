@@ -100,7 +100,7 @@ public class ClientRequestThread extends Thread {
 //<editor-fold defaultstate="collapsed" desc="open streams">
         try {
             logMSG("opening streams...", Level.INFO);
-            // open a stream
+            // open a stream            
             this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));            
             this.out = new PrintWriter(this.socket.getOutputStream());
         } catch (IOException ex) {
