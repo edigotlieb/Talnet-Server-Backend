@@ -167,6 +167,7 @@ public class ClientRequestThread extends Thread {
             }
             String requestString = new String(buffer);
             requestString = new String(requestString.getBytes(),"utf-8");
+            System.out.println(buffer);
              logMSG("REQUEST: "+requestString,Level.INFO);
             // process response to request
              
