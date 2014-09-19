@@ -53,6 +53,10 @@ public class ThreadHandler {
         
         try {            
             RuntimeParams.readParams(paramFileName);       // read all the params from a config file
+            
+            System.setProperty("file.encoding", "UTF-8");            
+            System.setProperty("encoding", "UTF-8");
+            
         } catch (Exception ex) {
             // cant open param file
             logger.log(Level.SEVERE, "Can't open parameter file");
