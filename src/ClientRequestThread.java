@@ -101,7 +101,7 @@ public class ClientRequestThread extends Thread {
         try {
             logMSG("opening streams...", Level.INFO);
             // open a stream            
-            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));            
+            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));            
             this.out = new PrintWriter(this.socket.getOutputStream());
         } catch (IOException ex) {
             logMSG("failed to open streams...", Level.INFO);
