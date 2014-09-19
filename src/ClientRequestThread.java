@@ -165,9 +165,12 @@ public class ClientRequestThread extends Thread {
                 this.closeThread();
                 return;
             }
-             logMSG("REQUEST: "+(new String(buffer)),Level.INFO);
+            String requestString = new String(buffer);
+            requestString = new String(requestString.getBytes(),"utf-8");
+             logMSG("REQUEST: "+requestString,Level.INFO);
             // process response to request
-            clientRequest = RequestFactory.createRequestFromString(new String(buffer));
+             
+            clientRequest = RequestFactory.createRequestFromString(requestString);
             if(clientRequest == null) {
                 throw new JSONException("RequestFactory Fail...");
             }
