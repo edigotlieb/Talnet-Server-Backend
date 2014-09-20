@@ -177,7 +177,11 @@ public class ClientRequestThread extends Thread {
             
              logMSG("REQUEST: "+requestString,Level.INFO);
              for(int y=0;y<requestString.length();y++)
+             {
                  System.out.print(requestString.charAt(y));
+                 System.out.print(" ");
+                 System.out.println((int) requestString.charAt(y));
+             }
              System.out.println();
              
             // process response to request
