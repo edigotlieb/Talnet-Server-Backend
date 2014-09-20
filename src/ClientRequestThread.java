@@ -162,6 +162,7 @@ public class ClientRequestThread extends Thread {
         try {
             int maxLength = (int) RuntimeParams.getParams("BufferSize");
             char[] buffer = new char[maxLength];
+            
             int length = reader.read(buffer);
             if (length == maxLength) {
                 // some error
@@ -173,6 +174,7 @@ public class ClientRequestThread extends Thread {
             }
             String requestString = new String(buffer);                        
              logMSG("REQUEST: "+requestString,Level.INFO);
+             System.out.print(buffer);
              
             // process response to request
              
