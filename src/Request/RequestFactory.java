@@ -127,25 +127,27 @@ public class RequestFactory {
 			case SIGN_UP: {
 				String username = requestData.getString("username");
 				String pass = requestData.getString("password");
-				String name = requestData.getString("name");
+				String first_name = requestData.getString("firstName");
+				String last_name = requestData.getString("lastName");
 				String disp_name = requestData.getString("displayName");
 				String email = requestData.getString("email");
 				int year = requestData.getInt("year");
 				int room = requestData.getInt("room");
 				String phonePre = requestData.getString("phonePre");
 				String phoneSuf = requestData.getString("phoneSuf");
-				return new UserSignupRequest(username, pass, name, disp_name, email, room, year, phonePre, phoneSuf, creds);
+				return new UserSignupRequest(username, pass, first_name, last_name, disp_name, email, room, year, phonePre, phoneSuf, creds);
 			}
 			case UPDATE_INFO: {
 				String userToChange = requestData.getString("username");
-				String newName = requestData.getString("newName");
+				String newFirstName = requestData.getString("newFirstName");
+				String newLastName = requestData.getString("newLastName");
 				String newDispName = requestData.getString("newDisplayName");
 				String newEmail = requestData.getString("newEmail");
 				int newYear = requestData.getInt("newYear");
 				int newRoom = requestData.getInt("newRoom");
 				String newPhonePre = requestData.getString("phonePre");
 				String newPhoneSuf = requestData.getString("phoneSuf");
-				return new UserUpdateInfoRequest(userToChange, newName, newDispName, newEmail, newYear, newRoom, newPhonePre, newPhoneSuf, creds);
+				return new UserUpdateInfoRequest(userToChange, newFirstName, newLastName, newDispName, newEmail, newYear, newRoom, newPhonePre, newPhoneSuf, creds);
 			}
 			case ADD_PERMISSION: {
 				String username = requestData.getString("username");
