@@ -18,7 +18,7 @@ public class Main {
      //   Request req = RequestFactory.createRequestFromString(source);
     //    System.out.println(req.getType().toString());
         System.out.println("Default Charset=" + Charset.defaultCharset());
-    	System.setProperty("file.encoding", "UTF-8");
+    	System.setProperty("file.encoding", "UTF8");
     	System.out.println("file.encoding=" + System.getProperty("file.encoding"));
     	System.out.println("Default Charset=" + Charset.defaultCharset());    	      
         
