@@ -103,7 +103,7 @@ public class ClientRequestThread extends Thread {
             logMSG("opening streams...", Level.INFO);
             // open a stream            
             
-            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF16"));            
+            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF8"));            
             
             
             this.out = new PrintWriter(new OutputStreamWriter(this.socket.getOutputStream(), "UTF8"));
