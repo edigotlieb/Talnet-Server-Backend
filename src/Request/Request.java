@@ -77,7 +77,7 @@ public abstract class Request {
 		if (!this.creds.getHashedPassword().equals(Hashing.MD5Hash(hashed_pass + challenge))) {
 			throw new ValidationException(4);
 		}
-		this.creds.setMoreInfo(rset.getString("NAME"),
+		this.creds.setMoreInfo(rset.getString("FIRST_NAME") + rset.getString("LAST_NAME"),
 				rset.getString("DISPLAY_NAME"),
 				rset.getString("EMAIL"),
 				rset.getInt("YEAR"),
