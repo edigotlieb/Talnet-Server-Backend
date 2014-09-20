@@ -174,7 +174,7 @@ public class ClientRequestThread extends Thread {
                 return;
             }
             String requestString = new String(buffer);  
-            
+            requestString =  org.apache.commons.lang3.StringEscapeUtils.unescapeJava(requestString);
              logMSG("REQUEST: "+requestString,Level.INFO);
              for(int y=0;y<buffer.length;y++)
              {
