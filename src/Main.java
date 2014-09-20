@@ -22,8 +22,6 @@ public class Main {
     	System.out.println("file.encoding=" + System.getProperty("file.encoding"));
     	System.out.println("Default Charset=" + Charset.defaultCharset());    	      
         
-        System.out.println("א");
-        System.out.println('\u05D0');
         
         ThreadHandler.init(args[0]);
         ThreadHandler.run();
