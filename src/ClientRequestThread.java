@@ -103,7 +103,7 @@ public class ClientRequestThread extends Thread {
             logMSG("opening streams...", Level.INFO);
             // open a stream            
             
-            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF8"));            
+            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF16"));            
             
             
             this.out = new PrintWriter(new OutputStreamWriter(this.socket.getOutputStream(), "UTF8"));
@@ -272,7 +272,8 @@ public class ClientRequestThread extends Thread {
                 String response = createResponse(resultSet, 1, "");
                 // System.out.println("Resonse: " + response);
                 this.out.print(response);
-            
+                
+                
             	logMSG(response, Level.INFO);
             //this.writer.flush();
             this.out.flush();
