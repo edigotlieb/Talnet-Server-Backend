@@ -14,14 +14,15 @@ import java.sql.SQLException;
 
 public class UserSignupRequest extends UserRequest {
 
-	String user, pass, name, disp_name, email, phonePre, phoneSuf;
+	String user, pass, first_name, last_name, disp_name, email, phonePre, phoneSuf;
 	int room, year;
 
-	public UserSignupRequest(String user, String pass, String name, String disp_name, String email, int room, int year, String phonePre, String phoneSuf, Credentials creds) {
+	public UserSignupRequest(String user, String pass, String first_name, String last_name, String disp_name, String email, int room, int year, String phonePre, String phoneSuf, Credentials creds) {
 		this(creds);
 		this.user = user;
 		this.pass = pass;
-		this.name = name;
+		this.first_name = first_name;
+		this.last_name = last_name;
 		this.disp_name = disp_name;
 		this.email = email;
 		this.room = room;
@@ -60,7 +61,8 @@ public class UserSignupRequest extends UserRequest {
 		//add to user table
 		final String username = this.user;
 		final String password = Utilities.Hashing.MD5Hash(this.pass);
-		final String full_name = this.name;
+		final String firstname = this.first_name;
+		final String lastname = this.last_name;
 		final String display_name = this.disp_name;
 		final String e_mail = this.email;
 		final String roomstr = "" + this.room;
@@ -72,13 +74,14 @@ public class UserSignupRequest extends UserRequest {
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
 				ps.setString(1, username);
 				ps.setString(2, password);
-				ps.setString(3, full_name);
-				ps.setString(4, display_name);
-				ps.setString(5, e_mail);
-				ps.setString(6, roomstr);
-				ps.setString(7, yearstr);
-				ps.setString(8, phonepre);
-				ps.setString(9, phonesuf);
+				ps.setString(3, firstname);
+				ps.setString(4, lastname);
+				ps.setString(5, display_name);
+				ps.setString(6, e_mail);
+				ps.setString(7, roomstr);
+				ps.setString(8, yearstr);
+				ps.setString(9, phonepre);
+				ps.setString(10, phonesuf);
 			}
 		});
 		//add user permissiongroup

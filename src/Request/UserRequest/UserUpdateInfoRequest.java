@@ -13,13 +13,14 @@ import java.sql.SQLException;
 
 public class UserUpdateInfoRequest extends UserRequest {
 
-	String userToChange, newName, newDispName, newEmail,newPhonePre,newPhoneSuf;
+	String userToChange, newFirstName, newLastName, newDispName, newEmail,newPhonePre,newPhoneSuf;
 	int newYear, newRoom;
 
-	public UserUpdateInfoRequest(String userToChange, String newName, String newDispName, String newEmail, int newYear, int newRoom, String newPhonePre, String newPhoneSuf, Credentials creds) {
+	public UserUpdateInfoRequest(String userToChange, String newFirstName, String newLastName, String newDispName, String newEmail, int newYear, int newRoom, String newPhonePre, String newPhoneSuf, Credentials creds) {
 		this(creds);
 		this.userToChange = userToChange;
-		this.newName = newName;
+		this.newFirstName = newFirstName;
+		this.newLastName = newLastName;
 		this.newDispName = newDispName;
 		this.newEmail = newEmail;
 		this.newYear = newYear;
@@ -53,7 +54,8 @@ public class UserUpdateInfoRequest extends UserRequest {
 	protected ResultSet performRequest(SqlExecutor sqlExc) throws SQLException {
 		//add to user table
 		final String username = this.userToChange;
-		final String full_name = this.newName;
+		final String firstname = this.newFirstName;
+		final String lastname = this.newFirstName;
 		final String display_name = this.newDispName;
 		final String e_mail = this.newEmail;
 		final String roomstr = "" + this.newRoom;
@@ -63,14 +65,15 @@ public class UserUpdateInfoRequest extends UserRequest {
 		sqlExc.executePreparedStatement("UpdateUser", new StatementPreparer() {
 			@Override
 			public void prepareStatement(PreparedStatement ps) throws SQLException {
-				ps.setString(1, full_name);
-				ps.setString(2, display_name);
-				ps.setString(3, e_mail);
-				ps.setString(4, roomstr);
-				ps.setString(5, yearstr);
-				ps.setString(6, phonePre);
-				ps.setString(7, phoneSuf);
-				ps.setString(8, username);
+				ps.setString(1, firstname);
+				ps.setString(2, lastname);
+				ps.setString(3, display_name);
+				ps.setString(4, e_mail);
+				ps.setString(5, roomstr);
+				ps.setString(6, yearstr);
+				ps.setString(7, phonePre);
+				ps.setString(8, phoneSuf);
+				ps.setString(9, username);
 			}
 		});
 		return null;
