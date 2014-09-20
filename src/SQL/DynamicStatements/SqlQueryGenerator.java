@@ -5,6 +5,7 @@
 package SQL.DynamicStatements;
 
 import Request.AppRequest.Column;
+import Request.UserRequest.UserSelectRequest;
 import Statement.Statement;
 import java.util.Iterator;
 import java.util.List;
@@ -68,7 +69,12 @@ public class SqlQueryGenerator {
 			columns = stringCommaSeperated(colnames);
 		}
 		// System.out.println("SELECT " + columns + " FROM " + from + " WHERE " + where.toString());
-		String query = "SELECT " + columns + " FROM " + from + " WHERE " + where.toString();
+		String query = "SELECT " + columns + " FROM " + from;
+		if(from.equals(UserSelectRequest.userTable)) {
+			query = query + " HAVING " + where.toString();
+		} else { 
+			query = query + " WHERE " + where.toString();
+		}
 		if (orderBy.length() > 0) {
 			query += " ORDER BY " + orderBy + " " + orie.toString();
 		}

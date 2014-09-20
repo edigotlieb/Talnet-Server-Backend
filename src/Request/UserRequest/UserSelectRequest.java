@@ -18,7 +18,7 @@ import java.util.List;
 public class UserSelectRequest extends UserRequest {
 
 	Statement where;
-	private static final String userTable = "USERS";
+	public static final String userTable = "USERS";
 	private static final String passwordField = "PASSWORD";
 	private static final String usernameField = "USERNAME";
 
@@ -44,9 +44,9 @@ public class UserSelectRequest extends UserRequest {
 		if (!this.where.validateOperands()) {
 			throw new ValidationException(19);
 		}
-                if(!this.creds.isInPermissionGroup("User")) {
-                        throw new ValidationException(32);
-                }
+		if(!this.creds.isInPermissionGroup("User")) {
+				throw new ValidationException(32);
+		}
 		return true;
 	}
 
@@ -55,6 +55,7 @@ public class UserSelectRequest extends UserRequest {
 
 		List<String> userCols = Utils.getColNames(sqlExc, userTable);
 		userCols.remove(passwordField);
+		userCols.add("CONCAT_WS(' ',USERS.FIRST_NAME,USERS.LAST_NAME) AS NAME");
 		Statement whereNoAnon = new AndStatement(this.where, new RelStatement(usernameField,  Credentials.anonymous, "!="));
 		return sqlExc.executeDynamicStatementQry(SqlQueryGenerator.select(userCols, userTable, whereNoAnon));
 	}
