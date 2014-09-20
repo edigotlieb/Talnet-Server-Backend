@@ -55,7 +55,7 @@ public class UserUpdateInfoRequest extends UserRequest {
 		//add to user table
 		final String username = this.userToChange;
 		final String firstname = this.newFirstName;
-		final String lastname = this.newFirstName;
+		final String lastname = this.newLastName;
 		final String display_name = this.newDispName;
 		final String e_mail = this.newEmail;
 		final String roomstr = "" + this.newRoom;
