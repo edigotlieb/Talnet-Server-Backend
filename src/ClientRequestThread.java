@@ -172,9 +172,10 @@ public class ClientRequestThread extends Thread {
                 this.closeThread();
                 return;
             }
-            String requestString = new String(buffer);                        
+            String requestString = new String(buffer);  
+            
              logMSG("REQUEST: "+requestString,Level.INFO);
-             System.out.print(buffer);
+             
              
             // process response to request
              
