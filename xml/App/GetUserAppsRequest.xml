@@ -1,0 +1,16 @@
+<talnet type="request">
+	<request type="APP" name="GET_USER_APPS">
+		<description>
+			This request drops a dynamic table.
+		</description>
+		<requestArguments>
+		</requestArguments>
+		<validation>
+		</validation>
+		<performance>
+			<sqlExecute query="getAllAppsUser">
+				<argument id="1">{creds:username}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

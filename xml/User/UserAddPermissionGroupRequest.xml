@@ -1,0 +1,36 @@
+<talnet type="request">
+	<request type="USER" name="ADD_PERMISSION">
+		<description>
+			This request adds a permission to a dynamic table created specially for a certain app.
+			it requires the app name, table name, permission group name and the permission type.
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="userToAddTo" key="username">The name of the application using the modified table</requestArgument>
+			<requestArgument type="String" name="groupName" key="permissionGroupName">The modified table name</requestArgument>
+		</requestArguments>
+		<validation>
+			<string gate="not" target="{userToAddTo}" type="equals" errorid="3">
+				<argument id="1">Anonymous</argument>
+			</string>
+			<existence type="UserByUsername" errorid="3">
+				<argument id="1">{userToAddTo}</argument>
+			</existence>
+			<existence type="PermissionGroupByName" errorid="11">
+				<argument id="1">{groupName}</argument>
+			</existence>
+			<permission type="PermissionGroupAdmin" errorid="6">
+				<argument id="1">{groupName}</argument>
+			</permission>
+			<permission gate="not" type="UserInGroup" errorid="22">
+				<argument id="1">{userToAddTo}</argument>
+				<argument id="2">{groupName}</argument>
+			</permission>
+		</validation>
+		<performance>
+			<sqlExecute query="AddUserPermissionGroup">
+				<argument id="1">{userToAddTo}</argument>
+				<argument id="2">{groupName}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

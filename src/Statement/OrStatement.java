@@ -1,20 +1,22 @@
-
+/**
+ * FILE : OrStatement.java AUTHORS : Erez Gotlieb
+ */
 package Statement;
 
 /**
- *  Defines an abstract relational OR SQL WHERE statement
+ * Defines an abstract relational OR SQL WHERE statement
  */
 public class OrStatement extends Statement {
 
-        // the two statements that define the OR
+	// the two statements that define the OR
 	private final Statement st1, st2;
 
-        /**
-         * Default Constructor
-         * 
-         * @param st1 the first statement
-         * @param st2 the second statement
-         */
+	/**
+	 * Default Constructor
+	 *
+	 * @param st1 the first statement
+	 * @param st2 the second statement
+	 */
 	public OrStatement(Statement st1, Statement st2) {
 		this.st1 = st1;
 		this.st2 = st2;
@@ -31,9 +33,6 @@ public class OrStatement extends Statement {
 	}
 
 	@Override
-        /**
-         * validates the operands of each statement
-         */
 	public boolean validateOperands() {
 		return st1.validateOperands() && st2.validateOperands();
 	}

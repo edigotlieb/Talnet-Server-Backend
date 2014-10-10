@@ -1,0 +1,18 @@
+<talnet type="argumentEnums">
+	<enum name="ColType">
+		<value>INT</value>
+		<value>VARCHAR</value>
+		<value>TIMESTAMP</value>
+		<value>DATE</value>
+	</enum>
+	<enum name="PermissionType">
+		<value>SELECT</value>
+		<value>INSERT</value>
+		<value>UPDATE</value>
+		<value>DELETE</value>
+	</enum>
+	<enum name="OrderOrientation">
+		<value>ASC</value>
+		<value>DESC</value>
+	</enum>
+</talnet>

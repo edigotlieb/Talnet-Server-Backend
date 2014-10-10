@@ -1,0 +1,30 @@
+<talnet type="request">
+	<request type="DTD" name="SELECT">
+		<description>
+			This request adds a permission to a dynamic table created specially for a certain app.
+			it requires the app name, table name, permission group name and the permission type.
+		</description>
+		<requestArguments>
+			<requestArgument type="Statement" name="where" key="WHERE">The name of the application using the modified table</requestArgument>
+		</requestArguments>
+		<validation>
+			<statement target="{where}" type="isColumnIn" errorid="18">
+				<argument id="1">PASSWORD</argument>
+			</statement>
+			<statement target="{where}" type="validateOperands" errorid="19">
+			</statement>
+			<permission type="UserInGroup" errorid="32">
+				<argument id="1">{creds:username}</argument>
+				<argument id="2">User</argument>
+			</permission>
+		</validation>
+		<performance>
+			<dynamicSqlExecute query="select">
+				<argument id="1">USERS</argument>
+				<argument id="2">{where}</argument>
+				<argument id="3">NAME</argument>
+				<argument id="4">ASC</argument>
+			</dynamicSqlExecute>
+		</performance>
+	</request>
+</talnet>

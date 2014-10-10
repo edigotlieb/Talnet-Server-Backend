@@ -1,0 +1,40 @@
+<talnet type="request">
+	<request type="USER" name="UPDATE_INFO">
+		<description>
+			This request adds a permission to a dynamic table created specially for a certain app.
+			it requires the app name, table name, permission group name and the permission type.
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="userToChange" key="username"></requestArgument>
+			<requestArgument type="String" name="first_name" key="newFirstName"></requestArgument>
+			<requestArgument type="String" name="last_name" key="newLastName"></requestArgument>
+			<requestArgument type="String" name="disp_name" key="newDispName"></requestArgument>
+			<requestArgument type="String" name="email" key="newEmail"></requestArgument>
+			<requestArgument type="Integer" name="room" key="newRoom"></requestArgument>
+			<requestArgument type="Integer" name="year" key="newYear"></requestArgument>
+			<requestArgument type="String" name="phonePre" key="phonePre"></requestArgument>
+			<requestArgument type="String" name="phoneSuf" key="phoneSuf"></requestArgument>
+		</requestArguments>
+		<validation>
+			<string gate="not" target="{creds:username}" type="equals" errorid="10">
+				<argument id="1">Anonymous</argument>
+			</string>
+			<string target="{creds:username}" type="equals" errorid="6">
+				<argument id="1">{userToChange}</argument>
+			</string>
+		</validation>
+		<performance>
+			<sqlExecute query="AddUser">
+				<argument id="1">{first_name}</argument>
+				<argument id="2">{last_name}</argument>
+				<argument id="3">{disp_name}</argument>
+				<argument id="4">{email}</argument>
+				<argument id="5">{room}</argument>
+				<argument id="6">{year}</argument>
+				<argument id="7">{phonePre}</argument>
+				<argument id="8">{phoneSuf}</argument>
+				<argument id="9">{userToChange}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

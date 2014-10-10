@@ -1,3 +1,6 @@
+/**
+ * FILE : EmptyStatement.java AUTHORS : Erez Gotlieb
+ */
 package Statement;
 
 /**
@@ -5,7 +8,6 @@ package Statement;
  *
  */
 public class EmptyStatement extends Statement {
-
 
 	@Override
 	public String toString() {

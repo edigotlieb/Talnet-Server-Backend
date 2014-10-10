@@ -1,18 +1,18 @@
+/**
+ * FILE : Credentials.java AUTHORS : Erez Gotlieb
+ */
 package Request;
 
-import Request.DTDRequest.DTDRequest;
-import SQL.PreparedStatements.StatementPreparer;
-import SQL.SqlExecutor;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import org.json.JSONObject;
 
 /**
+ * this class handles the credentials part of a client request meaning it
+ * handles the authenticated user and application
  *
- * @author talpiot
+ * @author idanb55
  */
 public class Credentials {
 
@@ -22,64 +22,97 @@ public class Credentials {
 	public final static String anonymous = "Anonymous";
 	public final static String masterAppName = "talnet";
 	public final static String userPermission = "User";
-
-        
-        
-	public static boolean isSpecialPermissionGroup(String permissionGroupName) {
-		return permissionGroupName.equals(superAdmin)
-				|| permissionGroupName.equals(developer)
-				|| permissionGroupName.equals(userPermission)
-				|| permissionGroupName.equals(anonymous)
-				|| permissionGroupName.endsWith("_admin");
-	}
-        
-        public static boolean isSpecialAppName(String appName) {
-            return appName.matches("APPS|APP|DYNAMIC|DYNAMIC_TABLES|PERMISSION|PERMISSION_GROUPS"+
-                    "|TEMP|TEMP_KEYS|USERS|USER|USER_PERMISSIONS|talnet");
-        }
-        
 	private final String username, hashedPassword;
-	private final String hashedAppKey;
-	private final String appName;
-	//More Information
-	private String name, dispName, email;
-	private int year, roomNum;
+	private final String appName, hashedAppKey;
 	private List<String> permissions;
-        
-        private boolean isLocalRequest = false;
+	private boolean isLocalRequest = false;
 
-    public void setIsLocalRequest(boolean isLocalRequest) {
-        this.isLocalRequest = isLocalRequest;
-    }                
-
-	public String[] getPermissions() {
-		return this.permissions.toArray(new String[this.permissions.size()]);
+	/**
+	 * constructs a Credentials instance using the json object given by the
+	 * client
+	 *
+	 * @param jsonCreds the json object given by the client
+	 */
+	public Credentials(JSONObject jsonCreds) {
+		this(jsonCreds.getString("username"), jsonCreds.getString("password"),
+				jsonCreds.getString("appName"), jsonCreds.getString("appKey"));
 	}
 
-	public boolean isAnonymous() {
-		return this.username.equals(anonymous);
+	/**
+	 * constructs a Credetials instance with user and app details
+	 *
+	 * @param username the authenticated user name
+	 * @param hashed_password the authenticated user md5 hashed password
+	 * @param app_name the authenticated application name
+	 * @param hashed_app_key the authenticated application md5 hashed key
+	 */
+	protected Credentials(String username, String hashed_password, String app_name, String hashed_app_key) {
+		this.username = username;
+		this.hashedPassword = hashed_password;
+		this.appName = app_name;
+		this.hashedAppKey = hashed_app_key;
 	}
 
+	/**
+	 * set the local request member
+	 *
+	 * @param isLocalRequest whether the request was local or not
+	 */
+	public void setIsLocalRequest(boolean isLocalRequest) {
+		this.isLocalRequest = isLocalRequest;
+	}
+
+	/**
+	 * whether this user is a member of Super_Admin group
+	 *
+	 * @return true if this user is a member of Super_Admin group, otherwise,
+	 * false
+	 */
 	public boolean isSuperAdmin() {
 		return isInPermissionGroup(superAdmin);
 	}
 
+	/**
+	 * returns whether the application is talnet and it is a local request
+	 * (basically if it is safe to trust this client and recieve plain
+	 * passwords)
+	 *
+	 * @return true if the application is talnet and it is a local request,
+	 * otherwise, false
+	 */
 	public boolean isMasterApplication() {
 		return this.appName.equals(masterAppName) && isLocalRequest;
 	}
 
-	public boolean isAppSuperAdmin() {
-		return isAppSuperAdmin(this.appName);
-	}
-
+	/**
+	 * returns whether the authenticated user is a Super_Admin or an admin of
+	 * the authenticated app (basically if it can skip a "User has insufficient
+	 * permissions" exception
+	 *
+	 * @param app the app to check for
+	 * @return true if the authenticated user is a Super_Admin or an admin of
+	 * the authenticated app, otherwise, false
+	 */
 	public boolean isAppSuperAdmin(String app) {
 		return isSuperAdmin() || isInPermissionGroup(app + "_" + appAdminSuffix);
 	}
 
+	/**
+	 * whether this user is a member of Developer group
+	 *
+	 * @return true if this user is a member of Developer group, otherwise,
+	 * false
+	 */
 	public boolean isDeveloper() {
 		return isSuperAdmin() || isInPermissionGroup(Credentials.developer);
 	}
 
+	/**
+	 * whether this user is a member of a given group
+	 *
+	 * @param permissionGroupName the group to check
+	 * @return true if this user is a member of a given group, otherwise, false
+	 */
 	public boolean isInPermissionGroup(String permissionGroupName) {
 		if (permissionGroupName.equals(anonymous)) {
 			return true;
@@ -87,94 +120,48 @@ public class Credentials {
 		return this.permissions.contains(permissionGroupName);
 	}
 
+	/**
+	 * sets the collection of permissions of this user
+	 *
+	 * @param permissions the collection of permissions of this user to set
+	 */
 	public void setPermissions(Collection<String> permissions) {
 		this.permissions = new ArrayList<>(permissions);
 	}
 
-	public String getName() {
-		return this.name;
-	}
-
-	public String getDispName() {
-		return this.dispName;
-	}
-
-	public String getEmail() {
-		return this.email;
-	}
-
-	public int getYear() {
-		return this.year;
-	}
-
-	public int getRoomNum() {
-		return this.roomNum;
-	}
-
-	public Credentials(String username, String hashed_password, String app_name, String hashed_app_key) {
-		this.username = username;
-		this.hashedPassword = hashed_password;
-		this.appName = app_name;
-		this.hashedAppKey = hashed_app_key;
-	}
-
-	public void setMoreInfo(String name, String disp_name, String email, int year, int room_num) {
-		this.name = name;
-		this.dispName = name;
-		this.email = email;
-		this.year = year;
-		this.roomNum = room_num;
-	}
-
+	/**
+	 * returns the authenticated user name
+	 *
+	 * @return the authenticated user name
+	 */
 	public String getUsername() {
 		return this.username;
 	}
 
+	/**
+	 * returns the authenticated user md5 hashed password
+	 *
+	 * @return the authenticated user md5 hashed password
+	 */
 	public String getHashedPassword() {
 		return this.hashedPassword;
 	}
 
+	/**
+	 * returns the authenticated application name
+	 *
+	 * @return the authenticated application name
+	 */
 	public String getHashedAppKey() {
 		return this.hashedAppKey;
 	}
 
+	/**
+	 * returns the authenticated application md5 hashed key
+	 *
+	 * @return the authenticated application md5 hashed key
+	 */
 	public String getAppName() {
 		return this.appName;
-	}
-
-	public List<DTDRequest.DTD_ACTION_TYPE> getTablePermissionList(SqlExecutor sqlExc, String tableName) throws SQLException {
-		List<DTDRequest.DTD_ACTION_TYPE> reslist = new ArrayList<>();
-		final String user_name = this.username;
-		final String app_name = this.appName;
-		final String table_name = tableName;
-		System.out.println(user_name + " " + app_name + " " + table_name + "AAAA");
-		ResultSet rset = sqlExc.executePreparedStatement("getUserTablePermission", new StatementPreparer() {
-			@Override
-			public void prepareStatement(PreparedStatement ps) throws SQLException {
-				ps.setString(1, user_name);
-				ps.setString(2, app_name);
-				ps.setString(3, table_name);
-			}
-		});
-		try {
-			while (rset.next()) {
-				reslist.add(DTDRequest.DTD_ACTION_TYPE.valueOf(rset.getString("PERMISSION_TYPE")));
-			}
-		} catch (IllegalArgumentException e) {
-		}
-
-		return reslist;
-	}
-	
-	public boolean getTablePublicPermission(SqlExecutor sqlExc, String tableName) throws SQLException {
-		final String table_name = tableName;
-		ResultSet rset = sqlExc.executePreparedStatement("getUserTablePermission", new StatementPreparer() {
-			@Override
-			public void prepareStatement(PreparedStatement ps) throws SQLException {
-				ps.setString(1, table_name);
-			}
-		});
-		rset.next();
-		return (rset.getInt("PUBLIC") != 0);
 	}
 }

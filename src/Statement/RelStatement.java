@@ -1,7 +1,9 @@
-
+/**
+ * FILE : RelStatement.java AUTHORS : Erez Gotlieb
+ */
 package Statement;
 
-import SQL.Utilities.Utils;
+import Utilities.Sql;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,14 +13,12 @@ import java.util.List;
  */
 public class RelStatement extends Statement {
 
-        // the  tow terms and the operand defining the statement
+	// the  tow terms and the operand defining the statement
 	private final String col, value, op;
-        
-        // the list of allowed opperands
+	// the list of allowed opperands
 	private static final List<String> operands = new ArrayList<>();
 
 	static {
-
 		RelStatement.operands.add("=");
 		RelStatement.operands.add("!=");
 		RelStatement.operands.add(">=");
@@ -30,16 +30,16 @@ public class RelStatement extends Statement {
 		RelStatement.operands.add("NOT NULL");
 	}
 
-        /**
-         * Default constructor
-         * 
-         * @param col the first term
-         * @param value the second term
-         * @param op the operand 
-         */
+	/**
+	 * Default constructor
+	 *
+	 * @param col the first term
+	 * @param value the second term
+	 * @param op the operand
+	 */
 	public RelStatement(String col, String value, String op) {
-		this.col = Utils.sanitizeAlphaNumeric(col);
-		this.value = Utils.sanitizeSqlCharacterEscaping(value);
+		this.col = Sql.sanitizeAlphaNumeric(col);
+		this.value = Sql.sanitizeSqlCharacterEscaping(value);
 		this.op = op;
 	}
 
@@ -48,11 +48,7 @@ public class RelStatement extends Statement {
 		return col.equals(colname);
 	}
 
-        
 	@Override
-        /**
-         * validated the operand is legal
-         */
 	public boolean validateOperands() {
 		return operands.contains(op);
 	}
