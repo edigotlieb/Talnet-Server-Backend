@@ -27,13 +27,12 @@ public class Main {
 		FileHandler fh = new FileHandler("log/" + new java.text.SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date().getTime()) + ".txt");
 		fh.setFormatter(new SimpleFormatter());
 		Logger.getGlobal().addHandler(fh);
-		//logger.addHandler(new StreamHandler(System.out, new SimpleFormatter()));
 		ThreadHandler.setLogLevel(Logger.getGlobal(), Level.INFO);
 
 		Logger.getGlobal().log(Level.INFO, "file.encoding={0}", System.getProperty("file.encoding"));
 		Logger.getGlobal().log(Level.INFO, "Default Charset={0}", Charset.defaultCharset());
 
-		//ThreadHandler.init(args[0]);
+		ThreadHandler.init(args[0]);
 		try {
 			Logger.getGlobal().log(Level.INFO, "XML parsing...");
 			XMLParser.XMLParser.parse();
