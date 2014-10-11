@@ -28,10 +28,10 @@ LEFT JOIN USERS ON USERS.USER_ID = PERMISSION_GROUPS.PERMISSION_GROUP_ADMIN
 WHERE PERMISSION_NAME = ?</query>
 	</preparedSql>
 	<preparedSql name="getPermissionGroupInfoByNameAndAdminname">
-		<description>returns a record of permission group with a given group admi username</description>
+		<description>returns a record of permission group with a given group admin username</description>
 		<arguments>
 			<argument id="1">the permission group name</argument>
-			<argument id="1">the group admin username</argument>
+			<argument id="2">the group admin username</argument>
 		</arguments>
 		<columns>
 			<column name="PERMISSIONGROUP_ID">the permission group id</column>

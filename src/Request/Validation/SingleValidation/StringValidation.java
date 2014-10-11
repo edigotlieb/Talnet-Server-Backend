@@ -20,7 +20,7 @@ public class StringValidation extends SingleValidation {
 
 	protected enum ValidationType {
 
-		endsWith, equals, matches, isAlphaNumeric
+		endsWith, startsWith, equals, equalsIgnoreCase, matches, isAlphaNumeric
 	}
 	protected StringValidation.ValidationType type;
 	private String target;
@@ -44,8 +44,12 @@ public class StringValidation extends SingleValidation {
 		switch (this.type) {
 			case endsWith:
 				return targetValue.endsWith(this.arguments.get(1).getValue(arguments, creds));
+			case startsWith:
+				return targetValue.startsWith(this.arguments.get(1).getValue(arguments, creds));
 			case equals:
 				return targetValue.equals(this.arguments.get(1).getValue(arguments, creds));
+			case equalsIgnoreCase:
+				return targetValue.equalsIgnoreCase(this.arguments.get(1).getValue(arguments, creds));
 			case matches:
 				return targetValue.matches(this.arguments.get(1).getValue(arguments, creds));
 			case isAlphaNumeric:

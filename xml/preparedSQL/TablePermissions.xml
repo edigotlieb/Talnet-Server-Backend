@@ -13,6 +13,21 @@
 LEFT JOIN APPS ON APPS.APP_ID = DYNAMIC_TABLES.APP_ID
 WHERE DYNAMIC_TABLES.TABLE_NAME = ?</query>
 	</preparedSql>
+	<preparedSql name="getTablePermissionForGroup">
+		<description>returns a record of table permission by table name, permisison group name, and permission type</description>
+		<arguments>
+			<argument id="1">full table name</argument>
+			<argument id="2">the permission group name</argument>
+			<argument id="3">the permission type</argument>
+		</arguments>
+		<columns>
+			<column name="PERMISSION_TYPE">the permission type</column>
+		</columns>
+		<query>SELECT APP_PERMISSIONS.PERMISSION_TYPE FROM APP_PERMISSIONS
+LEFT JOIN DYNAMIC_TABLES ON DYNAMIC_TABLES.TABLE_ID = APP_PERMISSIONS.TABLE_ID
+LEFT JOIN DYNAMIC_TABLES ON DYNAMIC_TABLES.PERMISSIONGROUP_ID = PERMISSION_GROUPS.PERMISSIONGROUP_ID
+WHERE DYNAMIC_TABLES.TABLE_NAME = ? AND PERMISSION_GROUPS.PERMISSION_NAME = ? AND APP_PERMISSIONS.PERMISSION_TYPE = ?</query>
+	</preparedSql>
 	<preparedSql name="getTablePermissions">
 		<description>returns a list of permissions of a table</description>
 		<arguments>

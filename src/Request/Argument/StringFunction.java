@@ -30,6 +30,24 @@ public abstract class StringFunction {
 				return Hashing.MD5Hash(target);
 			}
 		});
+		stringFunctions.put("toLowerCase", new StringFunction() {
+			@Override
+			public String function(String target) {
+				return target.toLowerCase();
+			}
+		});
+		stringFunctions.put("toUpperCase", new StringFunction() {
+			@Override
+			public String function(String target) {
+				return target.toUpperCase();
+			}
+		});
+		stringFunctions.put("trim", new StringFunction() {
+			@Override
+			public String function(String target) {
+				return target.trim();
+			}
+		});
 		// empty function
 		stringFunctions.put("", new StringFunction() {
 			@Override
