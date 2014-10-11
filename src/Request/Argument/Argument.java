@@ -98,6 +98,7 @@ public class Argument {
 			switch (argument.getType().typeName()) {
 				case "List":
 				case "Statement":
+				case "Map":
 					continue;
 				default:
 					src = src.replace("{" + argument.getName() + "}", (String) argument.getValue());

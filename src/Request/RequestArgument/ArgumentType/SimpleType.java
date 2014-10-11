@@ -24,6 +24,7 @@ public class SimpleType extends ArgumentType {
 
 	/**
 	 * returns an instance of a simple type given its name
+	 *
 	 * @param type the name of the simple type
 	 * @return the simple type instance
 	 */
@@ -52,6 +53,7 @@ public class SimpleType extends ArgumentType {
 			case String:
 			case List:
 			case Statement:
+			case Map:
 				return true;
 			case Integer:
 				try {
