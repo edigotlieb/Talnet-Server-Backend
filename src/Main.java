@@ -32,7 +32,6 @@ public class Main {
 		Logger.getGlobal().log(Level.INFO, "file.encoding={0}", System.getProperty("file.encoding"));
 		Logger.getGlobal().log(Level.INFO, "Default Charset={0}", Charset.defaultCharset());
 
-		ThreadHandler.init(args[0]);
 		try {
 			Logger.getGlobal().log(Level.INFO, "XML parsing...");
 			XMLParser.XMLParser.parse();
@@ -41,6 +40,7 @@ public class Main {
 			Logger.getGlobal().log(Level.SEVERE, "XML parsing failed! Exiting...", ex);
 			return;
 		}
+		ThreadHandler.init(args[0]);
 		ThreadHandler.run();
 	}
 }
