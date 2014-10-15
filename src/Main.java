@@ -27,7 +27,7 @@ public class Main {
 		FileHandler fh = new FileHandler("log" + new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new Date().getTime()) + ".txt");
 		fh.setFormatter(new SimpleFormatter());
 		Logger.getGlobal().addHandler(fh);
-		ThreadHandler.setLogLevel(Logger.getGlobal(), Level.INFO);
+		ThreadHandler.setLogLevel(Logger.getGlobal(), Level.FINEST);
 
 		Logger.getGlobal().log(Level.INFO, "file.encoding={0}", System.getProperty("file.encoding"));
 		Logger.getGlobal().log(Level.INFO, "Default Charset={0}", Charset.defaultCharset());
