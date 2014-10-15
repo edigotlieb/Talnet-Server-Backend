@@ -44,7 +44,7 @@ public class SqlExecutor {
 	 */
 	public ResultSet executePreparedStatement(String sqlKey, StatementPreparer sp) throws SQLException {
 		Logger.getGlobal().log(Level.FINE, "prepared statement - sqlKey: {0}", sqlKey);
-		Logger.getGlobal().log(Level.FINE, "prepared statement - query: {0}", sqlKey);
+		Logger.getGlobal().log(Level.FINE, "prepared statement - query: {0}", PreparedStatementStrings.getSQL(sqlKey));
 		PreparedStatement ps = this.con.prepareStatement(PreparedStatementStrings.getSQL(sqlKey));
 		sp.prepareStatement(ps);
 		ps.execute();
