@@ -10,6 +10,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.JSONObject;
 
 /**
@@ -17,7 +19,7 @@ import org.json.JSONObject;
  *
  * @author idanb55
  */
-public class RequestArgumentStructureAssignment {
+public final class RequestArgumentStructureAssignment {
 
 	private Map<String, RequestArgumentAssignment> arguments;
 
@@ -43,6 +45,7 @@ public class RequestArgumentStructureAssignment {
 		while (i.hasNext()) {
 			this.addArgument(RequestArgumentAssignment.RequestArgumentAssignmentFactory(i.next(), requestData));
 		}
+		Logger.getGlobal().log(Level.FINEST,this.toString());
 	}
 
 	private RequestArgumentStructureAssignment() {
@@ -86,5 +89,10 @@ public class RequestArgumentStructureAssignment {
 		RequestArgumentStructureAssignment result = new RequestArgumentStructureAssignment();
 		result.arguments = new HashMap<>(arguments);
 		return result;
+	}
+	
+	@Override
+	public String toString(){
+		return this.arguments.toString();
 	}
 }
