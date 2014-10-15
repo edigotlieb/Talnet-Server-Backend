@@ -9,14 +9,16 @@ import Request.Credentials;
 import RequestArgumentAssignment.RequestArgumentStructureAssignment;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Iterator;
 
 public abstract class StatementPreparer {
 
-    public abstract void prepareStatement(PreparedStatement ps) throws SQLException;
-	
-	protected void prepareStatement(PreparedStatement ps, ArgumentSet arguments, RequestArgumentStructureAssignment requestArguments, Credentials creds) throws SQLException{
-		for(int i = 0; i < arguments.getSize(); i++){
-			Argument argument = arguments.get(i);
+	public abstract void prepareStatement(PreparedStatement ps) throws SQLException;
+
+	protected void prepareStatement(PreparedStatement ps, ArgumentSet arguments, RequestArgumentStructureAssignment requestArguments, Credentials creds) throws SQLException {
+		Iterator<Integer> it = arguments.keySet().iterator();
+		while (it.hasNext()) {
+			Argument argument = arguments.get(it.next());
 			ps.setString(argument.getId(), argument.getValue(requestArguments, creds));
 		}
 	}

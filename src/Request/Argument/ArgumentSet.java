@@ -6,6 +6,7 @@ package Request.Argument;
 import Exceptions.ParsingException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -53,9 +54,19 @@ public class ArgumentSet {
 
 	/**
 	 * returns the size of the set
+	 *
 	 * @return the size of the set
 	 */
 	public int getSize() {
 		return arguments.size();
+	}
+
+	/**
+	 * returns a set of the keys
+	 *
+	 * @return the size of the set
+	 */
+	public Set<Integer> keySet() {
+		return arguments.keySet();
 	}
 }
