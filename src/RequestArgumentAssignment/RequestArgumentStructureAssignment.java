@@ -45,7 +45,7 @@ public final class RequestArgumentStructureAssignment {
 		while (i.hasNext()) {
 			this.addArgument(RequestArgumentAssignment.RequestArgumentAssignmentFactory(i.next(), requestData));
 		}
-		Logger.getGlobal().log(Level.FINEST,this.toString());
+		Logger.getGlobal().log(Level.FINE,this.toString());
 	}
 
 	private RequestArgumentStructureAssignment() {
