@@ -51,7 +51,7 @@ public class Request {
 				requestsMap.put(request.getType(), new HashMap<String, Request>());
 			}
 			requestsMap.get(request.getType()).put(request.getName(), request);
-			Logger.getGlobal().log(Level.FINER, "Request type:{0} name:{1}", new Object[]{request.getType(), request.getName()});
+			Logger.getGlobal().log(Level.FINE, "Request type:{0} name:{1}", new Object[]{request.getType(), request.getName()});
 		}
 	}
 

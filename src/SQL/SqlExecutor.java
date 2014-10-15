@@ -44,7 +44,7 @@ public class SqlExecutor {
 	 */
 	public ResultSet executePreparedStatement(String sqlKey, StatementPreparer sp) throws SQLException {
 		Logger.getGlobal().log(Level.FINE, "prepared statement - sqlKey: {0}", sqlKey);
-		Logger.getGlobal().log(Level.FINEST, "prepared statement - query: {0}", sqlKey);
+		Logger.getGlobal().log(Level.FINE, "prepared statement - query: {0}", sqlKey);
 		PreparedStatement ps = this.con.prepareStatement(PreparedStatementStrings.getSQL(sqlKey));
 		sp.prepareStatement(ps);
 		ps.execute();
@@ -104,7 +104,7 @@ public class SqlExecutor {
 		} else {
 			sql = query;
 		}
-		Logger.getGlobal().log(Level.FINEST, "dynamic statement - query: {0}", sql);
+		Logger.getGlobal().log(Level.FINE, "dynamic statement - query: {0}", sql);
 		if (sql.startsWith("INSERT")) {
 			//get generated keys if inserted
 			stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
