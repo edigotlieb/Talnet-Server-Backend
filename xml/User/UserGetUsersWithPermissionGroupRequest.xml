@@ -1,0 +1,24 @@
+<talnet type="request">
+	<request type="USER" name="GET_USERS_WITH_GROUPS">
+		<description>
+			This request adds a permission to a dynamic table created specially for a certain app.
+			it requires the app name, table name, permission group name and the permission type.
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="groupName" key="groupName"></requestArgument>
+		</requestArguments>
+		<validation>
+			<existence type="PermissionGroupByName" errorid="11">
+				<argument id="1">{permissionGroupName}</argument>
+			</existence>
+			<permission type="PermissionGroupAdmin" errorid="6">
+				<argument id="1">{permissionGroupName}</argument>
+			</permission>
+		</validation>
+		<performance>
+			<sqlExecute query="getUserInfoWithPermissionGroup">
+				<argument id="1">{groupName}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

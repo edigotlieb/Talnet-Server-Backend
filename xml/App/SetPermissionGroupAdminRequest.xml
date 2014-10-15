@@ -1,0 +1,33 @@
+<talnet type="request">
+	<request type="APP" name="SET_PERMISSIONGROUP_ADMIN">
+		<description>
+			This request creates a new permission group.
+			The default group admin is the authenticated user.
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="permissionGroupName" key="permissionGroupName">The name of the new permission group</requestArgument>
+			<requestArgument type="String" name="username" key="username">The name of the new permission group</requestArgument>
+		</requestArguments>
+		<validation>
+			<existence type="UserByUsername" errorid="5">
+				<argument id="1">{permissionGroupName}</argument>
+			</existence>
+			<existence type="PermissionGroupByName" errorid="5">
+				<argument id="1">{permissionGroupName}</argument>
+			</existence>
+			<permission type="PermissionGroupAdmin" errorid="22">
+				<argument id="1">{permissionGroupName}</argument>
+			</permission>
+			<permission type="UserInGroup" errorid="22">
+				<argument id="1">{username}</argument>
+				<argument id="2">{permissionGroupName}</argument>
+			</permission>
+		</validation>
+		<performance>
+			<sqlExecute query="SetPermissionGroupAdmin">
+				<argument id="1">{username}</argument>
+				<argument id="2">{permissionGroupName}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

@@ -1,0 +1,19 @@
+<talnet type="preparedSQL">
+	<preparedSql name="getUserTablePermission">
+		<description>returns a record of table permission by table name, permisison group name, and permission type</description>
+		<arguments>
+			<argument id="1">the table name</argument>
+			<argument id="2">user name</argument>
+			<argument id="3">permission type</argument>
+		</arguments>
+		<columns>
+			<column name="PERMISSION_TYPE">the permission type</column>
+		</columns>
+		<query>SELECT APP_PERMISSIONS.PERMISSION_TYPE FROM USERS
+RIGHT JOIN USER_PERMISSIONS ON USERS.USER_ID = USER_PERMISSIONS.USER_ID
+RIGHT JOIN PERMISSION_GROUPS ON USER_PERMISSIONS.PERMISSIONGROUP_ID = PERMISSION_GROUPS.PERMISSIONGROUP_ID
+LEFT JOIN APP_PERMISSIONS ON APP_PERMISSIONS.PERMISSIONGROUP_ID = PERMISSION_GROUPS.PERMISSIONGROUP_ID
+WHERE APP_PERMISSIONS.TABLE_ID=(SELECT TABLE_ID FROM DYNAMIC_TABLES WHERE DYNAMIC_TABLES.TABLE_NAME = ?) AND
+USERS.USERNAME = ? AND APP_PERMISSIONS.PERMISSION_TYPE = ?</query>
+	</preparedSql>
+</talnet>

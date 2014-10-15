@@ -1,0 +1,22 @@
+<talnet type="preparedSQL">
+	<preparedSql name="getBackendParams">
+		<description>returns information of all backend params</description>
+		<arguments>
+		</arguments>
+		<columns>
+			<column name="name">the name of the parameter</column>
+			<column name="value">the value of the parameter</column>
+		</columns>
+		<query>SELECT * FROM BACKEND_PARAMS</query>
+	</preparedSql>
+	<preparedSql name="getBackendParamValue">
+		<description>returns value of a scpecific backend params</description>
+		<arguments>
+			<argument id="1">the name of the argument to return</argument>
+		</arguments>
+		<columns>
+			<column name="value">the value of the parameter</column>
+		</columns>
+		<query>SELECT value FROM BACKEND_PARAMS WHERE name = ?</query>
+	</preparedSql>
+</talnet>

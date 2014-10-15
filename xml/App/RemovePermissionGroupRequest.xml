@@ -1,0 +1,36 @@
+<talnet type="request">
+	<request type="APP" name="REMOVE_PERMISSIONGROUP">
+		<description>
+			This request creates a new permission group.
+			The default group admin is the authenticated user.
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="permissionGroupName" key="permissionGroupName">The name of the new permission group</requestArgument>
+		</requestArguments>
+		<validation>
+			<existence type="PermissionGroupByName" errorid="5">
+				<argument id="1">{permissionGroupName}</argument>
+			</existence>
+			<string gate="not" target="{permissionGroupName}" type="endsWith" errorid="17">
+				<argument id="1">_admin</argument>
+			</string>
+			<string gate="not" target="{permissionGroupName}" type="matches" errorid="17">
+				<argument id="1">Super_Admin|Developer|Anonymous|User</argument>
+			</string>
+			<permission type="PermissionGroupAdmin" errorid="22">
+				<argument id="1">{permissionGroupName}</argument>
+			</permission>
+		</validation>
+		<performance>
+			<sqlExecute query="DeletePermissionUsers">
+				<argument id="1">{permissionGroupName}</argument>
+			</sqlExecute>
+			<sqlExecute query="DeleteAppPermissionsByPermissionName">
+				<argument id="1">{permissionGroupName}</argument>
+			</sqlExecute>
+			<sqlExecute query="DeletePermission">
+				<argument id="1">{permissionGroupName}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

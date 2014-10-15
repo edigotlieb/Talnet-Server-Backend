@@ -1,0 +1,15 @@
+<talnet type="request">
+	<request type="APP" name="GET_ALL_PERMISSIONS">
+		<description>
+			This request drops a dynamic table.
+		</description>
+		<requestArguments>
+		</requestArguments>
+		<validation>
+		</validation>
+		<performance>
+			<sqlExecute query="getAllPermissionGroupsAdmin">
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

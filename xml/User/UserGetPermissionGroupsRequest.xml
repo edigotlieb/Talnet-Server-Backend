@@ -1,0 +1,17 @@
+<talnet type="request">
+	<request type="USER" name="GET_GROUPS">
+		<description>
+			This request adds a permission to a dynamic table created specially for a certain app.
+			it requires the app name, table name, permission group name and the permission type.
+		</description>
+		<requestArguments>
+		</requestArguments>
+		<validation>
+		</validation>
+		<performance>
+			<sqlExecute query="getUserPermissionGroupsNoPass">
+				<argument id="1">{creds:username}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

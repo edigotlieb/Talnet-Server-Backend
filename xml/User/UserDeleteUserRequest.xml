@@ -1,0 +1,32 @@
+<talnet type="request">
+	<request type="USER" name="DELETE_USER">
+		<description>
+			This request adds a permission to a dynamic table created specially for a certain app.
+			it requires the app name, table name, permission group name and the permission type.
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="userToDelete" key="userToDelete">The name of the application using the modified table</requestArgument>
+		</requestArguments>
+		<validation>
+			<string gate="not" target="{userToDelete}" type="equals" errorid="3">
+				<argument id="1">Anonymous</argument>
+			</string>
+			<existence type="UserByUsername" errorid="3">
+				<argument id="1">{userToDelete}</argument>
+			</existence>
+			<string gate="not" target="{userToDelete}" type="equals" errorid="3">
+				<argument id="1">{creds:username}</argument>
+			</string>
+			<permission type="AnyPermissionGroupAdmin" errorid="24">
+			</permission>
+		</validation>
+		<performance>
+			<sqlExecute query="DeletePermissionUsersByUser">
+				<argument id="1">{userToDelete}</argument>
+			</sqlExecute>
+			<sqlExecute query="DeleteUser">
+				<argument id="1">{userToDelete}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

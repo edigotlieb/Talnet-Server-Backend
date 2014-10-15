@@ -1,119 +1,163 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * FILE : SqlQueryGenerator.java AUTHORS : Idan Berkovits
  */
 package SQL.DynamicStatements;
 
-import Request.AppRequest.Column;
-import Request.UserRequest.UserSelectRequest;
+import Request.Credentials;
+import Request.Preformance.DynamicSqlExecutePerformance;
+import RequestArgumentAssignment.RequestArgumentStructureAssignment;
+import SQL.PreparedStatements.StatementPreparerArgument;
+import Statement.AndStatement;
+import Statement.RelStatement;
 import Statement.Statement;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 /**
+ * this abstract class generates all dynamic sql queries
  *
- * @author T7639192
+ * @author idanb55
  */
-public class SqlQueryGenerator {
+public abstract class SqlQueryGenerator {
 
-	private static <T> String stringCommaSeperated(Iterable<T> list){
-		return stringCommaSeperated(list, false);
-	}
-	
-	private static <T> String stringCommaSeperated(Iterable<T> list, boolean apostrophe) {
-		Iterator<T> iterator = list.iterator();
-		String res = "";
-		while (iterator.hasNext()) {
-			if (apostrophe) {
-				res += "'" + iterator.next().toString() + "'";
-			} else {
-				res += iterator.next().toString();
+	private final static Map<String, SqlQueryGenerator> queryGenerators;
+
+	static {
+		queryGenerators = new HashMap<>();
+		queryGenerators.put("userSelect", new SqlQueryGenerator() {
+			@Override
+			public String generateQuery(StatementPreparerArgument sp) {
+				String cols = "";
+				Iterator<String> columns = DynamicSqlExecutePerformance.selectUserColumns.iterator();
+				while (columns.hasNext()) {
+					cols += columns.next();
+					if (columns.hasNext()) {
+						cols += ", ";
+					}
+				}
+				Statement whereNoAnon = new AndStatement(sp.getArgumentStatement(1), new RelStatement("USERNAME", Credentials.anonymous, "!="));
+				return "SELECT " + cols + " FROM USERS WHERE " + whereNoAnon + " ORDER BY NAME ASC";
 			}
-			res += ", ";
-		}
-		if (res.length() > 0) {
-			res = res.substring(0, res.length() - 2);
-		}
-		return res;
-	}
-
-	private static <T> String stringCommaSeperated(Map<T, T> map) {
-		Iterator<T> iterator = map.keySet().iterator();
-		String res = "";
-		while (iterator.hasNext()) {
-			T key = iterator.next();
-			res += key.toString() + " = '" + map.get(key) + "'";
-			res += ", ";
-		}
-		if (res.length() > 0) {
-			res = res.substring(0, res.length() - 2);
-		}
-		return res;
-	}
-
-	public enum ORDER_ORIENTATION {
-
-		ASC, DESC
-	}
-
-	public static String select(List<String> colnames, String from, Statement where) {
-		return select(colnames, from, where, "", null);
-	}
-
-	public static String select(List<String> colnames, String from, Statement where, String orderBy, ORDER_ORIENTATION orie) {
-		String columns;
-		if (colnames == null) {
-			columns = "*";
-		} else {
-			columns = stringCommaSeperated(colnames);
-		}
-		// System.out.println("SELECT " + columns + " FROM " + from + " WHERE " + where.toString());
-		String query = "SELECT " + columns + " FROM " + from;
-		if(from.equals(UserSelectRequest.userTable)) {
-			query = query + " HAVING " + where.toString();
-		} else { 
-			query = query + " WHERE " + where.toString();
-		}
-		if (orderBy.length() > 0) {
-			query += " ORDER BY " + orderBy + " " + orie.toString();
-		}
-		return query;
-	}
-
-	public static String delete(String from, Statement where) {
-		return "DELETE FROM " + from + " WHERE " + where.toString();
-	}
-
-	public static String update(String table, Map<String, String> set, Statement where) {
-		return "UPDATE " + table + " SET " + stringCommaSeperated(set) + " WHERE " + where.toString();
-	}
-	
-	public static String insert(String into, Map<String, String> cols_vals) {
-		String sql = "INSERT INTO " + into + "(" + stringCommaSeperated(cols_vals.keySet()) + ") VALUES (" + stringCommaSeperated(cols_vals.values(), true) + ");";
-		//sql += "\nSELECT LAST_INSERT_ID( ) AS insert_id;";
-		return sql;
-	}
-
-	public static String create(String tableName, List<Request.AppRequest.Column> cols) {
-		String primaries = "";
-		for (Column col : cols) {
-			if (col.isPrimary()) {
-				primaries += col.getColName() + ", ";
+		});
+		queryGenerators.put("select", new SqlQueryGenerator() {
+			@Override
+			public String generateQuery(StatementPreparerArgument sp) {
+				if (sp.getArgumentValue(3).length() > 0) {
+					return "SELECT * FROM " + sp.getArgumentValue(1) + " WHERE " + sp.getArgumentStatement(2) + " ORDER BY " + sp.getArgumentValue(3) + " " + sp.getArgumentValue(4);
+				}
+				return "SELECT * FROM " + sp.getArgumentValue(1) + " WHERE " + sp.getArgumentStatement(2);
 			}
-		}
-		if (primaries.length() > 0) {
-			primaries = primaries.substring(0, primaries.length() - 2);
-			primaries = ", PRIMARY KEY (" + primaries + ")";
-		}
-		return "CREATE TABLE " + tableName + "(" + stringCommaSeperated(cols) + primaries + ")";
+		});
+		queryGenerators.put("insert", new SqlQueryGenerator() {
+			@Override
+			public String generateQuery(StatementPreparerArgument sp) {
+				String sql = "INSERT INTO " + sp.getArgumentValue(1);
+				String cols = "";
+				String vals = "";
+				Map<String, String> columnMap = sp.getArgumentMap(2);
+				Iterator<String> columns = columnMap.keySet().iterator();
+				while (columns.hasNext()) {
+					String column = columns.next();
+					cols += column;
+					vals += "'" + columnMap.get(column) + "'";
+					if (columns.hasNext()) {
+						cols += ", ";
+						vals += ", ";
+					}
+				}
+				sql += " (" + cols + ") VALUES (" + vals + ")";
+				return sql;
+			}
+		});
+		queryGenerators.put("delete", new SqlQueryGenerator() {
+			@Override
+			public String generateQuery(StatementPreparerArgument sp) {
+				return "DELETE FROM " + sp.getArgumentValue(1) + " WHERE " + sp.getArgumentStatement(2);
+			}
+		});
+		queryGenerators.put("update", new SqlQueryGenerator() {
+			@Override
+			public String generateQuery(StatementPreparerArgument sp) {
+				String sql = "UPDATE " + sp.getArgumentValue(1) + " SET ";
+				String data = "";
+				Map<String, String> columnMap = sp.getArgumentMap(2);
+				Iterator<String> columns = columnMap.keySet().iterator();
+				while (columns.hasNext()) {
+					String column = columns.next();
+					data += column + " = '" + Utilities.Sql.sanitizeSqlCharacterEscaping(columnMap.get(column)) + "'";
+					if (columns.hasNext()) {
+						data += ", ";
+					}
+				}
+				sql += data + " WHERE " + sp.getArgumentStatement(3);
+				return sql;
+			}
+		});
+		queryGenerators.put("createTable", new SqlQueryGenerator() {
+			@Override
+			public String generateQuery(StatementPreparerArgument sp) {
+				String cols = "";
+				String primaries = "";
+				Iterator<RequestArgumentStructureAssignment> columns = sp.getArgumentList(2).iterator();
+				while (columns.hasNext()) {
+					RequestArgumentStructureAssignment column = columns.next();
+					cols += columnToString(column);
+					if (((String) column.getArgument("isPrimary").getValue()).toLowerCase().equals("true")) {
+						primaries += (String) column.getArgument("colName").getValue() + ", ";
+					}
+					if (columns.hasNext()) {
+						cols += ", ";
+					}
+					primaries = primaries.substring(0, primaries.length() - 2);
+				}
+				return "CREATE TABLE " + sp.getArgumentValue(1) + " (" + cols + ", PRIMARY KEY (" + primaries + ") )";
+			}
+
+			private String columnToString(RequestArgumentStructureAssignment column) {
+				String col = column.getArgument("colName").getValue() + " " + column.getArgument("type").getValue();
+				switch ((String) column.getArgument("type").getValue()) {
+					case "DATE":
+					case "TIMESTAMP":
+						break;
+					case "VARCHAR":
+						if (Integer.parseInt((String) column.getArgument("size").getValue()) < 0) {
+							col += "(50)";
+						} else {
+							col += "(" + (String) column.getArgument("size").getValue() + ")";
+						}
+						break;
+					case "INT":
+						if (Integer.parseInt((String) column.getArgument("size").getValue()) < 0) {
+							col += "(11)";
+						} else {
+							col += "(" + (String) column.getArgument("size").getValue() + ")";
+						}
+						break;
+				}
+				if (((String) column.getArgument("autoInc").getValue()).toLowerCase().equals("true")) {
+					col += " AUTO_INCREMENT";
+				}
+				return col;
+			}
+		});
+		queryGenerators.put("descTable", new SqlQueryGenerator() {
+			@Override
+			public String generateQuery(StatementPreparerArgument sp) {
+				return "DESC " + sp.getArgumentValue(1);
+			}
+		});
+		queryGenerators.put("dropTable", new SqlQueryGenerator() {
+			@Override
+			public String generateQuery(StatementPreparerArgument sp) {
+				return "DROP TABLE " + sp.getArgumentValue(1);
+			}
+		});
 	}
 
-	public static String drop(String tableName) {
-		return "DROP TABLE " + tableName;
-	}
+	public abstract String generateQuery(StatementPreparerArgument sp);
 
-	public static String desc(String tableName) {
-		return "DESC " + tableName;
+	public static SqlQueryGenerator getQueryGenerator(String query) {
+		return queryGenerators.get(query);
 	}
 }

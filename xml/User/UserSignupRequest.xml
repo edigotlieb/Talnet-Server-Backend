@@ -1,0 +1,47 @@
+<talnet type="request">
+	<request type="USER" name="SIGN_UP">
+		<description>
+			This request adds a permission to a dynamic table created specially for a certain app.
+			it requires the app name, table name, permission group name and the permission type.
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="username" key="username"></requestArgument>
+			<requestArgument type="String" name="password" key="password"></requestArgument>
+			<requestArgument type="String" name="first_name" key="firstName"></requestArgument>
+			<requestArgument type="String" name="last_name" key="lastName"></requestArgument>
+			<requestArgument type="String" name="disp_name" key="displayName"></requestArgument>
+			<requestArgument type="String" name="email" key="email"></requestArgument>
+			<requestArgument type="Integer" name="room" key="room"></requestArgument>
+			<requestArgument type="Integer" name="year" key="year"></requestArgument>
+			<requestArgument type="String" name="phonePre" key="phonePre"></requestArgument>
+			<requestArgument type="String" name="phoneSuf" key="phoneSuf"></requestArgument>
+		</requestArguments>
+		<validation>
+			<string target="{BeckendParams:register_activated}" type="equals" errorid="31">
+				<argument id="1">1</argument>
+			</string>
+			<string target="{creds:username}" type="equals" errorid="10">
+				<argument id="1">Anonymous</argument>
+			</string>
+			<credentials type="isMasterApplication" errorid="13"></credentials>
+		</validation>
+		<performance>
+			<sqlExecute query="AddUser">
+				<argument id="1">{username}</argument>
+				<argument id="2">{password}" function="md5</argument>
+				<argument id="3">{first_name}</argument>
+				<argument id="4">{last_name}</argument>
+				<argument id="5">{disp_name}</argument>
+				<argument id="6">{email}</argument>
+				<argument id="7">{room}</argument>
+				<argument id="8">{year}</argument>
+				<argument id="9">{phonePre}</argument>
+				<argument id="10">{phoneSuf}</argument>
+			</sqlExecute>
+			<sqlExecute query="AddUserPermissionGroup">
+				<argument id="1">{username}</argument>
+				<argument id="2">User</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

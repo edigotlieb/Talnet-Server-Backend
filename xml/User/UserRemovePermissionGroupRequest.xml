@@ -1,0 +1,37 @@
+<talnet type="request">
+	<request type="USER" name="REMOVE_PERMISSION">
+		<description>
+			This request adds a permission to a dynamic table created specially for a certain app.
+			it requires the app name, table name, permission group name and the permission type.
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="userToRemoveFrom" key="username">The name of the application using the modified table</requestArgument>
+			<requestArgument type="String" name="groupToRemove" key="permissionGroupName">The modified table name</requestArgument>
+		</requestArguments>
+		<validation>
+			<existence type="PermissionGroupByName" errorid="11">
+				<argument id="1">{groupToRemove}</argument>
+			</existence>
+			<string gate="not" target="{groupToRemove}" type="equals" errorid="26">
+				<argument id="1">User</argument>
+			</string>
+			<existence type="UserByUsername" errorid="11">
+				<argument id="1">{userToRemoveFrom}</argument>
+			</existence>
+			<permission gate="not" type="PermissionGroupAdmin" errorid="6">
+				<argument id="1">{groupToRemove}</argument>
+				<argument id="2">{userToRemoveFrom}</argument>
+			</permission>
+			<special type="selfOrGroupAdmin" errorid="16">
+				<argument id="1">{groupToRemove}</argument>
+				<argument id="2">{userToRemoveFrom}</argument>
+			</special>
+		</validation>
+		<performance>
+			<sqlExecute query="RemoveUserPermission">
+				<argument id="1">{groupToRemove}</argument>
+				<argument id="2">{userToRemoveFrom}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>
