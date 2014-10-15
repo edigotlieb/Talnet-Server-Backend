@@ -151,7 +151,7 @@ public class Request {
 		if (!user.next()) {
 			throw new ValidationException(3);
 		}
-		if (!creds.getHashedPassword().equals(Hashing.MD5Hash(app.getString("PASSWORD") + challenge))) {
+		if (!creds.getHashedPassword().equals(Hashing.MD5Hash(user.getString("PASSWORD") + challenge))) {
 			throw new ValidationException(4);
 		}
 
