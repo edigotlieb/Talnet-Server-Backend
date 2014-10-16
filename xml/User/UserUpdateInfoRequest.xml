@@ -16,7 +16,7 @@
 			<requestArgument type="String" name="phoneSuf" key="phoneSuf"></requestArgument>
 		</requestArguments>
 		<validation>
-			<string gate="not" target="{creds:username}" type="equals" errorid="10">
+			<string gate="not" target="{creds:username}" type="equals" errorid="28">
 				<argument id="1">Anonymous</argument>
 			</string>
 			<string target="{creds:username}" type="equals" errorid="6">
