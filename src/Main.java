@@ -40,7 +40,7 @@ public class Main {
 			Logger.getGlobal().log(Level.SEVERE, "XML parsing failed! Exiting...", ex);
 			return;
 		}
-		//ThreadHandler.init(args[0]);
+		ThreadHandler.init(args[0]);
 		ThreadHandler.run();
 	}
 }
