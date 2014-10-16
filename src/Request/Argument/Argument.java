@@ -9,6 +9,8 @@ import RequestArgumentAssignment.RequestArgumentStructureAssignment;
 import RequestArgumentAssignment.RequestArgumentAssignment;
 import Utilities.BackendParams;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.w3c.dom.Element;
 
 /**
@@ -109,7 +111,10 @@ public class Argument {
 		Iterator<String> backendParams = BackendParams.getNames().iterator();
 		while (backendParams.hasNext()) {
 			String paramName = backendParams.next();
+			Logger.getGlobal().log(Level.FINE, "DEBUG {0}", paramName);
+			Logger.getGlobal().log(Level.FINE, "DEBUG {0}", src);
 			src = src.replace("{BackendParams:" + paramName + "}", BackendParams.getParameter(paramName));
+			Logger.getGlobal().log(Level.FINE, "DEBUG {0}", src);
 		}
 
 		return function.function(src);
