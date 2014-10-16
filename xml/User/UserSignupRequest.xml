@@ -31,7 +31,7 @@
 		<performance>
 			<sqlExecute query="AddUser">
 				<argument id="1">{username}</argument>
-				<argument id="2">{password}" function="md5</argument>
+				<argument id="2"  function="md5">{password}</argument>
 				<argument id="3">{first_name}</argument>
 				<argument id="4">{last_name}</argument>
 				<argument id="5">{disp_name}</argument>

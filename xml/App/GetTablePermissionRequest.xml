@@ -1,5 +1,5 @@
 <talnet type="request">
-	<request type="App" name="GET_TABLE_PERMISSIONS">
+	<request type="APP" name="GET_TABLE_PERMISSIONS">
 		<description>
 			This request drops a dynamic table.
 		</description>
