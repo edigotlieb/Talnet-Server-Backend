@@ -8,7 +8,7 @@
 			<requestArgument type="String" name="userToChange" key="username"></requestArgument>
 			<requestArgument type="String" name="first_name" key="newFirstName"></requestArgument>
 			<requestArgument type="String" name="last_name" key="newLastName"></requestArgument>
-			<requestArgument type="String" name="disp_name" key="newDispName"></requestArgument>
+			<requestArgument type="String" name="disp_name" key="newDisplayName"></requestArgument>
 			<requestArgument type="String" name="email" key="newEmail"></requestArgument>
 			<requestArgument type="Integer" name="room" key="newRoom"></requestArgument>
 			<requestArgument type="Integer" name="year" key="newYear"></requestArgument>
