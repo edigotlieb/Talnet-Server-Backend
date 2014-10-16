@@ -1,3 +1,4 @@
+
 /**
  * FILE : Main.java AUTHORS : Erez Gotlieb & Idan Berkovits
  */
@@ -24,7 +25,7 @@ public class Main {
 		System.setProperty("file.encoding", "UTF8");
 
 		//initialize logger
-		FileHandler fh = new FileHandler("log" + new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new Date().getTime()) + ".txt");
+		FileHandler fh = new FileHandler("log/" + new java.text.SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date().getTime()) + ".log");
 		fh.setFormatter(new SimpleFormatter());
 		Logger.getGlobal().addHandler(fh);
 		ThreadHandler.setLogLevel(Logger.getGlobal(), Level.FINE);
