@@ -45,11 +45,6 @@ public class StatementValidation extends SingleValidation {
 	@Override
 	protected boolean helpValidate(SqlExecutor sqlExc, RequestArgumentStructureAssignment arguments, Credentials creds) throws SQLException {
 		Statement st = (Statement) arguments.getArgument(this.target).getValue();
-		if (this.type == ValidationType.isColumnIn) {
-			Logger.getGlobal().log(Level.FINE, "DEBUG Statement {0}", st);
-			Logger.getGlobal().log(Level.FINE, "DEBUG Statement pass in {0}", st.isColumnIn("PASSWORD"));
-			Logger.getGlobal().log(Level.FINE, "DEBUG Statement username in {0}", st.isColumnIn("USERNAME"));
-		}
 		switch (this.type) {
 			case isColumnIn:
 				return st.isColumnIn(this.arguments.get(1).getValue(arguments, creds));
