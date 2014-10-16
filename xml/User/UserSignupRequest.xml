@@ -17,7 +17,7 @@
 			<requestArgument type="String" name="phoneSuf" key="phoneSuf"></requestArgument>
 		</requestArguments>
 		<validation>
-			<string target="{BeckendParams:register_activated}" type="equals" errorid="31">
+			<string target="{BackendParams:register_activated}" type="equals" errorid="31">
 				<argument id="1">1</argument>
 			</string>
 			<string target="{creds:username}" type="equals" errorid="10">
