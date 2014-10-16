@@ -37,7 +37,7 @@ public abstract class SqlQueryGenerator {
 					}
 				}
 				Statement whereNoAnon = new AndStatement(sp.getArgumentStatement(1), new RelStatement("USERNAME", Credentials.anonymous, "!="));
-				return "SELECT " + cols + " FROM USERS WHERE " + whereNoAnon + " ORDER BY NAME ASC";
+				return "SELECT " + cols + " FROM USERS HAVING " + whereNoAnon + " ORDER BY NAME ASC";
 			}
 		});
 		queryGenerators.put("select", new SqlQueryGenerator() {
