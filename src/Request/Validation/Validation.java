@@ -107,6 +107,7 @@ public abstract class Validation {
 	public boolean validate(SqlExecutor sqlExc, RequestArgumentStructureAssignment arguments, Credentials creds) throws ValidationException, SQLException {
 		boolean flag = this.helpValidate(sqlExc, arguments, creds);
 		Logger.getGlobal().log(Level.FINE, "DEBUG help val {0}", flag);
+		Logger.getGlobal().log(Level.FINE, "DEBUG gate {0}", this.gate);
 		if ((this.gate && !flag) || (!this.gate && flag)) {
 			throw new ValidationException(this.errorid);
 		}
