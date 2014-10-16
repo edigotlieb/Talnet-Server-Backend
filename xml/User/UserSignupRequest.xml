@@ -20,6 +20,9 @@
 			<string target="{BackendParams:register_activated}" type="equals" errorid="31">
 				<argument id="1">1</argument>
 			</string>
+			<existence type="UserByUsername" gate="not" errorid="27">
+				<argument id="1">{username}</argument>
+			</existence>
 			<string target="{creds:username}" type="equals" errorid="10">
 				<argument id="1">Anonymous</argument>
 			</string>
