@@ -1,5 +1,5 @@
 <talnet type="request">
-	<request type="DTD" name="SELECT">
+	<request type="USER" name="SELECT">
 		<description>
 			This request adds a permission to a dynamic table created specially for a certain app.
 			it requires the app name, table name, permission group name and the permission type.
