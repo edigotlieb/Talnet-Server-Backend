@@ -37,8 +37,10 @@ public class RequestSingleArgumentAssignment extends RequestArgumentAssignment {
 		switch (argument.getType().typeName()) {
 			case "Statement":
 				this.value = Statement.statementFactory(requestData.getJSONObject(argument.getKey()));
+				break;
 			case "Map":
 				this.value = assignMap(new HashMap<String, String>(), requestData.getJSONObject(argument.getKey()));
+				break;
 			default:
 				String strValue;
 				if (argument.getDefValue() != null && !requestData.has(argument.getKey())) {
