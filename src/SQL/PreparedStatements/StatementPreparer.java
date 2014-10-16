@@ -21,7 +21,6 @@ public abstract class StatementPreparer {
 		Iterator<Integer> it = arguments.keySet().iterator();
 		while (it.hasNext()) {
 			Argument argument = arguments.get(it.next());
-			Logger.getGlobal().log(Level.FINE, "DEBUG arguments {0}...{1}", new Object[]{argument.getId(), argument.getValue(requestArguments, creds)});
 			ps.setString(argument.getId(), argument.getValue(requestArguments, creds));
 		}
 	}

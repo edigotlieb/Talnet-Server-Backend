@@ -66,6 +66,7 @@ public class SqlExecutor {
 	public int countExecutePreparedStatement(String sqlKey, StatementPreparer sp) throws SQLException {
 		ResultSet rs = this.executePreparedStatement(sqlKey, sp);
 		rs.afterLast();
+		Logger.getGlobal().log(Level.FINE, "DEBUG row count {0}",rs.getRow());
 		return rs.getRow();
 	}
 
