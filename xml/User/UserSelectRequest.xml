@@ -19,7 +19,7 @@
 			</permission>
 		</validation>
 		<performance>
-			<dynamicSqlExecute query="userSelect">
+			<dynamicSqlExecute query="userSelect" return="return">
 				<argument id="1">{where}</argument>
 			</dynamicSqlExecute>
 		</performance>
