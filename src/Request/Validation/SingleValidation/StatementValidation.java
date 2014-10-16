@@ -45,7 +45,7 @@ public class StatementValidation extends SingleValidation {
 		Statement st = (Statement) arguments.getArgument(this.target).getValue();
 		switch (this.type) {
 			case isColumnIn:
-				st.isColumnIn(this.arguments.get(1).getValue(arguments, creds));
+				return st.isColumnIn(this.arguments.get(1).getValue(arguments, creds));
 			case validateOperands:
 				return st.validateOperands();
 			default:
