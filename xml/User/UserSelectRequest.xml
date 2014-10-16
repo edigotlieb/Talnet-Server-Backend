@@ -19,11 +19,8 @@
 			</permission>
 		</validation>
 		<performance>
-			<dynamicSqlExecute query="select">
-				<argument id="1">USERS</argument>
-				<argument id="2">{where}</argument>
-				<argument id="3">NAME</argument>
-				<argument id="4">ASC</argument>
+			<dynamicSqlExecute query="userSelect">
+				<argument id="1">{where}</argument>
 			</dynamicSqlExecute>
 		</performance>
 	</request>
