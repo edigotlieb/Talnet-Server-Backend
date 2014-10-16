@@ -9,6 +9,8 @@ import Request.Credentials;
 import RequestArgumentAssignment.RequestArgumentStructureAssignment;
 import SQL.SqlExecutor;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.w3c.dom.Element;
 
 /**
@@ -41,6 +43,7 @@ public class StringValidation extends SingleValidation {
 	@Override
 	protected boolean helpValidate(SqlExecutor sqlExc, RequestArgumentStructureAssignment arguments, Credentials creds) throws SQLException {
 		String targetValue = Argument.getValue(target, arguments, creds);
+		Logger.getGlobal().log(Level.FINE, "DEBUG {0}", targetValue);
 		switch (this.type) {
 			case endsWith:
 				return targetValue.endsWith(this.arguments.get(1).getValue(arguments, creds));
