@@ -24,7 +24,7 @@
 			</string>
 		</validation>
 		<performance>
-			<sqlExecute query="AddUser">
+			<sqlExecute query="UpdateUser">
 				<argument id="1">{first_name}</argument>
 				<argument id="2">{last_name}</argument>
 				<argument id="3">{disp_name}</argument>
