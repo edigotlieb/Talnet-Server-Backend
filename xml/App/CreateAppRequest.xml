@@ -29,7 +29,7 @@
 			</sqlExecute>
 			<sqlExecute query="AddApp">
 				<argument id="1">{appName}</argument>
-				<argument id="2" function="md5">{AddApp}</argument>
+				<argument id="2" function="md5">{appKey}</argument>
 				<argument id="3">{appName}_admin</argument>
 			</sqlExecute>
 			<sqlExecute query="AddUserPermissionGroup">
