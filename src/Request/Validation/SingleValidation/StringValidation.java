@@ -7,6 +7,7 @@ import Exceptions.ParsingException;
 import Request.Argument.Argument;
 import Request.Credentials;
 import RequestArgumentAssignment.RequestArgumentStructureAssignment;
+import SQL.PreparedStatements.PreparedStatementStrings;
 import SQL.SqlExecutor;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -43,6 +44,7 @@ public class StringValidation extends SingleValidation {
 	@Override
 	protected boolean helpValidate(SqlExecutor sqlExc, RequestArgumentStructureAssignment arguments, Credentials creds) throws SQLException {
 		String targetValue = Argument.getValue(target, arguments, creds);
+		Logger.getGlobal().log(Level.FINE, "DEBUG target {0} value {1}", new Object[]{targetValue, this.arguments.get(1).getValue(arguments, creds)});
 		switch (this.type) {
 			case endsWith:
 				return targetValue.endsWith(this.arguments.get(1).getValue(arguments, creds));
