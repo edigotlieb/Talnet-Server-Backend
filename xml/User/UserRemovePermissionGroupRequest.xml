@@ -13,16 +13,16 @@
 				<argument id="1">{groupToRemove}</argument>
 			</existence>
 			<string gate="not" target="{groupToRemove}" type="equals" errorid="26">
-				<argument id="1">User</argument>
+				<argument id="1">{Const:USER_PERMISSION_GROUP}</argument>
 			</string>
 			<existence type="UserByUsername" errorid="11">
 				<argument id="1">{userToRemoveFrom}</argument>
 			</existence>
-			<permission gate="not" type="PermissionGroupAdmin" errorid="6">
+			<permission gate="not" type="PermissionGroupAdmin" errorid="16">
 				<argument id="1">{groupToRemove}</argument>
 				<argument id="2">{userToRemoveFrom}</argument>
 			</permission>
-			<special type="selfOrGroupAdmin" errorid="16">
+			<special type="selfOrGroupAdmin" errorid="6">
 				<argument id="1">{groupToRemove}</argument>
 				<argument id="2">{userToRemoveFrom}</argument>
 			</special>

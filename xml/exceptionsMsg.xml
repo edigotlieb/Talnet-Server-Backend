@@ -24,7 +24,7 @@
 	<exception id="23">Cannot remove app admin permissions</exception>
 	<exception id="24">Cannot delete user that is a permission group admin</exception>
 	<exception id="25">Cannot add or delete an application with a special name</exception>
-	<exception id="26">Cannot exist Users user group</exception>
+	<exception id="26">Cannot remove Users from user group</exception>
 	<exception id="27">User already in group</exception>
 	<exception id="28">Cannot Delete or Change Anonymous Details</exception>
 	<exception id="29">App name is Invalid</exception>
