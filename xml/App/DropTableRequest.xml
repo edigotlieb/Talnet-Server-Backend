@@ -16,7 +16,7 @@
 			</credentials>
 		</validation>
 		<performance>
-			<dynamicSqlExecute query="DropTable">
+			<dynamicSqlExecute query="dropTable">
 				<argument id="1">{appName}_{tableName}</argument>
 			</dynamicSqlExecute>
 			<sqlExecute query="DeleteAppPermissionsByTableName">
