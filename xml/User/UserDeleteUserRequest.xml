@@ -14,7 +14,7 @@
 			<existence type="UserByUsername" errorid="3">
 				<argument id="1">{userToDelete}</argument>
 			</existence>
-			<string gate="not" target="{userToDelete}" type="equals" errorid="3">
+			<string gate="not" target="{userToDelete}" type="equals" errorid="33">
 				<argument id="1">{creds:username}</argument>
 			</string>
 			<permission type="AnyPermissionGroupAdmin" errorid="24">

@@ -31,4 +31,5 @@
 	<exception id="30">Cannot publicly select from that table</exception>
 	<exception id="31">Registration is inactive at the moment</exception>
 	<exception id="32">Must be User for USER SELECT</exception>
+	<exception id="33">User Cannot Delete Self</exception>
 </talnet>
