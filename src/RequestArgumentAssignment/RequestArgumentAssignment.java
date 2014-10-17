@@ -53,4 +53,9 @@ public abstract class RequestArgumentAssignment {
 	 * @return the assigned value
 	 */
 	public abstract Object getValue();
+	
+	@Override
+	public String toString(){
+		return this.getValue().toString();
+	}
 }
