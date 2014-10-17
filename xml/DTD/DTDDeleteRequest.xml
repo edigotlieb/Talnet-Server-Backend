@@ -20,7 +20,7 @@
 			</permission>
 		</validation>
 		<performance>
-			<dynamicSqlExecute query="delete">
+			<dynamicSqlExecute query="delete" return="return">
 				<argument id="1">{creds:appname}_{tableName}</argument>
 				<argument id="2">{where}</argument>
 			</dynamicSqlExecute>

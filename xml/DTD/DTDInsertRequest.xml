@@ -24,7 +24,7 @@
 			</permission>
 		</validation>
 		<performance>
-			<dynamicSqlExecute query="select">
+			<dynamicSqlExecute query="insert" return="return">
 				<argument id="1">{creds:appname}_{tableName}</argument>
 				<argument id="2">{data}</argument>
 			</dynamicSqlExecute>
