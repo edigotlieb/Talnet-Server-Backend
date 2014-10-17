@@ -9,7 +9,7 @@
 		<validation>
 		</validation>
 		<performance>
-			<sqlExecute query="getUserPermissionGroupsNoPass">
+			<sqlExecute query="getUserPermissionGroupsNoPass" return="return">
 				<argument id="1">{creds:username}</argument>
 			</sqlExecute>
 		</performance>
