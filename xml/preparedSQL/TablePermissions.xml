@@ -67,7 +67,7 @@ WHERE TABLE_ID = (SELECT TABLE_ID FROM DYNAMIC_TABLES WHERE DYNAMIC_TABLES.TABLE
 AND PERMISSIONGROUP_ID = (SELECT PERMISSIONGROUP_ID FROM PERMISSION_GROUPS WHERE PERMISSION_GROUPS.PERMISSION_NAME = ?)
 AND PERMISSION_TYPE = ?</query>
 	</preparedSql>
-	<preparedSql name="DeleteAppPermissionByTableName">
+	<preparedSql name="DeleteAppPermissionsByTableName">
 		<description>deletes all table permission of a given table</description>
 		<arguments>
 			<argument id="1">the table name</argument>
