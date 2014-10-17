@@ -29,7 +29,7 @@ public abstract class Constant {
 	public static void addConstants(NodeList constants) throws ParsingException {
 		for (int i = 0; i < constants.getLength(); i++) {
 			Element constant = (Element) constants.item(i);
-			consts.put(constant.getAttribute("name"), constant.getTextContent().toUpperCase());
+			consts.put(constant.getAttribute("name"), constant.getTextContent());
 		}
 	}
 
@@ -40,7 +40,7 @@ public abstract class Constant {
 	 * @return the retrieved message
 	 */
 	public static String getValue(String name) {
-		return consts.get(name.toUpperCase());
+		return consts.get(name);
 	}
 	
 	public static Set<String> getNames(){
