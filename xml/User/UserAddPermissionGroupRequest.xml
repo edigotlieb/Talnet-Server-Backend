@@ -20,6 +20,7 @@
 			</existence>
 			<permission type="PermissionGroupAdmin" errorid="6">
 				<argument id="1">{groupName}</argument>
+				<argument id="2">{creds:username}</argument>
 			</permission>
 			<permission gate="not" type="UserInGroup" errorid="22">
 				<argument id="1">{userToAddTo}</argument>
