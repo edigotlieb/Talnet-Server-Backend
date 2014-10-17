@@ -18,6 +18,7 @@
 				<argument id="1">{creds:username}</argument>
 			</string>
 			<permission type="AnyPermissionGroupAdmin" errorid="24">
+				<argument id="1">{userToDelete}</argument>
 			</permission>
 			<permission type="UserInGroup" errorid="6">
 				<argument id="1">{creds:username}</argument>
