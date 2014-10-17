@@ -7,6 +7,7 @@ import Exceptions.ValidationException;
 import Request.RequestArgument.ArgumentType.ArgumentType;
 import Request.RequestArgument.RequestArgumentList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,6 +30,7 @@ public class RequestArgumentListAssignment extends RequestArgumentAssignment {
 	 */
 	public RequestArgumentListAssignment(RequestArgumentList arguments, JSONArray requestData) throws ValidationException {
 		this.arguments = arguments;
+		this.argumentList = new LinkedList<>();
 		for (int i = 0; i < requestData.length(); i++) {
 			JSONObject requestSubData = requestData.getJSONObject(i);
 			this.argumentList.add(new RequestArgumentStructureAssignment(arguments.getArgumentStruct(), requestSubData));
