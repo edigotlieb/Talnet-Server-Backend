@@ -4,14 +4,17 @@
 package SQL.DynamicStatements;
 
 import Request.Credentials;
-import Request.Preformance.DynamicSqlExecutePerformance;
 import RequestArgumentAssignment.RequestArgumentStructureAssignment;
 import SQL.PreparedStatements.StatementPreparerArgument;
+import SQL.SqlExecutor;
 import Statement.AndStatement;
 import Statement.RelStatement;
 import Statement.Statement;
+import Utilities.Sql;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,6 +25,20 @@ import java.util.Map;
 public abstract class SqlQueryGenerator {
 
 	private final static Map<String, SqlQueryGenerator> queryGenerators;
+	public static List<String> selectUserColumns;
+
+	/**
+	 * loads the columns of USERS table into a list to use in user select
+	 * request
+	 *
+	 * @param sqlExc the sql query executor
+	 * @throws SQLException thrown in case of an sql execution exception
+	 */
+	public static void loadUserColumns(SqlExecutor sqlExc) throws SQLException {
+		SqlQueryGenerator.selectUserColumns = Sql.getColNames(sqlExc, "USERS");
+		selectUserColumns.remove("PASSWORD");
+		selectUserColumns.add("CONCAT_WS(' ',USERS.FIRST_NAME,USERS.LAST_NAME) AS NAME");
+	}
 
 	static {
 		queryGenerators = new HashMap<>();
@@ -29,7 +46,7 @@ public abstract class SqlQueryGenerator {
 			@Override
 			public String generateQuery(StatementPreparerArgument sp) {
 				String cols = "";
-				Iterator<String> columns = DynamicSqlExecutePerformance.selectUserColumns.iterator();
+				Iterator<String> columns = SqlQueryGenerator.selectUserColumns.iterator();
 				while (columns.hasNext()) {
 					cols += columns.next();
 					if (columns.hasNext()) {

@@ -2,6 +2,7 @@
 /**
  * FILE : ThreadHandler.java AUTHORS : Erez Gotlieb
  */
+import SQL.DynamicStatements.SqlQueryGenerator;
 import SQL.SqlExecutor;
 import Utilities.BackendParams;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
@@ -69,6 +70,7 @@ public class ThreadHandler {
 			ds.getConnection();
 
 			BackendParams.loadParams(new SqlExecutor(ds.getConnection()));
+			SqlQueryGenerator.loadUserColumns(new SqlExecutor(ds.getConnection()));
 
 		} catch (IOException | PropertyVetoException | SQLException ex) {
 			// cant start the server socket or open param file or set params of the DS

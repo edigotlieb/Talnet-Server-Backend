@@ -25,7 +25,7 @@
 		</validation>
 		<performance>
 			<dynamicSqlExecute query="select">
-				<argument id="1">{tableName}</argument>
+				<argument id="1">{creds:appname}_{tableName}</argument>
 				<argument id="2">{where}</argument>
 				<argument id="3">{orderBy}</argument>
 				<argument id="4">{orie}</argument>
