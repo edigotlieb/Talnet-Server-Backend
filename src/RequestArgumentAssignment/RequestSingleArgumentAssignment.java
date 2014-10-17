@@ -11,6 +11,8 @@ import Statement.Statement;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.JSONObject;
 
 /**
@@ -48,6 +50,7 @@ public class RequestSingleArgumentAssignment extends RequestArgumentAssignment {
 				}
 				if (!argument.getType().validateValue(strValue)) {
 					//validation of the assigned value
+					Logger.getGlobal().log(Level.FINE, "value validation failed...", new IllegalArgumentException("type: " + argument.getType().toString() + ", value: " + strValue));
 					throw new ValidationException(100);
 				}
 				this.value = strValue;
