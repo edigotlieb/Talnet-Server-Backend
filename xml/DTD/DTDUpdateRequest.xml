@@ -21,7 +21,7 @@
 			<permission type="TablePermissionUser" errorid="6">
 				<argument id="1">{creds:appname}_{tableName}</argument>
 				<argument id="2">{creds:username}</argument>
-				<argument id="3">{permissionType}</argument>
+				<argument id="3">UPDATE</argument>
 			</permission>
 		</validation>
 		<performance>
