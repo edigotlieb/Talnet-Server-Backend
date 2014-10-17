@@ -48,7 +48,7 @@ public class RequestSingleArgumentAssignment extends RequestArgumentAssignment {
 				}
 				if (!argument.getType().validateValue(strValue)) {
 					//validation of the assigned value
-					throw new ValidationException(33);
+					throw new ValidationException(100);
 				}
 				this.value = strValue;
 		}
