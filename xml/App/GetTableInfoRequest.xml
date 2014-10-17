@@ -19,7 +19,7 @@
 			</existence>
 		</validation>
 		<performance>
-			<dynamicSqlExecute query="TableDescription" return="return">
+			<dynamicSqlExecute query="descTable" return="return">
 				<argument id="1">{appName}_{tableName}</argument>
 			</dynamicSqlExecute>
 		</performance>
