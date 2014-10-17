@@ -154,6 +154,7 @@ public class ClientRequestThread extends Thread {
 			return;
 		} catch (JSONException ex) {
 			// bad format! - send bad format error
+			Logger.getGlobal().log(Level.WARNING, "JSON parse...", ex);
 			String errorResponse = this.createErrorResponse(new RequestException(100));
 			Logger.getGlobal().log(Level.FINE, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
 			this.out.print(errorResponse);
@@ -197,6 +198,13 @@ public class ClientRequestThread extends Thread {
 			String errorResponse = this.createErrorResponse(new RequestException(100));
 			Logger.getGlobal().log(Level.FINE, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
 			this.out.print(errorResponse);
+			this.out.flush();
+			this.closeThread();
+			return;
+		} catch (Exception ex) {
+			// some bad SQL
+			Logger.getGlobal().log(Level.WARNING, "General error...", ex);
+			this.out.print(this.createErrorResponse(new RequestException(500)));
 			this.out.flush();
 			this.closeThread();
 			return;
