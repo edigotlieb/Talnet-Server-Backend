@@ -45,7 +45,7 @@ abstract public class Statement {
 		JSONObject termData;
 		if (requestData.has("Term")) {
 			termData = requestData.getJSONObject("Term");
-			return new RelStatement(termData.getString("Field"), termData.getString("Value"), termData.getString("Op"));
+			return new RelStatement(termData.getString("Field"), termData.get("Value").toString(), termData.getString("Op"));
 		} else if (requestData.has("AND")) {
 			termData = requestData.getJSONObject("AND");
 			return new AndStatement(statementFactory(termData.getJSONObject("firstStatement")), statementFactory(termData.getJSONObject("secondStatement")));
