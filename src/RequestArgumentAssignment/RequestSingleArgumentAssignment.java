@@ -11,8 +11,6 @@ import Statement.Statement;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.json.JSONObject;
 
 /**
@@ -43,12 +41,10 @@ public class RequestSingleArgumentAssignment extends RequestArgumentAssignment {
 				break;
 			default:
 				String strValue;
-				Logger.getGlobal().log(Level.INFO, "DEBUG key {0} defvalue {1} def {2}", new Object[]{argument.getKey(), argument.getDefValue(), requestData.has(argument.getKey())});
-				Logger.getGlobal().log(Level.INFO, "DEBUG data {0}", requestData.toString());
 				if (argument.getDefValue() != null && !requestData.has(argument.getKey())) {
 					strValue = argument.getDefValue();
 				} else {
-					strValue = requestData.getString(argument.getKey());
+					strValue = requestData.get(argument.getKey()).toString();
 				}
 				if (!argument.getType().validateValue(strValue)) {
 					//validation of the assigned value
