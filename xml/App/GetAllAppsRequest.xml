@@ -8,7 +8,7 @@
 		<validation>
 		</validation>
 		<performance>
-			<sqlExecute query="getAllApps">
+			<sqlExecute query="getAllApps" return="return">
 			</sqlExecute>
 		</performance>
 	</request>
