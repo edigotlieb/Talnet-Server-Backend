@@ -5,7 +5,7 @@
 			it requires the app name, table name, permission group name and the permission type.
 		</description>
 		<requestArguments>
-			<requestArgument type="String" name="groupName" key="groupName"></requestArgument>
+			<requestArgument type="String" name="permissionGroupName" key="groupName"></requestArgument>
 		</requestArguments>
 		<validation>
 			<existence type="PermissionGroupByName" errorid="11">
