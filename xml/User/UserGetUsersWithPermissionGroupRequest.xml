@@ -17,7 +17,7 @@
 			</permission>
 		</validation>
 		<performance>
-			<sqlExecute query="getUserInfoWithPermissionGroup">
+			<sqlExecute query="getUserInfoWithPermission" return="return">
 				<argument id="1">{groupName}</argument>
 			</sqlExecute>
 		</performance>
