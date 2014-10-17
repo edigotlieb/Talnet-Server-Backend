@@ -13,7 +13,7 @@
 			<existence gate="not" type="AppByName" errorid="14">
 				<argument id="1">{appName}</argument>
 			</existence>
-			<string target="{appName}" type="matches" errorid="25">
+			<string gate="not" target="{appName}" type="matches" errorid="25">
 				<argument id="1">APPS|APP|DYNAMIC|DYNAMIC_TABLES|PERMISSION|PERMISSION_GROUPS|TEMP|TEMP_KEYS|USERS|USER|USER_PERMISSIONS</argument>
 			</string>
 			<credentials type="isMasterApplication" errorid="13">
