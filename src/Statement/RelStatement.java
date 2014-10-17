@@ -37,9 +37,13 @@ public class RelStatement extends Statement {
 	 * @param value the second term
 	 * @param op the operand
 	 */
-	public RelStatement(String col, String value, String op) {
+	public RelStatement(String col, Object value, String op) {
 		this.col = Sql.sanitizeAlphaNumeric(col);
-		this.value = Sql.sanitizeSqlCharacterEscaping(value);
+		if (value != null) {
+			this.value = Sql.sanitizeSqlCharacterEscaping(value.toString());
+		} else {
+			this.value = null;
+		}
 		this.op = op;
 	}
 
@@ -55,6 +59,10 @@ public class RelStatement extends Statement {
 
 	@Override
 	public String toString() {
-		return col + " " + op + " '" + value + "'";
+		if (value != null) {
+			return col + " " + op + " '" + value + "'";
+		} else {
+			return col + " " + op + " NULL";
+		}
 	}
 }

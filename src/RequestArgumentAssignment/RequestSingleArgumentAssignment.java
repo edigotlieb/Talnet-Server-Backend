@@ -93,7 +93,11 @@ public class RequestSingleArgumentAssignment extends RequestArgumentAssignment {
 		Iterator it = requestData.keys();
 		while (it.hasNext()) {
 			String key = (String) it.next();
-			map.put(key, requestData.get(key).toString());
+			if (requestData.get(key) != null) {
+				map.put(key, requestData.get(key).toString());
+			} else {
+				map.put(key, null);
+			}
 		}
 		return map;
 	}

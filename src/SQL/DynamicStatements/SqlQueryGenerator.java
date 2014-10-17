@@ -77,7 +77,11 @@ public abstract class SqlQueryGenerator {
 				while (columns.hasNext()) {
 					String column = columns.next();
 					cols += column;
-					vals += "'" + columnMap.get(column) + "'";
+					if (columnMap.get(column) != null) {
+						vals += "'" + columnMap.get(column) + "'";
+					} else {
+						vals += "NULL";
+					}
 					if (columns.hasNext()) {
 						cols += ", ";
 						vals += ", ";
@@ -102,7 +106,11 @@ public abstract class SqlQueryGenerator {
 				Iterator<String> columns = columnMap.keySet().iterator();
 				while (columns.hasNext()) {
 					String column = columns.next();
-					data += column + " = '" + Utilities.Sql.sanitizeSqlCharacterEscaping(columnMap.get(column)) + "'";
+					if (columnMap.get(column) != null) {
+						data += column + " = '" + Utilities.Sql.sanitizeSqlCharacterEscaping(columnMap.get(column)) + "'";
+					} else {
+						data += column + " = NULL";
+					}
 					if (columns.hasNext()) {
 						data += ", ";
 					}
