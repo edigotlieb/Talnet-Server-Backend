@@ -1,6 +1,6 @@
 <talnet type="argumentEnums">
 	<enum name="ColType">
-		<value>INT</value>
+		<value>INTEGER</value>
 		<value>VARCHAR</value>
 		<value>TIMESTAMP</value>
 		<value>DATE</value>
