@@ -15,6 +15,9 @@
 			<string gate="not" target="{permissionGroupName}" type="endsWith" errorid="17">
 				<argument id="1">_{Const:APP_ADMIN_PERMISSION_GROUP_SUFFIX}</argument>
 			</string>
+			<string target="{permissionGroupName}" type="matches" errorid="15">
+				<argument id="1">[a-zA-Z][\w]*</argument>
+			</string>
 		</validation>
 		<performance>
 			<sqlExecute query="AddPermissionGroup">

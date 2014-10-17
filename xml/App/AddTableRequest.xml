@@ -25,7 +25,7 @@
 				<argument id="1">{appName}_{tableName}</argument>
 			</existence>
 			<string target="{tableName}" type="matches" errorid="15">
-				<argument id="1">[a-zA-Z][\\w]*</argument>
+				<argument id="1">[a-zA-Z][\w]*</argument>
 			</string>
 			<foreach argname="columns" errorid="15">
 				<string target="{colName}" type="isAlphaNumeric" errorid="15"></string>
