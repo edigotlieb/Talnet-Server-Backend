@@ -8,6 +8,10 @@
 			<requestArgument type="String" name="userToDelete" key="userToDelete">The name of the application using the modified table</requestArgument>
 		</requestArguments>
 		<validation>
+			<permission type="UserInGroup" errorid="6">
+				<argument id="1">{creds:username}</argument>
+				<argument id="2">{Const:SUPER_ADMIN_PERMISSION_GROUP}</argument>
+			</permission>
 			<string gate="not" target="{userToDelete}" type="equals" errorid="28">
 				<argument id="1">{Const:Anonymous}</argument>
 			</string>
@@ -19,10 +23,6 @@
 			</string>
 			<permission gate="not" type="AnyPermissionGroupAdmin" errorid="24">
 				<argument id="1">{userToDelete}</argument>
-			</permission>
-			<permission type="UserInGroup" errorid="6">
-				<argument id="1">{creds:username}</argument>
-				<argument id="2">{Const:SUPER_ADMIN_PERMISSION_GROUP}</argument>
 			</permission>
 		</validation>
 		<performance>
