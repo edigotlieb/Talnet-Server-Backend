@@ -37,7 +37,7 @@
 			</atleast>
 		</validation>
 		<performance>
-			<dynamicSqlExecute query="CreateTable">
+			<dynamicSqlExecute query="createTable">
 				<argument id="1">{appName}_{tableName}</argument>
 				<argument id="2">{columns}</argument>
 			</dynamicSqlExecute>
