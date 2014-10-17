@@ -8,6 +8,7 @@ import Exceptions.ParsingException;
 import Request.Request;
 import Request.RequestArgument.ArgumentType.EnumType;
 import SQL.PreparedStatements.PreparedStatementStrings;
+import Utilities.Constant;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -70,6 +71,9 @@ public class XMLParser {
 					break;
 				case "preparedSQL":
 					PreparedStatementStrings.addPredaredStatements(eTalnet.getElementsByTagName("preparedSql"));
+					break;
+				case "constants":
+					Constant.addConstants(eTalnet.getElementsByTagName("constant"));
 					break;
 			}
 		} catch (SAXException | IOException | ParserConfigurationException | IllegalArgumentException ex) {
