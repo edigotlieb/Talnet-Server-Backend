@@ -19,7 +19,7 @@
 			<credentials type="isMasterApplication" errorid="13">
 			</credentials>
 			<string target="{appName}" type="matches" errorid="15">
-				<argument id="1">[a-zA-Z][\\w]*</argument>
+				<argument id="1">[a-zA-Z][\w]*</argument>
 			</string>
 		</validation>
 		<performance>
