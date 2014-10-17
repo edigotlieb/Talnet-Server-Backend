@@ -81,7 +81,7 @@ AND PERMISSION_TYPE = ?</query>
 		</arguments>
 		<query>DELETE FROM APP_PERMISSIONS WHERE APP_ID = (SELECT APP_ID FROM APPS WHERE APPS.APP_NAME = ?)</query>
 	</preparedSql>
-	<preparedSql name="DeleteAppPermissionByPermissionName">
+	<preparedSql name="DeleteAppPermissionsByPermissionName">
 		<description>deletes all table permissions of a given permission group</description>
 		<arguments>
 			<argument id="1">the permission group name</argument>
