@@ -140,7 +140,7 @@ public class ClientRequestThread extends Thread {
 			}
 			String requestString = new String(buffer);
 			requestString = org.apache.commons.lang3.StringEscapeUtils.unescapeJava(requestString);
-			Logger.getGlobal().log(Level.FINE, "CRT-{0}: REQUEST: {1}", new Object[]{ID, requestString});
+			Logger.getGlobal().log(Level.INFO, "CRT-{0}: REQUEST: {1}", new Object[]{ID, requestString});
 
 			masterObj = new JSONObject(requestString);
 			creds = new Credentials(masterObj.getJSONObject("RequesterCredentials"));
@@ -156,7 +156,7 @@ public class ClientRequestThread extends Thread {
 			// bad format! - send bad format error
 			Logger.getGlobal().log(Level.WARNING, "JSON parse...", ex);
 			String errorResponse = this.createErrorResponse(new RequestException(100));
-			Logger.getGlobal().log(Level.FINE, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
+			Logger.getGlobal().log(Level.INFO, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
 			this.out.print(errorResponse);
 			this.out.flush();
 			this.closeThread();
@@ -179,7 +179,7 @@ public class ClientRequestThread extends Thread {
 			// send back response
 			Logger.getGlobal().log(Level.FINE, "client request denied with validation error...", ex);
 			String errorResponse = this.createErrorResponse(ex);
-			Logger.getGlobal().log(Level.FINE, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
+			Logger.getGlobal().log(Level.INFO, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
 			this.out.print(errorResponse);
 			this.out.flush();
 			this.closeThread();
@@ -187,7 +187,7 @@ public class ClientRequestThread extends Thread {
 		} catch (ExecutionException ex) {
 			Logger.getGlobal().log(Level.FINE, "client request denied with performance error...", ex);
 			String errorResponse = this.createErrorResponse(ex);
-			Logger.getGlobal().log(Level.FINE, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
+			Logger.getGlobal().log(Level.INFO, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
 			this.out.print(errorResponse);
 			this.out.flush();
 			this.closeThread();
@@ -196,7 +196,7 @@ public class ClientRequestThread extends Thread {
 			// bad format! - send bad format error
 			Logger.getGlobal().log(Level.FINE, "client request denied with bad format error...", ex);
 			String errorResponse = this.createErrorResponse(new RequestException(100));
-			Logger.getGlobal().log(Level.FINE, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
+			Logger.getGlobal().log(Level.INFO, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
 			this.out.print(errorResponse);
 			this.out.flush();
 			this.closeThread();
