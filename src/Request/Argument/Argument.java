@@ -113,7 +113,6 @@ public class Argument {
 		Iterator<String> constants = Constant.getNames().iterator();
 		while (constants.hasNext()) {
 			String constName = constants.next();
-			Logger.getGlobal().log(Level.FINE, "DEBUG const name {0} value {1}", new Object[]{constName, Constant.getValue(constName)});
 			src = src.replace("{Const:" + constName + "}", Constant.getValue(constName));
 		}
 

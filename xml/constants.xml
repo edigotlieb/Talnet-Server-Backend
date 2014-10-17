@@ -1,4 +1,4 @@
 <talnet type="constants">
-	<constant id="Anonymous">Anonymous</constant>
-	<constant id="USER_PERMISSION_GROUP">User</constant>
+	<constant name="Anonymous">Anonymous</constant>
+	<constant name="USER_PERMISSION_GROUP">User</constant>
 </talnet>
