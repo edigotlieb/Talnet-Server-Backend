@@ -109,8 +109,8 @@ public abstract class SqlQueryGenerator {
 					if (columns.hasNext()) {
 						cols += ", ";
 					}
-					//primaries = primaries.substring(0, primaries.length() - 2);
 				}
+				primaries = primaries.substring(0, primaries.length() - 2);
 				return "CREATE TABLE " + sp.getArgumentValue(1) + " (" + cols + ", PRIMARY KEY (" + primaries + ") )";
 			}
 
