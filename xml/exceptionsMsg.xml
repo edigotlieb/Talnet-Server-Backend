@@ -26,7 +26,7 @@
 	<exception id="25">Cannot add or delete an application with a special name</exception>
 	<exception id="26">Cannot exist Users user group</exception>
 	<exception id="27">User already in group</exception>
-	<exception id="28">Cannot Change Anonymous Details</exception>
+	<exception id="28">Cannot Delete or Change Anonymous Details</exception>
 	<exception id="29">App name is Invalid</exception>
 	<exception id="30">Cannot publicly select from that table</exception>
 	<exception id="31">Registration is inactive at the moment</exception>

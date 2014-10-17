@@ -43,6 +43,7 @@ public class StringValidation extends SingleValidation {
 	@Override
 	protected boolean helpValidate(SqlExecutor sqlExc, RequestArgumentStructureAssignment arguments, Credentials creds) throws SQLException {
 		String targetValue = Argument.getValue(target, arguments, creds);
+		Logger.getGlobal().log(Level.FINE, "Request target:{0} type:{2} arg1:{1}", new Object[]{targetValue, this.arguments.get(1).getValue(arguments, creds), this.type});
 		switch (this.type) {
 			case endsWith:
 				return targetValue.endsWith(this.arguments.get(1).getValue(arguments, creds));
