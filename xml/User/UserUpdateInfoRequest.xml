@@ -1,19 +1,18 @@
 <talnet type="request">
 	<request type="USER" name="UPDATE_INFO">
 		<description>
-			This request adds a permission to a dynamic table created specially for a certain app.
-			it requires the app name, table name, permission group name and the permission type.
+			this requests updates a user's information
 		</description>
 		<requestArguments>
-			<requestArgument type="String" name="userToChange" key="username"></requestArgument>
-			<requestArgument type="String" name="first_name" key="newFirstName"></requestArgument>
-			<requestArgument type="String" name="last_name" key="newLastName"></requestArgument>
-			<requestArgument type="String" name="disp_name" key="newDisplayName"></requestArgument>
-			<requestArgument type="String" name="email" key="newEmail"></requestArgument>
-			<requestArgument type="Integer" name="room" key="newRoom"></requestArgument>
-			<requestArgument type="Integer" name="year" key="newYear"></requestArgument>
-			<requestArgument type="String" name="phonePre" key="phonePre"></requestArgument>
-			<requestArgument type="String" name="phoneSuf" key="phoneSuf"></requestArgument>
+			<requestArgument type="String" name="userToChange" key="username">the user to update</requestArgument>
+			<requestArgument type="String" name="first_name" key="newFirstName">the new first name</requestArgument>
+			<requestArgument type="String" name="last_name" key="newLastName">the new last name</requestArgument>
+			<requestArgument type="String" name="disp_name" key="newDisplayName">the new display name</requestArgument>
+			<requestArgument type="String" name="email" key="newEmail">the new email</requestArgument>
+			<requestArgument type="Integer" name="room" key="newRoom">the new room</requestArgument>
+			<requestArgument type="Integer" name="year" key="newYear">the new year</requestArgument>
+			<requestArgument type="String" name="phonePre" key="phonePre">the new phone prefix</requestArgument>
+			<requestArgument type="String" name="phoneSuf" key="phoneSuf">the new phone suffix</requestArgument>
 		</requestArguments>
 		<validation>
 			<string gate="not" target="{creds:username}" type="equals" errorid="28">

@@ -1,12 +1,11 @@
 <talnet type="request">
 	<request type="USER" name="ADD_PERMISSION">
 		<description>
-			This request adds a permission to a dynamic table created specially for a certain app.
-			it requires the app name, table name, permission group name and the permission type.
+			this request adds a user to an existing permission group
 		</description>
 		<requestArguments>
-			<requestArgument type="String" name="userToAddTo" key="username">The name of the application using the modified table</requestArgument>
-			<requestArgument type="String" name="groupName" key="permissionGroupName">The modified table name</requestArgument>
+			<requestArgument type="String" name="userToAddTo" key="username">the user to add</requestArgument>
+			<requestArgument type="String" name="groupName" key="permissionGroupName">the permission group to add to</requestArgument>
 		</requestArguments>
 		<validation>
 			<string gate="not" target="{userToAddTo}" type="equals" errorid="3">

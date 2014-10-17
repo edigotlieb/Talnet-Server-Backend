@@ -1,8 +1,7 @@
 <talnet type="request">
 	<request type="USER" name="GET_GROUPS">
 		<description>
-			This request adds a permission to a dynamic table created specially for a certain app.
-			it requires the app name, table name, permission group name and the permission type.
+			this request returns a list of all permission groups in talnet
 		</description>
 		<requestArguments>
 		</requestArguments>

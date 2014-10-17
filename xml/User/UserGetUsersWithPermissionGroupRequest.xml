@@ -1,11 +1,10 @@
 <talnet type="request">
 	<request type="USER" name="GET_USERS_WITH_GROUPS">
 		<description>
-			This request adds a permission to a dynamic table created specially for a certain app.
-			it requires the app name, table name, permission group name and the permission type.
+			this request returns a list of all users in a given permission group
 		</description>
 		<requestArguments>
-			<requestArgument type="String" name="permissionGroupName" key="groupName"></requestArgument>
+			<requestArgument type="String" name="permissionGroupName" key="groupName">the permission group to select from</requestArgument>
 		</requestArguments>
 		<validation>
 			<existence type="PermissionGroupByName" errorid="11">

@@ -1,8 +1,7 @@
 <talnet type="request">
 	<request type="USER" name="SIGN_IN">
 		<description>
-			This request adds a permission to a dynamic table created specially for a certain app.
-			it requires the app name, table name, permission group name and the permission type.
+			this request is used to authenticate an existing user. it returns the authenticated users information
 		</description>
 		<requestArguments>
 		</requestArguments>

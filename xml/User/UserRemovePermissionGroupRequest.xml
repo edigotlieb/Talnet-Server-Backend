@@ -1,12 +1,11 @@
 <talnet type="request">
 	<request type="USER" name="REMOVE_PERMISSION">
 		<description>
-			This request adds a permission to a dynamic table created specially for a certain app.
-			it requires the app name, table name, permission group name and the permission type.
+			this request removes a user from a given permission group
 		</description>
 		<requestArguments>
-			<requestArgument type="String" name="userToRemoveFrom" key="username">The name of the application using the modified table</requestArgument>
-			<requestArgument type="String" name="groupToRemove" key="permissionGroupName">The modified table name</requestArgument>
+			<requestArgument type="String" name="userToRemoveFrom" key="username">The user to remove</requestArgument>
+			<requestArgument type="String" name="groupToRemove" key="permissionGroupName">The permission group to remove from</requestArgument>
 		</requestArguments>
 		<validation>
 			<existence type="PermissionGroupByName" errorid="11">

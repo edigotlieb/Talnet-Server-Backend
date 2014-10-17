@@ -1,20 +1,19 @@
 <talnet type="request">
 	<request type="USER" name="SIGN_UP">
 		<description>
-			This request adds a permission to a dynamic table created specially for a certain app.
-			it requires the app name, table name, permission group name and the permission type.
+			this request registers a new user into talnet
 		</description>
 		<requestArguments>
-			<requestArgument type="String" name="username" key="username"></requestArgument>
-			<requestArgument type="String" name="password" key="password"></requestArgument>
-			<requestArgument type="String" name="first_name" key="firstName"></requestArgument>
-			<requestArgument type="String" name="last_name" key="lastName"></requestArgument>
-			<requestArgument type="String" name="disp_name" key="displayName"></requestArgument>
-			<requestArgument type="String" name="email" key="email"></requestArgument>
-			<requestArgument type="Integer" name="room" key="room"></requestArgument>
-			<requestArgument type="Integer" name="year" key="year"></requestArgument>
-			<requestArgument type="String" name="phonePre" key="phonePre"></requestArgument>
-			<requestArgument type="String" name="phoneSuf" key="phoneSuf"></requestArgument>
+			<requestArgument type="String" name="username" key="username">the username to use</requestArgument>
+			<requestArgument type="String" name="password" key="password">the user password (plain)</requestArgument>
+			<requestArgument type="String" name="first_name" key="firstName">the user first name</requestArgument>
+			<requestArgument type="String" name="last_name" key="lastName">the user last name</requestArgument>
+			<requestArgument type="String" name="disp_name" key="displayName">the user display name</requestArgument>
+			<requestArgument type="String" name="email" key="email">the user email</requestArgument>
+			<requestArgument type="Integer" name="room" key="room">the user room</requestArgument>
+			<requestArgument type="Integer" name="year" key="year">the user year</requestArgument>
+			<requestArgument type="String" name="phonePre" key="phonePre">the user phone prefix</requestArgument>
+			<requestArgument type="String" name="phoneSuf" key="phoneSuf">the user phone suffix</requestArgument>
 		</requestArguments>
 		<validation>
 			<string target="{BackendParams:register_activated}" type="equals" errorid="31">
