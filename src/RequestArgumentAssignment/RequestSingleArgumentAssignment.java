@@ -43,6 +43,7 @@ public class RequestSingleArgumentAssignment extends RequestArgumentAssignment {
 				break;
 			default:
 				String strValue;
+				Logger.getGlobal().log(Level.INFO, "DEBUG key {0} defvalue {1} def {2}", new Object[]{argument.getKey(), argument.getDefValue(), requestData.has(argument.getKey())});
 				if (argument.getDefValue() != null && !requestData.has(argument.getKey())) {
 					strValue = argument.getDefValue();
 				} else {

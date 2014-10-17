@@ -1,0 +1,224 @@
+אוק 17, 2014 2:49:06 PM Main main
+INFO: file.encoding=UTF8
+אוק 17, 2014 2:49:07 PM Main main
+INFO: Default Charset=UTF-8
+אוק 17, 2014 2:49:07 PM Main main
+INFO: XML parsing...
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\argumentEnums.xml...
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\argumentEnums.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\constants.xml...
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\constants.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\exceptionsMsg.xml...
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\exceptionsMsg.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\App\AddPermissionGroupForTableRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:APP name:ADD_PERMISSION_GROUP_FOR_TABLE
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\App\AddPermissionGroupForTableRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\App\AddPermissionGroupRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:APP name:ADD_PERMISSIONGROUP
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\App\AddPermissionGroupRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\App\AddTableRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:APP name:ADD_TABLE
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\App\AddTableRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\App\CreateAppRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:APP name:CREATE_APP
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\App\CreateAppRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\App\DeleteAppRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:APP name:DELETE_APP
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\App\DeleteAppRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\App\DropTableRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:APP name:DROP_TABLE
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\App\DropTableRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\App\GetAllAppsRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:APP name:GET_ALL_APPS
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\App\GetAllAppsRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\App\GetAllPermissionsAppRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:APP name:GET_ALL_PERMISSIONS
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\App\GetAllPermissionsAppRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\App\GetTableInfoRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:APP name:GET_TABLE_INFO
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\App\GetTableInfoRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\App\GetTablePermissionRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:APP name:GET_TABLE_PERMISSIONS
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\App\GetTablePermissionRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\App\GetTablesRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:APP name:GET_TABLES
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\App\GetTablesRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\App\GetUserAppsRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:APP name:GET_USER_APPS
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\App\GetUserAppsRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\App\RemovePermissionGroupForTableRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:APP name:REMOVE_PERMISSION_GROUP_FOR_TABLE
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\App\RemovePermissionGroupForTableRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\App\RemovePermissionGroupRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:APP name:REMOVE_PERMISSIONGROUP
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\App\RemovePermissionGroupRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\App\SetPermissionGroupAdminRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:APP name:SET_PERMISSIONGROUP_ADMIN
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\App\SetPermissionGroupAdminRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\DTD\DTDDeleteRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:DTD name:DELETE
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\DTD\DTDDeleteRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\DTD\DTDInsertRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:DTD name:INSERT
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\DTD\DTDInsertRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\DTD\DTDSelectRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:DTD name:SELECT
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\DTD\DTDSelectRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\DTD\DTDUpdateRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:DTD name:UPDATE
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\DTD\DTDUpdateRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\preparedSQL\Applications.xml...
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\preparedSQL\Applications.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\preparedSQL\BackendParams.xml...
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\preparedSQL\BackendParams.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\preparedSQL\PermissionGroups.xml...
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\preparedSQL\PermissionGroups.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\preparedSQL\TablePermissions.xml...
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\preparedSQL\TablePermissions.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\preparedSQL\Tables.xml...
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\preparedSQL\Tables.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\preparedSQL\UserPermissionGroups.xml...
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\preparedSQL\UserPermissionGroups.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\preparedSQL\Users.xml...
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\preparedSQL\Users.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\preparedSQL\UserTablePermissions.xml...
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\preparedSQL\UserTablePermissions.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\User\UserAddPermissionGroupRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:USER name:ADD_PERMISSION
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\User\UserAddPermissionGroupRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\User\UserDeleteUserRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:USER name:DELETE_USER
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\User\UserDeleteUserRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\User\UserGetPermissionGroupsRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:USER name:GET_GROUPS
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\User\UserGetPermissionGroupsRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\User\UserGetUsersWithPermissionGroupRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:USER name:GET_USERS_WITH_GROUPS
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\User\UserGetUsersWithPermissionGroupRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\User\UserRemovePermissionGroupRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:USER name:REMOVE_PERMISSION
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\User\UserRemovePermissionGroupRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\User\UserSelectRequest.xml...
+אוק 17, 2014 2:49:07 PM Request.Request addRequests
+FINE: Request type:USER name:SELECT
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: xml\User\UserSelectRequest.xml completed
+אוק 17, 2014 2:49:07 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\User\UserSigninRequest.xml...
+אוק 17, 2014 2:49:08 PM Request.Request addRequests
+FINE: Request type:USER name:SIGN_IN
+אוק 17, 2014 2:49:08 PM XMLParser.XMLParser parseFile
+FINE: xml\User\UserSigninRequest.xml completed
+אוק 17, 2014 2:49:08 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\User\UserSignupRequest.xml...
+אוק 17, 2014 2:49:08 PM Request.Request addRequests
+FINE: Request type:USER name:SIGN_UP
+אוק 17, 2014 2:49:08 PM XMLParser.XMLParser parseFile
+FINE: xml\User\UserSignupRequest.xml completed
+אוק 17, 2014 2:49:08 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\User\UserUpdateInfoRequest.xml...
+אוק 17, 2014 2:49:08 PM Request.Request addRequests
+FINE: Request type:USER name:UPDATE_INFO
+אוק 17, 2014 2:49:08 PM XMLParser.XMLParser parseFile
+FINE: xml\User\UserUpdateInfoRequest.xml completed
+אוק 17, 2014 2:49:08 PM XMLParser.XMLParser parseFile
+FINE: Parsing xml\User\UserUpdateUserPasswordRequest.xml...
+אוק 17, 2014 2:49:08 PM Request.Request addRequests
+FINE: Request type:USER name:UPDATE_PASSWORD
+אוק 17, 2014 2:49:08 PM XMLParser.XMLParser parseFile
+FINE: xml\User\UserUpdateUserPasswordRequest.xml completed
