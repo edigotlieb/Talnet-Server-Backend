@@ -1,5 +1,6 @@
 <talnet type="constants">
 	<constant name="Anonymous">Anonymous</constant>
 	<constant name="USER_PERMISSION_GROUP">User</constant>
+	<constant name="SUPER_ADMIN_PERMISSION_GROUP">Super_Admin</constant>
 	<constant name="USER_TABLE_PASSWORD_COLUMN">PASSWORD</constant>
 </talnet>

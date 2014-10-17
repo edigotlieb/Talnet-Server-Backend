@@ -19,6 +19,10 @@
 			</string>
 			<permission type="AnyPermissionGroupAdmin" errorid="24">
 			</permission>
+			<permission type="UserInGroup" errorid="6">
+				<argument id="1">{creds:username}</argument>
+				<argument id="2">{Const:SUPER_ADMIN_PERMISSION_GROUP}</argument>
+			</permission>
 		</validation>
 		<performance>
 			<sqlExecute query="DeletePermissionUsersByUser">
