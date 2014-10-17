@@ -10,8 +10,6 @@ import RequestArgumentAssignment.RequestArgumentAssignment;
 import Utilities.BackendParams;
 import Utilities.Constant;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.w3c.dom.Element;
 
 /**
