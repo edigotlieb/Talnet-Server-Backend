@@ -109,7 +109,7 @@ public abstract class SqlQueryGenerator {
 					if (columns.hasNext()) {
 						cols += ", ";
 					}
-					primaries = primaries.substring(0, primaries.length() - 2);
+					//primaries = primaries.substring(0, primaries.length() - 2);
 				}
 				return "CREATE TABLE " + sp.getArgumentValue(1) + " (" + cols + ", PRIMARY KEY (" + primaries + ") )";
 			}
@@ -121,14 +121,14 @@ public abstract class SqlQueryGenerator {
 					case "TIMESTAMP":
 						break;
 					case "VARCHAR":
-						if (Integer.parseInt((String) column.getArgument("size").getValue()) < 0) {
+						if (Integer.parseInt((String) column.getArgument("size").getValue()) <= 0) {
 							col += "(50)";
 						} else {
 							col += "(" + (String) column.getArgument("size").getValue() + ")";
 						}
 						break;
-					case "INT":
-						if (Integer.parseInt((String) column.getArgument("size").getValue()) < 0) {
+					case "INTEGER":
+						if (Integer.parseInt((String) column.getArgument("size").getValue()) <= 0) {
 							col += "(11)";
 						} else {
 							col += "(" + (String) column.getArgument("size").getValue() + ")";
