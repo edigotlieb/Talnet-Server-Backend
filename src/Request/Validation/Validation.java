@@ -10,6 +10,7 @@ import Request.Validation.MultipleValidation.AtleastValidation;
 import Request.Validation.MultipleValidation.ForeachValidation;
 import Request.Validation.SingleValidation.CredentialsValidation;
 import Request.Validation.SingleValidation.ExistenceValidation;
+import Request.Validation.SingleValidation.MapValidation;
 import Request.Validation.SingleValidation.PermissionValidation;
 import Request.Validation.SingleValidation.SpecialValidation;
 import Request.Validation.SingleValidation.StatementValidation;
@@ -17,8 +18,6 @@ import Request.Validation.SingleValidation.StringValidation;
 import RequestArgumentAssignment.RequestArgumentStructureAssignment;
 import SQL.SqlExecutor;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.w3c.dom.Element;
 
 /**
@@ -71,6 +70,8 @@ public abstract class Validation {
 				return new StringValidation(eValidation);
 			case "statement":
 				return new StatementValidation(eValidation);
+			case "map":
+				return new MapValidation(eValidation);
 			case "special":
 				return new SpecialValidation(eValidation);
 			case "foreach":

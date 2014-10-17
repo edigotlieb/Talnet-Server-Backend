@@ -7,11 +7,8 @@ import Exceptions.ParsingException;
 import Request.Argument.Argument;
 import Request.Credentials;
 import RequestArgumentAssignment.RequestArgumentStructureAssignment;
-import SQL.PreparedStatements.PreparedStatementStrings;
 import SQL.SqlExecutor;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.w3c.dom.Element;
 
 /**
