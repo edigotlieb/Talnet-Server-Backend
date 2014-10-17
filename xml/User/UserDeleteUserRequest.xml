@@ -17,7 +17,7 @@
 			<string gate="not" target="{userToDelete}" type="equals" errorid="33">
 				<argument id="1">{creds:username}</argument>
 			</string>
-			<permission type="AnyPermissionGroupAdmin" errorid="24">
+			<permission gate="not" type="AnyPermissionGroupAdmin" errorid="24">
 				<argument id="1">{userToDelete}</argument>
 			</permission>
 			<permission type="UserInGroup" errorid="6">
