@@ -92,7 +92,7 @@ public class RequestSingleArgumentAssignment extends RequestArgumentAssignment {
 	private static Map<String, String> assignMap(Map<String, String> map, JSONObject requestData) {
 		Iterator it = requestData.keys();
 		while (it.hasNext()) {
-			map.put((String) it.next(), requestData.getString((String) it.next()));
+			map.put((String) it.next(), requestData.get((String) it.next()).toString());
 		}
 		return map;
 	}
