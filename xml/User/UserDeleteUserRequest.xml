@@ -9,7 +9,7 @@
 		</requestArguments>
 		<validation>
 			<string gate="not" target="{userToDelete}" type="equals" errorid="3">
-				<argument id="1">Anonymous</argument>
+				<argument id="1">{Const:Anonymous}</argument>
 			</string>
 			<existence type="UserByUsername" errorid="3">
 				<argument id="1">{userToDelete}</argument>

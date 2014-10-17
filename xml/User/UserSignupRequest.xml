@@ -24,7 +24,7 @@
 				<argument id="1">{username}</argument>
 			</existence>
 			<string target="{creds:username}" type="equals" errorid="10">
-				<argument id="1">Anonymous</argument>
+				<argument id="1">{Const:Anonymous}</argument>
 			</string>
 			<credentials type="isMasterApplication" errorid="13"></credentials>
 		</validation>

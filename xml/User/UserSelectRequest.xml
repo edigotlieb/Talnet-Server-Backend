@@ -15,7 +15,7 @@
 			</statement>
 			<permission type="UserInGroup" errorid="32">
 				<argument id="1">{creds:username}</argument>
-				<argument id="2">User</argument>
+				<argument id="2">{Const:USER_PERMISSION_GROUP}</argument>
 			</permission>
 		</validation>
 		<performance>

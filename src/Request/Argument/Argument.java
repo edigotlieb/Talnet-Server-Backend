@@ -8,9 +8,8 @@ import Request.Credentials;
 import RequestArgumentAssignment.RequestArgumentStructureAssignment;
 import RequestArgumentAssignment.RequestArgumentAssignment;
 import Utilities.BackendParams;
+import Utilities.Constant;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.w3c.dom.Element;
 
 /**
@@ -108,6 +107,13 @@ public class Argument {
 		}
 		src = src.replace("{creds:username}", creds.getUsername());
 		src = src.replace("{creds:appname}", creds.getAppName());
+		
+		Iterator<String> constants = Constant.getNames().iterator();
+		while (constants.hasNext()) {
+			String constName = constants.next();
+			src = src.replace("{Const:" + constName + "}", Constant.getValue(constName));
+		}
+		
 		Iterator<String> backendParams = BackendParams.getNames().iterator();
 		while (backendParams.hasNext()) {
 			String paramName = backendParams.next();

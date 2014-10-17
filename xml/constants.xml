@@ -1,0 +1,4 @@
+<talnet type="constants">
+	<exception id="ANONYMOUS">Anonymous</exception>
+	<exception id="USER_PERMISSION_GROUP">User</exception>
+</talnet>
