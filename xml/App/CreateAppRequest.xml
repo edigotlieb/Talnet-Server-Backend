@@ -4,8 +4,8 @@
 			This request creates a new application.
 		</description>
 		<requestArguments>
-			<requestArgument type="String" name="appName" key="appName">The name of the application using the modified table</requestArgument>
-			<requestArgument type="String" name="appKey" key="appKey">The modified table name</requestArgument>
+			<requestArgument type="String" name="appName" key="appName">The name of the new application</requestArgument>
+			<requestArgument type="String" name="appKey" key="appKey">the application key (plain)</requestArgument>
 		</requestArguments>
 		<validation>
 			<credentials type="isDeveloper" errorid="6">
@@ -16,25 +16,26 @@
 			<string target="{appName}" type="matches" errorid="25">
 				<argument id="1">APPS|APP|DYNAMIC|DYNAMIC_TABLES|PERMISSION|PERMISSION_GROUPS|TEMP|TEMP_KEYS|USERS|USER|USER_PERMISSIONS</argument>
 			</string>
-			<credentials type="isMasterApplication" errorid="13"></credentials>
+			<credentials type="isMasterApplication" errorid="13">
+			</credentials>
 			<string target="{appName}" type="matches" errorid="15">
 				<argument id="1">[a-zA-Z][\\w]*</argument>
 			</string>
 		</validation>
 		<performance>
 			<sqlExecute query="AddPermissionGroup">
-				<argument id="1">{appName}_admin</argument>
+				<argument id="1">{appName}_{Const:APP_ADMIN_PERMISSION_GROUP_SUFFIX}</argument>
 				<argument id="2">The admin user of the '{appName}' application</argument>
 				<argument id="3">{creds:username}</argument>
 			</sqlExecute>
 			<sqlExecute query="AddApp">
 				<argument id="1">{appName}</argument>
 				<argument id="2" function="md5">{appKey}</argument>
-				<argument id="3">{appName}_admin</argument>
+				<argument id="3">{appName}_{Const:APP_ADMIN_PERMISSION_GROUP_SUFFIX}</argument>
 			</sqlExecute>
 			<sqlExecute query="AddUserPermissionGroup">
 				<argument id="1">{creds:username}</argument>
-				<argument id="2">{appName}_admin</argument>
+				<argument id="2">{appName}_{Const:APP_ADMIN_PERMISSION_GROUP_SUFFIX}</argument>
 			</sqlExecute>
 		</performance>
 	</request>

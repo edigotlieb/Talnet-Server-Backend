@@ -4,34 +4,37 @@
 			This request creates a new dynamic table.
 		</description>
 		<requestArguments>
-			<requestArgument type="String" name="appName" key="appName">The name of the application using the modified table</requestArgument>
-			<requestArgument type="String" name="tableName" key="tableName">The modified table name</requestArgument>
+			<requestArgument type="String" name="appName" key="appName">The name of the application using the created table</requestArgument>
+			<requestArgument type="String" name="tableName" key="tableName">The new table name</requestArgument>
 			<requestArgumentList name="columns" key="cols">
-				<requestArgument type="String" name="colName" key="colName">The modified table name</requestArgument>
-				<requestArgument type="Integer" name="size" key="size">The modified table name</requestArgument>
-				<requestArgument type="ColType" name="type" key="colType">The modified table name</requestArgument>
-				<requestArgument type="Boolean" name="autoInc" key="autoInc">The modified table name</requestArgument>
-				<requestArgument type="Boolean" name="isPrimary" key="isPrimary">The modified table name</requestArgument>
+				<requestArgument type="String" name="colName" key="colName">The column name</requestArgument>
+				<requestArgument type="Integer" name="size" key="size">The column size</requestArgument>
+				<requestArgument type="ColType" name="type" key="colType">The column type</requestArgument>
+				<requestArgument type="Boolean" name="autoInc" key="autoInc">whther the column is auto increment</requestArgument>
+				<requestArgument type="Boolean" name="isPrimary" key="isPrimary">whther the column is primary</requestArgument>
 			</requestArgumentList>
 		</requestArguments>
 		<validation>
+			<existence type="AppByName" errorid="1">
+				<argument id="1">{appName}</argument>
+			</existence>
 			<credentials type="AppAdmin" errorid="6">
 				<argument id="1">{appName}</argument>
 			</credentials>
-			<existence gate="not" type="TableByName" errorid="12">
+			<existence gate="not" type="TableByName" errorid="7">
 				<argument id="1">{appName}_{tableName}</argument>
 			</existence>
+			<string target="{tableName}" type="matches" errorid="15">
+				<argument id="1">[a-zA-Z][\\w]*</argument>
+			</string>
 			<foreach argname="columns" errorid="15">
 				<string target="{colName}" type="isAlphaNumeric" errorid="15"></string>
 			</foreach>
 			<atleast argname="columns" errorid="21">
-				<string target="{isPrimary}" type="equals" errorid="17">
+				<string target="{isPrimary}" type="equals" errorid="21">
 					<argument id="1">true</argument>
 				</string>
 			</atleast>
-			<string target="{appName}" type="matches" errorid="15">
-				<argument id="1">[a-zA-Z][\\w]*</argument>
-			</string>
 		</validation>
 		<performance>
 			<dynamicSqlExecute query="CreateTable">
@@ -42,14 +45,30 @@
 				<argument id="1">{appName}_{tableName}</argument>
 				<argument id="2">{appName}</argument>
 			</sqlExecute>
-			<foreach argname="enum:PermissionType(per)">
-				<sqlExecute query="AddPermissionGroupForTable">
-					<argument id="1">{appName}</argument>
-					<argument id="2">{appName}_{tableName}</argument>
-					<argument id="3">{per}</argument>
-					<argument id="4">{appName}_admin</argument>
-				</sqlExecute>
-			</foreach>	
+			<sqlExecute query="AddPermissionGroupForTable">
+				<argument id="1">{appName}</argument>
+				<argument id="2">{appName}_{tableName}</argument>
+				<argument id="3">SELECT</argument>
+				<argument id="4">{appName}_{Const:APP_ADMIN_PERMISSION_GROUP_SUFFIX}</argument>
+			</sqlExecute>
+			<sqlExecute query="AddPermissionGroupForTable">
+				<argument id="1">{appName}</argument>
+				<argument id="2">{appName}_{tableName}</argument>
+				<argument id="3">INSERT</argument>
+				<argument id="4">{appName}_{Const:APP_ADMIN_PERMISSION_GROUP_SUFFIX}</argument>
+			</sqlExecute>
+			<sqlExecute query="AddPermissionGroupForTable">
+				<argument id="1">{appName}</argument>
+				<argument id="2">{appName}_{tableName}</argument>
+				<argument id="3">UPDATE</argument>
+				<argument id="4">{appName}_{Const:APP_ADMIN_PERMISSION_GROUP_SUFFIX}</argument>
+			</sqlExecute>
+			<sqlExecute query="AddPermissionGroupForTable">
+				<argument id="1">{appName}</argument>
+				<argument id="2">{appName}_{tableName}</argument>
+				<argument id="3">DELETE</argument>
+				<argument id="4">{appName}_{Const:APP_ADMIN_PERMISSION_GROUP_SUFFIX}</argument>
+			</sqlExecute>
 		</performance>
 	</request>
 </talnet>

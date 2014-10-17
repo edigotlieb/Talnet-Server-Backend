@@ -2,7 +2,6 @@
 	<request type="APP" name="ADD_PERMISSION_GROUP_FOR_TABLE">
 		<description>
 			This request adds a permission to a dynamic table created specially for a certain app.
-			it requires the app name, table name, permission group name and the permission type.
 		</description>
 		<requestArguments>
 			<requestArgument type="String" name="appName" key="appName">The name of the application using the modified table</requestArgument>

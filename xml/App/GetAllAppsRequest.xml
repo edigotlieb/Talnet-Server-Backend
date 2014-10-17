@@ -1,7 +1,7 @@
 <talnet type="request">
 	<request type="APP" name="GET_ALL_APPS">
 		<description>
-			This request drops a dynamic table.
+			This request returns all applications in talnet
 		</description>
 		<requestArguments>
 		</requestArguments>
