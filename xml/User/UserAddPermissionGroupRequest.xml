@@ -10,7 +10,7 @@
 		</requestArguments>
 		<validation>
 			<string gate="not" target="{userToAddTo}" type="equals" errorid="3">
-				<argument id="1">Anonymous</argument>
+				<argument id="1">{Const:Anonymous}</argument>
 			</string>
 			<existence type="UserByUsername" errorid="3">
 				<argument id="1">{userToAddTo}</argument>
@@ -22,7 +22,7 @@
 				<argument id="1">{groupName}</argument>
 				<argument id="2">{creds:username}</argument>
 			</permission>
-			<permission gate="not" type="UserInGroup" errorid="22">
+			<permission gate="not" type="UserInGroup" errorid="27">
 				<argument id="1">{userToAddTo}</argument>
 				<argument id="2">{groupName}</argument>
 			</permission>
