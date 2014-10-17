@@ -50,7 +50,8 @@ public class RequestSingleArgumentAssignment extends RequestArgumentAssignment {
 				}
 				if (!argument.getType().validateValue(strValue)) {
 					//validation of the assigned value
-					Logger.getGlobal().log(Level.FINE, "value validation failed...", new IllegalArgumentException("type: " + argument.getType().toString() + ", value: " + strValue));
+					Logger.getGlobal().log(Level.FINE, "value validation failed...",
+							new IllegalArgumentException("name: " + argument.getName() + ", type: " + argument.getType().typeName() + ", value: " + strValue));
 					throw new ValidationException(100);
 				}
 				this.value = strValue;
