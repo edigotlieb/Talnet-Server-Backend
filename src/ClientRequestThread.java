@@ -139,7 +139,7 @@ public class ClientRequestThread extends Thread {
 				return;
 			}
 			String requestString = new String(buffer);
-			requestString = org.apache.commons.lang3.StringEscapeUtils.unescapeJava(requestString);
+			//requestString = org.apache.commons.lang3.StringEscapeUtils.unescapeJava(requestString);
 			Logger.getGlobal().log(Level.INFO, "CRT-{0}: REQUEST: {1}", new Object[]{ID, requestString});
 
 			masterObj = new JSONObject(requestString);
