@@ -131,7 +131,7 @@ public class ClientRequestThread extends Thread {
 			if (length == maxLength) {
 				// some error
 				String errorResponse = this.createErrorResponse(new RequestException(501));
-				Logger.getGlobal().log(Level.FINE, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
+				Logger.getGlobal().log(Level.INFO, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
 				this.out.print(errorResponse);
 				this.out.flush();
 
@@ -177,7 +177,7 @@ public class ClientRequestThread extends Thread {
 		} catch (ValidationException ex) {
 			// validation error
 			// send back response
-			Logger.getGlobal().log(Level.FINE, "client request denied with validation error...", ex);
+			Logger.getGlobal().log(Level.INFO, "client request denied with validation error...", ex);
 			String errorResponse = this.createErrorResponse(ex);
 			Logger.getGlobal().log(Level.INFO, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
 			this.out.print(errorResponse);
@@ -185,7 +185,7 @@ public class ClientRequestThread extends Thread {
 			this.closeThread();
 			return;
 		} catch (ExecutionException ex) {
-			Logger.getGlobal().log(Level.FINE, "client request denied with performance error...", ex);
+			Logger.getGlobal().log(Level.INFO, "client request denied with performance error...", ex);
 			String errorResponse = this.createErrorResponse(ex);
 			Logger.getGlobal().log(Level.INFO, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
 			this.out.print(errorResponse);
@@ -194,7 +194,7 @@ public class ClientRequestThread extends Thread {
 			return;
 		} catch (JSONException ex) {
 			// bad format! - send bad format error
-			Logger.getGlobal().log(Level.FINE, "client request denied with bad format error...", ex);
+			Logger.getGlobal().log(Level.INFO, "client request denied with bad format error...", ex);
 			String errorResponse = this.createErrorResponse(new RequestException(100));
 			Logger.getGlobal().log(Level.INFO, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
 			this.out.print(errorResponse);
