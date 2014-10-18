@@ -8,7 +8,7 @@
 			<requestArgument type="String" name="tableName" key="tableName">The new table name</requestArgument>
 			<requestArgumentList name="columns" key="cols">
 				<requestArgument type="String" name="colName" key="colName">The column name</requestArgument>
-				<requestArgument type="Integer" name="size" key="size">The column size</requestArgument>
+				<requestArgument type="Integer" name="size" key="size" defvalue="0">The column size</requestArgument>
 				<requestArgument type="ColType" name="type" key="colType">The column type</requestArgument>
 				<requestArgument type="Boolean" name="autoInc" key="autoInc" defvalue="false">whther the column is auto increment</requestArgument>
 				<requestArgument type="Boolean" name="isPrimary" key="isPrimary" defvalue="false">whther the column is primary</requestArgument>
