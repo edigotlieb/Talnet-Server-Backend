@@ -215,7 +215,7 @@ public class ClientRequestThread extends Thread {
 		try {
 			// send resultSet                    
 			String response = createResponse(resultSet, 1, "");
-			Logger.getGlobal().log(Level.FINE, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, response});
+			Logger.getGlobal().log(Level.INFO, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, response});
 			this.out.print(response);
 			this.out.flush();
 		} catch (SQLException ex) {
