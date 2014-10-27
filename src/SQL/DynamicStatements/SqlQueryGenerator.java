@@ -78,7 +78,7 @@ public abstract class SqlQueryGenerator {
 					String column = columns.next();
 					cols += column;
 					if (columnMap.get(column) != null) {
-						vals += "'" + columnMap.get(column) + "'";
+						vals += "'" + Utilities.Sql.sanitizeSqlCharacterEscaping(columnMap.get(column))+ "'";
 					} else {
 						vals += "NULL";
 					}
