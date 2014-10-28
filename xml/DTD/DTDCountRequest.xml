@@ -1,5 +1,5 @@
 <talnet type="request">
-	<request type="DTD" name="SELECT">
+	<request type="DTD" name="COUNT">
 		<description>
 			DTD Select
 		</description>
