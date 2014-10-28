@@ -66,6 +66,12 @@ public abstract class SqlQueryGenerator {
 				return "SELECT * FROM " + sp.getArgumentValue(1) + " WHERE " + sp.getArgumentStatement(2);
 			}
 		});
+		queryGenerators.put("count", new SqlQueryGenerator() {
+			@Override
+			public String generateQuery(StatementPreparerArgument sp) {
+				return "SELECT count(*) FROM " + sp.getArgumentValue(1) + " WHERE " + sp.getArgumentStatement(2);
+			}
+		});
 		queryGenerators.put("insert", new SqlQueryGenerator() {
 			@Override
 			public String generateQuery(StatementPreparerArgument sp) {
