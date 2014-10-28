@@ -69,7 +69,7 @@ public abstract class SqlQueryGenerator {
 		queryGenerators.put("count", new SqlQueryGenerator() {
 			@Override
 			public String generateQuery(StatementPreparerArgument sp) {
-				return "SELECT count(*) FROM " + sp.getArgumentValue(1) + " WHERE " + sp.getArgumentStatement(2);
+				return "SELECT count(*) AS resultLength FROM " + sp.getArgumentValue(1) + " WHERE " + sp.getArgumentStatement(2);
 			}
 		});
 		queryGenerators.put("insert", new SqlQueryGenerator() {
