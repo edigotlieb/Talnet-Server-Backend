@@ -62,7 +62,7 @@ public class ListBaseStatement extends Statement {
 				values = values + ", ";
 			}
 		}
-		return col + " " + op + " (" + value + ")";
+		return col + " " + op + " (" + values + ")";
 
 	}
 }
