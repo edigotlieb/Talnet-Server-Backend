@@ -57,7 +57,7 @@ public class ListBaseStatement extends Statement {
 	public String toString() {
 		String values = "";
 		for (int i = 0; i < this.value.length; i++) {
-			values += "'" + this.value[i] + "'";
+			values += "'" + this.value[i].toString() + "'";
 			if (i < this.value.length - 1) {
 				values = values + ", ";
 			}
