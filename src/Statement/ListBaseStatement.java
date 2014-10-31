@@ -35,7 +35,7 @@ public class ListBaseStatement extends Statement {
 		if (values != null) {
 			this.value = new String[values.length];
 			for (int i = 0; i < this.value.length; i++) {
-				this.value[i] = Sql.sanitizeSqlCharacterEscaping(value.toString());
+				this.value[i] = Sql.sanitizeSqlCharacterEscaping(values[i].toString());
 			}
 		} else {
 			this.value = new String[0];
