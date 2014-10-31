@@ -3,6 +3,10 @@
  */
 package Statement;
 
+import java.nio.charset.Charset;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -45,7 +49,12 @@ abstract public class Statement {
 		JSONObject termData;
 		if (requestData.has("Term")) {
 			termData = requestData.getJSONObject("Term");
-			return new RelStatement(termData.getString("Field"), termData.get("Value"), termData.getString("Op"));
+			if (termData.get("Value") instanceof JSONArray) {
+				Logger.getGlobal().log(Level.INFO, "DEBUG JSONArray");
+			} else {
+				Logger.getGlobal().log(Level.INFO, "DEBUG Object");
+			}
+			return new BaseStatement(termData.getString("Field"), termData.get("Value"), termData.getString("Op"));
 		} else if (requestData.has("AND")) {
 			termData = requestData.getJSONObject("AND");
 			return new AndStatement(statementFactory(termData.getJSONObject("firstStatement")), statementFactory(termData.getJSONObject("secondStatement")));

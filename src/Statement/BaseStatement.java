@@ -1,5 +1,5 @@
 /**
- * FILE : RelStatement.java AUTHORS : Erez Gotlieb
+ * FILE : BaseStatement.java AUTHORS : Erez Gotlieb
  */
 package Statement;
 
@@ -11,7 +11,7 @@ import java.util.List;
  *
  * Defines an abstract relational SQL WHERE statement
  */
-public class RelStatement extends Statement {
+public class BaseStatement extends Statement {
 
 	// the  tow terms and the operand defining the statement
 	private final String col, value, op;
@@ -19,15 +19,15 @@ public class RelStatement extends Statement {
 	private static final List<String> operands = new ArrayList<>();
 
 	static {
-		RelStatement.operands.add("=");
-		RelStatement.operands.add("!=");
-		RelStatement.operands.add(">=");
-		RelStatement.operands.add("<=");
-		RelStatement.operands.add(">");
-		RelStatement.operands.add("<");
-		RelStatement.operands.add("LIKE");
-		RelStatement.operands.add("NOT LIKE");
-		RelStatement.operands.add("NOT NULL");
+		BaseStatement.operands.add("=");
+		BaseStatement.operands.add("!=");
+		BaseStatement.operands.add(">=");
+		BaseStatement.operands.add("<=");
+		BaseStatement.operands.add(">");
+		BaseStatement.operands.add("<");
+		BaseStatement.operands.add("LIKE");
+		BaseStatement.operands.add("NOT LIKE");
+		BaseStatement.operands.add("NOT NULL");
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class RelStatement extends Statement {
 	 * @param value the second term
 	 * @param op the operand
 	 */
-	public RelStatement(String col, Object value, String op) {
+	public BaseStatement(String col, Object value, String op) {
 		this.col = Sql.sanitizeAlphaNumeric(col);
 		if (value != null) {
 			this.value = Sql.sanitizeSqlCharacterEscaping(value.toString());

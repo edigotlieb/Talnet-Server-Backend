@@ -8,7 +8,7 @@ import RequestArgumentAssignment.RequestArgumentStructureAssignment;
 import SQL.PreparedStatements.StatementPreparerArgument;
 import SQL.SqlExecutor;
 import Statement.AndStatement;
-import Statement.RelStatement;
+import Statement.BaseStatement;
 import Statement.Statement;
 import Utilities.Sql;
 import java.sql.SQLException;
@@ -53,7 +53,7 @@ public abstract class SqlQueryGenerator {
 						cols += ", ";
 					}
 				}
-				Statement whereNoAnon = new AndStatement(sp.getArgumentStatement(1), new RelStatement("USERNAME", Credentials.anonymous, "!="));
+				Statement whereNoAnon = new AndStatement(sp.getArgumentStatement(1), new BaseStatement("USERNAME", Credentials.anonymous, "!="));
 				return "SELECT " + cols + " FROM USERS HAVING " + whereNoAnon + " ORDER BY NAME ASC";
 			}
 		});
