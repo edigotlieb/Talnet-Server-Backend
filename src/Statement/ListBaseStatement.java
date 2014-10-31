@@ -21,6 +21,7 @@ public class ListBaseStatement extends Statement {
 
 	static {
 		ListBaseStatement.operands.add("IN");
+		ListBaseStatement.operands.add("NOT IN");
 	}
 
 	/**

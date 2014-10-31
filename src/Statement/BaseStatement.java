@@ -27,7 +27,9 @@ public class BaseStatement extends Statement {
 		BaseStatement.operands.add("<");
 		BaseStatement.operands.add("LIKE");
 		BaseStatement.operands.add("NOT LIKE");
-		BaseStatement.operands.add("NOT NULL");
+		BaseStatement.operands.add("IS");
+		BaseStatement.operands.add("IS NOT");
+
 	}
 
 	/**
