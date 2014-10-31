@@ -50,11 +50,10 @@ abstract public class Statement {
 		if (requestData.has("Term")) {
 			termData = requestData.getJSONObject("Term");
 			if (termData.get("Value") instanceof JSONArray) {
-				Logger.getGlobal().log(Level.INFO, "DEBUG JSONArray");
+				return new ListBaseStatement(termData.getString("Field"), getObjectArray((JSONArray) termData.get("Value")), termData.getString("Op"));
 			} else {
-				Logger.getGlobal().log(Level.INFO, "DEBUG Object");
+				return new BaseStatement(termData.getString("Field"), termData.get("Value"), termData.getString("Op"));
 			}
-			return new BaseStatement(termData.getString("Field"), termData.get("Value"), termData.getString("Op"));
 		} else if (requestData.has("AND")) {
 			termData = requestData.getJSONObject("AND");
 			return new AndStatement(statementFactory(termData.getJSONObject("firstStatement")), statementFactory(termData.getJSONObject("secondStatement")));
@@ -64,5 +63,13 @@ abstract public class Statement {
 		} else {
 			throw new JSONException("Bad Format");
 		}
+	}
+	
+	private static Object[] getObjectArray(JSONArray jsonArray){
+		Object[] result = new Object[jsonArray.length()];
+			for(int i = 0; i < result.length; i++){
+				result[i] = jsonArray.get(i);
+			}
+		return result;
 	}
 }
