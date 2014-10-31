@@ -33,7 +33,7 @@ public class ListBaseStatement extends Statement {
 	public ListBaseStatement(String col, Object[] values, String op) {
 		this.col = Sql.sanitizeAlphaNumeric(col);
 		if (values != null) {
-			this.value = new String[this.value.length];
+			this.value = new String[values.length];
 			for (int i = 0; i < this.value.length; i++) {
 				this.value[i] = Sql.sanitizeSqlCharacterEscaping(value.toString());
 			}
