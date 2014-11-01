@@ -56,6 +56,14 @@ public class ListBaseStatement extends Statement {
 
 	@Override
 	public String toString() {
+		if (this.value.length == 0) {
+			switch (op) {
+				case "IN":
+					return "0";
+				case "NOT IN":
+					return "1";
+			}
+		}
 		String values = "";
 		for (int i = 0; i < this.value.length; i++) {
 			values += "'" + this.value[i].toString() + "'";
