@@ -154,6 +154,9 @@ public class Request {
 		if (!creds.getHashedPassword().equals(Hashing.MD5Hash(user.getString("PASSWORD") + challenge))) {
 			throw new ValidationException(4);
 		}
+		if(!(user.getInt("ACTIVE") > 0)){
+			throw new ValidationException(34);
+		}
 
 		// set the permission collection in the credentials
 		List<String> permissions = new ArrayList<>();

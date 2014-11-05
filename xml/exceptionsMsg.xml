@@ -32,4 +32,5 @@
 	<exception id="31">Registration is inactive at the moment</exception>
 	<exception id="32">Must be User for USER SELECT</exception>
 	<exception id="33">User Cannot Delete Self</exception>
+	<exception id="34">Deactivated user cannot send requests</exception>
 </talnet>
