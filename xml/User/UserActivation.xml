@@ -11,6 +11,9 @@
 				<argument id="1">{creds:username}</argument>
 				<argument id="2">{Const:SUPER_ADMIN_PERMISSION_GROUP}</argument>
 			</permission>
+			<existence type="UserByUsername" errorid="3">
+				<argument id="1">{userToDeactivate}</argument>
+			</existence>
 		</validation>
 		<performance>
 			<sqlExecute query="ActivateUser" return="return">
