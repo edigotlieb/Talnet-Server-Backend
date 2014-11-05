@@ -12,7 +12,7 @@
 				<argument id="2">{Const:SUPER_ADMIN_PERMISSION_GROUP}</argument>
 			</permission>
 			<existence type="UserByUsername" errorid="3">
-				<argument id="1">{userToDeactivate}</argument>
+				<argument id="1">{username}</argument>
 			</existence>
 		</validation>
 		<performance>
