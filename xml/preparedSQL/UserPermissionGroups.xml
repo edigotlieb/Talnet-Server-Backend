@@ -31,6 +31,7 @@ WHERE USERS.USERNAME = ? AND PERMISSION_GROUPS.PERMISSION_NAME = ?</query>
 			<column name="YEAR">the user year</column>
 			<column name="PHONE_PRE">the user phone prefix</column>
 			<column name="PHONE_SUF">the user phone suffix</column>
+			<column name="ACTIVE">whether the user is active</column>
 			<column name="PERMISSIONGROUP_ID">the group id</column>
 			<column name="PERMISSION_NAME">the group name</column>
 			<column name="PERMISSIONGROUP_DESCRIPTION">the group description</column>
@@ -104,8 +105,9 @@ WHERE USERS.USERNAME = ?</query>
 			<column name="YEAR">the user year</column>
 			<column name="PHONE_PRE">the user phone prefix</column>
 			<column name="PHONE_SUF">the user phone suffix</column>
+			<column name="ACTIVE">whether the user is active</column>
 		</columns>
-		<query>SELECT USERS.USER_ID, USERS.USERNAME, USERS.FIRST_NAME, USERS.LAST_NAME, CONCAT_WS(' ',USERS.FIRST_NAME,USERS.LAST_NAME) AS NAME, USERS.EMAIL, USERS.DATE_REGISTERED, USERS.YEAR, USERS.DISPLAY_NAME, USERS.ROOM_NUM, USERS.PHONE_PRE, USERS.PHONE_SUF FROM USERS
+		<query>SELECT USERS.USER_ID, USERS.USERNAME, USERS.FIRST_NAME, USERS.LAST_NAME, CONCAT_WS(' ',USERS.FIRST_NAME,USERS.LAST_NAME) AS NAME, USERS.EMAIL, USERS.DATE_REGISTERED, USERS.YEAR, USERS.DISPLAY_NAME, USERS.ROOM_NUM, USERS.PHONE_PRE, USERS.PHONE_SUF, USERS.ACTIVE FROM USERS
 RIGHT JOIN USER_PERMISSIONS ON USERS.USER_ID = USER_PERMISSIONS.USER_ID
 RIGHT JOIN PERMISSION_GROUPS ON USER_PERMISSIONS.PERMISSIONGROUP_ID = PERMISSION_GROUPS.PERMISSIONGROUP_ID
 WHERE PERMISSION_GROUPS.PERMISSION_NAME = ?</query>

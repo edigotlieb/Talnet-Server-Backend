@@ -1,0 +1,21 @@
+<talnet type="request">
+	<request type="USER" name="DEACTIVATE">
+		<description>
+			this request deactivates a user
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="username" key="userToDeactivate">the user to deactivate</requestArgument>
+		</requestArguments>
+		<validation>
+			<permission type="UserInGroup" errorid="6">
+				<argument id="1">{creds:username}</argument>
+				<argument id="2">{Const:SUPER_ADMIN_PERMISSION_GROUP}</argument>
+			</permission>
+		</validation>
+		<performance>
+			<sqlExecute query="DeactivateUser" return="return">
+				<argument id="1">{username}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>
