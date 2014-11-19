@@ -150,6 +150,7 @@ public abstract class SqlQueryGenerator {
 				switch ((String) column.getArgument("type").getValue()) {
 					case "DATE":
 					case "TIMESTAMP":
+					case "FLOAT":
 						break;
 					case "VARCHAR":
 						if (Integer.parseInt((String) column.getArgument("size").getValue()) <= 0) {
