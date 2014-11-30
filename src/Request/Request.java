@@ -125,7 +125,7 @@ public class Request {
 	 */
 	public ResultSet execute(SqlExecutor sqlExc, String challenge, JSONObject requestData, final Credentials creds) throws ValidationException, ExecutionException, SQLException {
 		//assigns values to the request arguments
-		RequestArgumentStructureAssignment arguments = new RequestArgumentStructureAssignment(this.requestArguments, requestData);
+		RequestArgumentStructureAssignment arguments = new RequestArgumentStructureAssignment(this.requestArguments, requestData, creds);
 
 		//authenticate application
 		ResultSet app = sqlExc.executePreparedStatement("getAllAppInfoByName", new StatementPreparer() {

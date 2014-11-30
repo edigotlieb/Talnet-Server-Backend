@@ -52,6 +52,12 @@ public class Credentials {
 		this.appName = app_name;
 		this.hashedAppKey = hashed_app_key;
 	}
+	
+	public String getValue(String src){
+		src = src.replace("{creds:username}", this.getUsername());
+		src = src.replace("{creds:appname}", this.getAppName());
+		return src;
+	}
 
 	/**
 	 * set the local request member

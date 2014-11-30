@@ -4,6 +4,7 @@
 package RequestArgumentAssignment;
 
 import Exceptions.ValidationException;
+import Request.Credentials;
 import Request.RequestArgument.ArgumentType.ArgumentType;
 import Request.RequestArgument.RequestArgumentList;
 import java.util.Iterator;
@@ -28,12 +29,12 @@ public class RequestArgumentListAssignment extends RequestArgumentAssignment {
 	 * @param requestData the data received from the client to assign with
 	 * @throws ValidationException thrown in case of illegal value
 	 */
-	public RequestArgumentListAssignment(RequestArgumentList arguments, JSONArray requestData) throws ValidationException {
+	public RequestArgumentListAssignment(RequestArgumentList arguments, JSONArray requestData, Credentials creds) throws ValidationException {
 		this.arguments = arguments;
 		this.argumentList = new LinkedList<>();
 		for (int i = 0; i < requestData.length(); i++) {
 			JSONObject requestSubData = requestData.getJSONObject(i);
-			this.argumentList.add(new RequestArgumentStructureAssignment(arguments.getArgumentStruct(), requestSubData));
+			this.argumentList.add(new RequestArgumentStructureAssignment(arguments.getArgumentStruct(), requestSubData, creds));
 		}
 	}
 

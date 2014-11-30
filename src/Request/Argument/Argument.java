@@ -8,7 +8,7 @@ import Request.Credentials;
 import RequestArgumentAssignment.RequestArgumentStructureAssignment;
 import RequestArgumentAssignment.RequestArgumentAssignment;
 import Utilities.BackendParams;
-import Utilities.Constant;
+import Utilities.Constants;
 import java.util.Iterator;
 import org.w3c.dom.Element;
 
@@ -105,20 +105,10 @@ public class Argument {
 					src = src.replace("{" + argument.getName() + "}", (String) argument.getValue());
 			}
 		}
-		src = src.replace("{creds:username}", creds.getUsername());
-		src = src.replace("{creds:appname}", creds.getAppName());
 
-		Iterator<String> constants = Constant.getNames().iterator();
-		while (constants.hasNext()) {
-			String constName = constants.next();
-			src = src.replace("{Const:" + constName + "}", Constant.getValue(constName));
-		}
-
-		Iterator<String> backendParams = BackendParams.getNames().iterator();
-		while (backendParams.hasNext()) {
-			String paramName = backendParams.next();
-			src = src.replace("{BackendParams:" + paramName + "}", BackendParams.getParameter(paramName));
-		}
+		src = creds.getValue(src);
+		src = Constants.getValue(src);
+		src = BackendParams.getValue(src);
 
 		return function.function(src);
 	}

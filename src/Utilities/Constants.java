@@ -5,6 +5,7 @@ package Utilities;
 
 import Exceptions.*;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import org.w3c.dom.Element;
@@ -16,7 +17,7 @@ import org.w3c.dom.NodeList;
  *
  * @author idanb55
  */
-public abstract class Constant {
+public abstract class Constants {
 
 	private static final Map<String, String> consts = new HashMap<>();
 
@@ -32,6 +33,15 @@ public abstract class Constant {
 			consts.put(constant.getAttribute("name"), constant.getTextContent());
 		}
 	}
+	
+	public static String getValue(String src){
+		Iterator<String> constants = Constants.getNames().iterator();
+		while (constants.hasNext()) {
+			String constName = constants.next();
+			src = src.replace("{Const:" + constName + "}", Constants.getConstant(constName));
+		}
+		return src;
+	}
 
 	/**
 	 * retrieves an error message using an error code
@@ -39,7 +49,7 @@ public abstract class Constant {
 	 * @param errorCode the error code
 	 * @return the retrieved message
 	 */
-	public static String getValue(String name) {
+	public static String getConstant(String name) {
 		return consts.get(name);
 	}
 	

@@ -4,6 +4,7 @@
 package RequestArgumentAssignment;
 
 import Exceptions.ValidationException;
+import Request.Credentials;
 import Request.RequestArgument.RequestArgumentStructure;
 import Request.RequestArgument.RequestArgument;
 import java.util.Collection;
@@ -39,11 +40,11 @@ public final class RequestArgumentStructureAssignment {
 	 * @param requestData the data received fro the client to assign with
 	 * @throws ValidationException thrown in case of illegal value
 	 */
-	public RequestArgumentStructureAssignment(RequestArgumentStructure arguments, JSONObject requestData) throws ValidationException {
+	public RequestArgumentStructureAssignment(RequestArgumentStructure arguments, JSONObject requestData, Credentials creds) throws ValidationException {
 		this.arguments = new HashMap<>();
 		Iterator<RequestArgument> i = arguments.getArguments().iterator();
 		while (i.hasNext()) {
-			this.addArgument(RequestArgumentAssignment.RequestArgumentAssignmentFactory(i.next(), requestData));
+			this.addArgument(RequestArgumentAssignment.RequestArgumentAssignmentFactory(i.next(), requestData, creds));
 		}
 		Logger.getGlobal().log(Level.FINE,this.toString());
 	}

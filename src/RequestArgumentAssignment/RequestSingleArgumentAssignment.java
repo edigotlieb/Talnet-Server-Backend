@@ -4,10 +4,13 @@
 package RequestArgumentAssignment;
 
 import Exceptions.ValidationException;
+import Request.Credentials;
 import Request.RequestArgument.ArgumentType.ArgumentType;
 import Request.RequestArgument.RequestArgument;
 import Request.RequestArgument.RequestSingleArgument;
 import Statement.Statement;
+import Utilities.BackendParams;
+import Utilities.Constants;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -32,7 +35,7 @@ public class RequestSingleArgumentAssignment extends RequestArgumentAssignment {
 	 * @param requestData the data received from the client
 	 * @throws ValidationException thrown in case of illegal value
 	 */
-	public RequestSingleArgumentAssignment(RequestSingleArgument argument, JSONObject requestData) throws ValidationException {
+	public RequestSingleArgumentAssignment(RequestSingleArgument argument, JSONObject requestData, Credentials creds) throws ValidationException {
 		this.argument = argument;
 		switch (argument.getType().typeName()) {
 			case "Statement":
@@ -45,6 +48,10 @@ public class RequestSingleArgumentAssignment extends RequestArgumentAssignment {
 				String strValue;
 				if (argument.getDefValue() != null && !requestData.has(argument.getKey())) {
 					strValue = argument.getDefValue();
+					strValue = creds.getValue(strValue);
+					strValue = Constants.getValue(strValue);
+					strValue = BackendParams.getValue(strValue);
+
 				} else {
 					strValue = requestData.get(argument.getKey()).toString();
 				}

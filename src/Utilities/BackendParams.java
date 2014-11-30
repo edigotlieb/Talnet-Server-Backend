@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -39,6 +40,15 @@ public abstract class BackendParams {
 		}
 	}
 
+	public static String getValue(String src){
+		Iterator<String> backendParams = BackendParams.getNames().iterator();
+		while (backendParams.hasNext()) {
+			String paramName = backendParams.next();
+			src = src.replace("{BackendParams:" + paramName + "}", BackendParams.getParameter(paramName));
+		}
+		return src;
+	}
+	
 	/**
 	 * returns a set of the parameter names
 	 *

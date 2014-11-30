@@ -4,6 +4,7 @@
 package RequestArgumentAssignment;
 
 import Exceptions.ValidationException;
+import Request.Credentials;
 import Request.RequestArgument.ArgumentType.ArgumentType;
 import Request.RequestArgument.RequestArgument;
 import Request.RequestArgument.RequestArgumentList;
@@ -25,11 +26,11 @@ public abstract class RequestArgumentAssignment {
 	 * @return returns the created RequestArgumentAssignment
 	 * @throws ValidationException thrown in case of illegal value
 	 */
-	public static RequestArgumentAssignment RequestArgumentAssignmentFactory(RequestArgument argument, JSONObject requestData) throws ValidationException {
+	public static RequestArgumentAssignment RequestArgumentAssignmentFactory(RequestArgument argument, JSONObject requestData, Credentials creds) throws ValidationException {
 		if (argument.getType().typeName().equals("List")) {
-			return new RequestArgumentListAssignment((RequestArgumentList) argument, requestData.getJSONArray(argument.getKey()));
+			return new RequestArgumentListAssignment((RequestArgumentList) argument, requestData.getJSONArray(argument.getKey()), creds);
 		} else {
-			return new RequestSingleArgumentAssignment((RequestSingleArgument) argument, requestData);
+			return new RequestSingleArgumentAssignment((RequestSingleArgument) argument, requestData, creds);
 		}
 	}
 
