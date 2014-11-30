@@ -27,6 +27,15 @@ public class ArgumentSet {
 	public final void addArgument(Argument argument) {
 		this.arguments.put(argument.getId(), argument);
 	}
+	
+	/**
+	 * adds an argument to the argument collection
+	 *
+	 * @param argument
+	 */
+	public final void removeArgument(int key) {
+		this.arguments.remove(key);
+	}
 
 	/**
 	 * constructs a new ArgumentSet using an xml element
