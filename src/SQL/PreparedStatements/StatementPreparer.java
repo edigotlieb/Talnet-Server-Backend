@@ -16,7 +16,7 @@ public abstract class StatementPreparer {
 	public abstract void prepareStatement(PreparedStatement ps) throws SQLException;
 
 	protected void prepareStatement(PreparedStatement ps, ArgumentSet arguments, RequestArgumentStructureAssignment requestArguments, Credentials creds) throws SQLException {
-		System.out.println(ps.getParameterMetaData().getParameterCount());
+		System.out.println("DEBUG" + ps.getParameterMetaData().getParameterCount());
 		Iterator<Integer> it = arguments.keySet().iterator();
 		while (it.hasNext()) {
 			Argument argument = arguments.get(it.next());
