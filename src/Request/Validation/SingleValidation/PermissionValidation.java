@@ -42,11 +42,8 @@ public class PermissionValidation extends SingleValidation {
 			case TablePermission:
 				return !sqlExc.emptyResultExecutePreparedStatement("getTablePermissionForGroup", new StatementPreparerArgument(this.arguments, arguments, creds));
 			case TablePermissionUser:
-				Argument appArgument = this.arguments.get(4);
-				System.out.println(appArgument);
-				this.arguments.removeArgument(4);
 				if (!sqlExc.emptyResultExecutePreparedStatement("getUserTablePermission", new StatementPreparerArgument(this.arguments, arguments, creds))) {
-					if(appArgument.getValue(arguments, creds).equals(creds.getAppName())){
+					if(this.arguments.get(4).getValue(arguments, creds).equals(creds.getAppName())){
 						return true;
 					}
 					return creds.isMasterApplication() && creds.isAppSuperAdmin(this.arguments.get(4).getValue(arguments, creds));

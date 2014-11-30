@@ -17,7 +17,7 @@
 				<argument id="1">{creds:appname}_{tableName}</argument>
 			</existence>
 			<permission type="TablePermissionUser" errorid="6">
-				<argument id="1">{creds:appname}_{tableName}</argument>
+				<argument id="1">{appName}_{tableName}</argument>
 				<argument id="2">{creds:username}</argument>
 				<argument id="3">INSERT</argument>
 				<argument id="4">{appName}</argument>
