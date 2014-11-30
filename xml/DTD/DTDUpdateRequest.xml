@@ -7,6 +7,7 @@
 			<requestArgument type="String" name="tableName" key="into"></requestArgument>
 			<requestArgument type="Statement" name="where" key="WHERE"></requestArgument>
 			<requestArgument type="Map" name="data" key="data"></requestArgument>
+			<requestArgument type="String" name="appName" key="appName" defvalue="{creds:appname}"></requestArgument>
 		</requestArguments>
 		<validation>
 			<string target="{creds:appname}_{tableName}" type="isAlphaNumeric" errorid="15">
@@ -20,6 +21,7 @@
 				<argument id="1">{creds:appname}_{tableName}</argument>
 				<argument id="2">{creds:username}</argument>
 				<argument id="3">UPDATE</argument>
+				<argument id="4">{appName}</argument>
 			</permission>
 		</validation>
 		<performance>
