@@ -169,7 +169,7 @@ public class ClientRequestThread extends Thread {
 			resultSet = request.execute(new SqlExecutor(con), chal, masterObj.getJSONObject("RequestData"), creds);
 		} catch (SQLException ex) {
 			// some bad SQL
-			Logger.getGlobal().log(Level.WARNING, "SQL error...", ex);
+			Logger.getGlobal().log(Level.SEVERE, "SQL error...", ex);
 			this.out.print(this.createErrorResponse(new RequestException(500)));
 			this.out.flush();
 			this.closeThread();
