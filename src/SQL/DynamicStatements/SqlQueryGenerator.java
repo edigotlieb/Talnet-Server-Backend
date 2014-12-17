@@ -67,7 +67,7 @@ public abstract class SqlQueryGenerator {
 				for (; tables.hasNext(); query += " NATURAL JOIN " + appName + "_" + tables.next().getArgument("tableName")) {
 				}
 				query += " WHERE " + sp.getArgumentStatement(3);
-				if (sp.getArgumentValue(3).length() > 0) {
+				if (sp.getArgumentValue(4).length() > 0) {
 					query += " ORDER BY " + sp.getArgumentValue(4) + " " + sp.getArgumentValue(5);
 				}
 				return query;
@@ -76,7 +76,14 @@ public abstract class SqlQueryGenerator {
 		queryGenerators.put("count", new SqlQueryGenerator() {
 			@Override
 			public String generateQuery(StatementPreparerArgument sp) {
-				return "SELECT count(*) AS resultLength FROM " + sp.getArgumentValue(1) + " WHERE " + sp.getArgumentStatement(2);
+				String query = "SELECT COUNT(*) FROM ";
+				String appName = sp.getArgumentValue(1);
+				Iterator<RequestArgumentStructureAssignment> tables = sp.getArgumentList(2).iterator();
+				query += appName + "_" + tables.next().getArgument("tableName");
+				for (; tables.hasNext(); query += " NATURAL JOIN " + appName + "_" + tables.next().getArgument("tableName")) {
+				}
+				query += " WHERE " + sp.getArgumentStatement(3);
+				return query;
 			}
 		});
 		queryGenerators.put("insert", new SqlQueryGenerator() {
