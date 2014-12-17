@@ -60,10 +60,17 @@ public abstract class SqlQueryGenerator {
 		queryGenerators.put("select", new SqlQueryGenerator() {
 			@Override
 			public String generateQuery(StatementPreparerArgument sp) {
-				if (sp.getArgumentValue(3).length() > 0) {
-					return "SELECT * FROM " + sp.getArgumentValue(1) + " WHERE " + sp.getArgumentStatement(2) + " ORDER BY " + sp.getArgumentValue(3) + " " + sp.getArgumentValue(4);
+				String query = "SELECT * FROM ";
+				String appName = sp.getArgumentValue(1);
+				Iterator<RequestArgumentStructureAssignment> tables = sp.getArgumentList(2).iterator();
+				query += appName + "_" + tables.next().getArgument("tableName");
+				for (; tables.hasNext(); query += " NATURAL JOIN " + appName + "_" + tables.next().getArgument("tableName")) {
 				}
-				return "SELECT * FROM " + sp.getArgumentValue(1) + " WHERE " + sp.getArgumentStatement(2);
+				query += " WHERE " + sp.getArgumentStatement(3);
+				if (sp.getArgumentValue(3).length() > 0) {
+					query += " ORDER BY " + sp.getArgumentValue(4) + " " + sp.getArgumentValue(5);
+				}
+				return query;
 			}
 		});
 		queryGenerators.put("count", new SqlQueryGenerator() {
@@ -84,7 +91,7 @@ public abstract class SqlQueryGenerator {
 					String column = columns.next();
 					cols += column;
 					if (columnMap.get(column) != null) {
-						vals += "'" + Utilities.Sql.sanitizeSqlCharacterEscaping(columnMap.get(column))+ "'";
+						vals += "'" + Utilities.Sql.sanitizeSqlCharacterEscaping(columnMap.get(column)) + "'";
 					} else {
 						vals += "NULL";
 					}
