@@ -76,7 +76,7 @@ public abstract class SqlQueryGenerator {
 		queryGenerators.put("count", new SqlQueryGenerator() {
 			@Override
 			public String generateQuery(StatementPreparerArgument sp) {
-				String query = "SELECT COUNT(*) FROM ";
+				String query = "SELECT COUNT(*) AS resultLength FROM ";
 				String appName = sp.getArgumentValue(1);
 				Iterator<RequestArgumentStructureAssignment> tables = sp.getArgumentList(2).iterator();
 				query += appName + "_" + tables.next().getArgument("tableName");
