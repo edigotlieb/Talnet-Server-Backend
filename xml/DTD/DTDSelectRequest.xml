@@ -30,7 +30,6 @@
 				<string target="{appName}_{tableName}" type="isAlphaNumeric" errorid="15">
 				</string>
 			</atleast>
-
 			<statement target="{where}" type="validateOperands" errorid="19">
 			</statement>
 		</validation>

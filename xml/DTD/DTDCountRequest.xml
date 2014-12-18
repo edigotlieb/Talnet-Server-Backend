@@ -4,29 +4,38 @@
 			DTD Select
 		</description>
 		<requestArguments>
-			<requestArgument type="String" name="tableName" key="from"></requestArgument>
+			<requestArgumentList name="tableNames" key="from">
+				<requestArgument type="String" name="tableName" key="tableName"></requestArgument>
+			</requestArgumentList>
 			<requestArgument type="Statement" name="where" key="WHERE"></requestArgument>
 			<requestArgument type="String" name="appName" key="appName" defvalue="{creds:appname}"></requestArgument>
 		</requestArguments>
 		<validation>
-			<string target="{creds:appname}_{tableName}" type="isAlphaNumeric" errorid="15">
-			</string>
-			<existence type="TableByName" errorid="12">
-				<argument id="1">{creds:appname}_{tableName}</argument>
-			</existence>
-			<permission type="TablePermissionUser" errorid="6">
-				<argument id="1">{appName}_{tableName}</argument>
-				<argument id="2">{creds:username}</argument>
-				<argument id="3">SELECT</argument>
-				<argument id="4">{appName}</argument>
-			</permission>
+			<foreach argname="tableNames" errorid="15">
+				<string target="{appName}_{tableName}" type="isAlphaNumeric" errorid="15">
+				</string>
+				<existence type="TableByName" errorid="12">
+					<argument id="1">{creds:appname}_{tableName}</argument>
+				</existence>
+				<permission type="TablePermissionUser" errorid="6">
+					<argument id="1">{appName}_{tableName}</argument>
+					<argument id="2">{creds:username}</argument>
+					<argument id="3">SELECT</argument>
+					<argument id="4">{appName}</argument>
+				</permission>
+			</foreach>
+			<atleast argname="tableNames" errorid="15">
+				<string target="{appName}_{tableName}" type="isAlphaNumeric" errorid="15">
+				</string>
+			</atleast>
 			<statement target="{where}" type="validateOperands" errorid="19">
 			</statement>
 		</validation>
 		<performance>
 			<dynamicSqlExecute query="count" return="return">
-				<argument id="1">{creds:appname}_{tableName}</argument>
-				<argument id="2">{where}</argument>
+				<argument id="1">{appName}</argument>
+				<argument id="2">{tableNames}</argument>
+				<argument id="3">{where}</argument>
 			</dynamicSqlExecute>
 		</performance>
 	</request>
