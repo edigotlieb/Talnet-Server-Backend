@@ -23,6 +23,7 @@ public abstract class StatementPreparer {
 			switch(argument.getType()){
 				case Integer:
 					ps.setInt(argument.getId(), Integer.parseInt(argument.getValue(requestArguments, creds)));
+					break;
 				case String:
 				default:
 					ps.setString(argument.getId(), argument.getValue(requestArguments, creds));
