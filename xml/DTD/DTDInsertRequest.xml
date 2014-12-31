@@ -14,7 +14,7 @@
 			<map target="{data}" type="areKeysAlphaNumeric" errorid="15">
 			</map>
 			<existence type="TableByName" errorid="12">
-				<argument id="1">{creds:appname}_{tableName}</argument>
+				<argument id="1">{appName}_{tableName}</argument>
 			</existence>
 			<permission type="TablePermissionUser" errorid="6">
 				<argument id="1">{appName}_{tableName}</argument>
@@ -25,7 +25,7 @@
 		</validation>
 		<performance>
 			<dynamicSqlExecute query="insert" return="return">
-				<argument id="1">{creds:appname}_{tableName}</argument>
+				<argument id="1">{appName}_{tableName}</argument>
 				<argument id="2">{data}</argument>
 			</dynamicSqlExecute>
 		</performance>

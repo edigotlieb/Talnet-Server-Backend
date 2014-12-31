@@ -75,4 +75,15 @@ VALUES (?,?,(SELECT PERMISSIONGROUP_ID FROM PERMISSION_GROUPS WHERE PERMISSION_N
 		<query>INSERT INTO REQUEST_FAILURES (appid, request, response)
 VALUES ((SELECT APP_ID FROM APPS WHERE APP_NAME = ?),?,?);</query>
 	</preparedSql>
+	<preparedSql name="GetFailures">
+		<description>returns the error record</description>
+		<arguments>
+			<argument id="1">app name</argument>
+			<argument id="2">from error number</argument>
+			<argument id="3">to error number</argument>
+		</arguments>
+		<query>SELECT timestamp, request, response FROM REQUEST_FAILURES
+		LEFT JOIN APPS ON APPS.APP_ID = REQUEST_FAILURES.appid
+		WHERE APPS.APP_NAME = ? ORDER BY REQUEST_FAILURES.timestamp DESC LIMIT ?, ?</query>
+	</preparedSql>
 </talnet>
