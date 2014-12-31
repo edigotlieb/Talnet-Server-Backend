@@ -20,7 +20,13 @@ public abstract class StatementPreparer {
 		Iterator<Integer> it = arguments.keySet().iterator();
 		while (it.hasNext() && parametersLeft > 0) {
 			Argument argument = arguments.get(it.next());
-			ps.setString(argument.getId(), argument.getValue(requestArguments, creds));
+			switch(argument.getType()){
+				case Integer:
+					ps.setInt(argument.getId(), Integer.parseInt(argument.getValue(requestArguments, creds)));
+				case String:
+				default:
+					ps.setString(argument.getId(), argument.getValue(requestArguments, creds));
+			}
 			parametersLeft--;
 		}
 	}

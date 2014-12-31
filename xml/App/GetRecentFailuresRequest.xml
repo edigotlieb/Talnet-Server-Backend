@@ -18,8 +18,8 @@
 		<performance>
 			<sqlExecute query="GetFailures" return="return">
 				<argument id="1">{appName}</argument>
-				<argument id="2">{from}</argument>
-				<argument id="3">{to}</argument>
+				<argument id="2" type="Integer">{from}</argument>
+				<argument id="3" type="Integer">{to}</argument>
 			</sqlExecute>
 		</performance>
 	</request>

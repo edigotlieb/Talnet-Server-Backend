@@ -22,6 +22,16 @@ public class Argument {
 	private int id;
 	private String value;
 	private StringFunction function;
+	private SqlArgumentType type;
+
+	public SqlArgumentType getType() {
+		return type;
+	}
+
+	public enum SqlArgumentType {
+
+		String, Integer
+	}
 
 	/**
 	 * constructs a new argument using an xml element
@@ -36,6 +46,11 @@ public class Argument {
 			this.function = StringFunction.get(eArgument.getAttribute("function"));
 		} else {
 			this.function = StringFunction.get("");
+		}
+		if (eArgument.hasAttribute("type")) {
+			this.type = SqlArgumentType.valueOf(eArgument.getAttribute("type"));
+		} else {
+			this.type = SqlArgumentType.String;
 		}
 	}
 
