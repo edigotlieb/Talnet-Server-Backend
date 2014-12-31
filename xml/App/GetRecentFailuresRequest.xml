@@ -4,7 +4,7 @@
 			Returns the recent failures of an app
 		</description>
 		<requestArguments>
-			<requestArgument type="Integer" name="appName" key="appName" defvalue="{creds:appname}">the application name to examine</requestArgument>
+			<requestArgument type="String" name="appName" key="appName" defvalue="{creds:appname}">the application name to examine</requestArgument>
 			<requestArgument type="Integer" name="from" key="start" defvalue="0">the index number of the first record</requestArgument>
 			<requestArgument type="Integer" name="to" key="index">the index number of the last record</requestArgument>
 		</requestArguments>
