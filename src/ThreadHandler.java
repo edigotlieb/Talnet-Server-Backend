@@ -43,16 +43,6 @@ public class ThreadHandler {
 	 * @return true if init was successful, false - otherwise
 	 */
 	public static boolean init(String paramFileName) {
-		try {
-			RuntimeParams.readParams(paramFileName);       // read all the params from a config file
-		} catch (Exception ex) {
-			// cant open param file
-			logger.log(Level.SEVERE, "Can't open parameter file");
-			logger.log(Level.SEVERE, ex.getMessage(), ex);
-			logger.log(Level.SEVERE, "closing...");
-			System.exit(0);
-			// exit
-		}
 		threads = new ArrayList<>();
 		try {
 			// init the server socket

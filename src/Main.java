@@ -24,11 +24,22 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		System.setProperty("file.encoding", "UTF8");
 
+		try {
+			RuntimeParams.readParams(args[0]);       // read all the params from a config file
+		} catch (Exception ex) {
+			System.out.println("Can't open parameter file");
+			System.out.println("closing...");
+			System.exit(0);
+			// exit
+		}
+		
+		Level logLevel = Level.parse(String.valueOf(RuntimeParams.getParams("logLevel")));
+		
 		//initialize logger
 		FileHandler fh = new FileHandler("log/" + new java.text.SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date().getTime()) + ".log");
 		fh.setFormatter(new SimpleFormatter());
 		Logger.getGlobal().addHandler(fh);
-		ThreadHandler.setLogLevel(Logger.getGlobal(), Level.INFO);
+		ThreadHandler.setLogLevel(Logger.getGlobal(), logLevel);
 
 		Logger.getGlobal().log(Level.INFO, "file.encoding={0}", System.getProperty("file.encoding"));
 		Logger.getGlobal().log(Level.INFO, "Default Charset={0}", Charset.defaultCharset());

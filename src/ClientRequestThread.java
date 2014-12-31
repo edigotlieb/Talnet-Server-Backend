@@ -7,6 +7,7 @@ import Exceptions.ExecutionException;
 import Exceptions.RequestException;
 import Exceptions.ValidationException;
 import Request.Request;
+import SQL.PreparedStatements.StatementPreparer;
 import SQL.SqlExecutor;
 import Utilities.Hashing;
 import java.io.BufferedReader;
@@ -26,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.OutputStreamWriter;
+import java.sql.PreparedStatement;
 
 /**
  * This class handles a user request from start to finish.
@@ -121,8 +123,10 @@ public class ClientRequestThread extends Thread {
 
 //<editor-fold defaultstate="collapsed" desc="proccess client request">
 		JSONObject masterObj;
-		Credentials creds;
+		Credentials creds = null;
+		String requestString = "";
 		Request request;
+		SqlExecutor sqlExc = new SqlExecutor(con);
 		try {
 			int maxLength = (int) RuntimeParams.getParams("BufferSize");
 			char[] buffer = new char[maxLength];
@@ -130,15 +134,10 @@ public class ClientRequestThread extends Thread {
 			int length = reader.read(buffer);
 			if (length == maxLength) {
 				// some error
-				String errorResponse = this.createErrorResponse(new RequestException(501));
-				Logger.getGlobal().log(Level.INFO, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
-				this.out.print(errorResponse);
-				this.out.flush();
-
-				this.closeThread();
+				this.sendErrorResponse(sqlExc, null, new RequestException(501), "Request Too Long!");
 				return;
 			}
-			String requestString = new String(buffer);
+			requestString = new String(buffer);
 			//requestString = org.apache.commons.lang3.StringEscapeUtils.unescapeJava(requestString);
 			Logger.getGlobal().log(Level.INFO, "CRT-{0}: REQUEST: {1}", new Object[]{ID, requestString});
 
@@ -154,59 +153,38 @@ public class ClientRequestThread extends Thread {
 			return;
 		} catch (JSONException ex) {
 			// bad format! - send bad format error
-			Logger.getGlobal().log(Level.WARNING, "JSON parse...", ex);
-			String errorResponse = this.createErrorResponse(new RequestException(100));
-			Logger.getGlobal().log(Level.INFO, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
-			this.out.print(errorResponse);
-			this.out.flush();
-			this.closeThread();
+			this.sendErrorResponse(sqlExc, creds, new RequestException(100), requestString);
 			return;
 		}
 		creds.setIsLocalRequest((socket.getInetAddress().isLoopbackAddress()));
 		ResultSet resultSet;
 		try {
 			// validate request
-			resultSet = request.execute(new SqlExecutor(con), chal, masterObj.getJSONObject("RequestData"), creds);
+			resultSet = request.execute(sqlExc, chal, masterObj.getJSONObject("RequestData"), creds);
 		} catch (SQLException ex) {
 			// some bad SQL
 			Logger.getGlobal().log(Level.SEVERE, "SQL error...", ex);
-			this.out.print(this.createErrorResponse(new RequestException(500)));
-			this.out.flush();
-			this.closeThread();
+			this.sendErrorResponse(sqlExc, creds, new RequestException(500), requestString);
 			return;
 		} catch (ValidationException ex) {
 			// validation error
 			// send back response
 			Logger.getGlobal().log(Level.INFO, "client request denied with validation error...", ex);
-			String errorResponse = this.createErrorResponse(ex);
-			Logger.getGlobal().log(Level.INFO, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
-			this.out.print(errorResponse);
-			this.out.flush();
-			this.closeThread();
+			this.sendErrorResponse(sqlExc, creds, ex, requestString);
 			return;
 		} catch (ExecutionException ex) {
 			Logger.getGlobal().log(Level.INFO, "client request denied with performance error...", ex);
-			String errorResponse = this.createErrorResponse(ex);
-			Logger.getGlobal().log(Level.INFO, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
-			this.out.print(errorResponse);
-			this.out.flush();
-			this.closeThread();
+			this.sendErrorResponse(sqlExc, creds, ex, requestString);
 			return;
 		} catch (JSONException ex) {
 			// bad format! - send bad format error
 			Logger.getGlobal().log(Level.INFO, "client request denied with bad format error...", ex);
-			String errorResponse = this.createErrorResponse(new RequestException(100));
-			Logger.getGlobal().log(Level.INFO, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
-			this.out.print(errorResponse);
-			this.out.flush();
-			this.closeThread();
+			this.sendErrorResponse(sqlExc, creds, ex, requestString);
 			return;
 		} catch (Exception ex) {
 			// some bad SQL
 			Logger.getGlobal().log(Level.WARNING, "General error...", ex);
-			this.out.print(this.createErrorResponse(new RequestException(500)));
-			this.out.flush();
-			this.closeThread();
+			this.sendErrorResponse(sqlExc, creds, ex, requestString);
 			return;
 		}
 //</editor-fold>
@@ -221,8 +199,7 @@ public class ClientRequestThread extends Thread {
 		} catch (SQLException ex) {
 			// cant write result or read result set
 			Logger.getGlobal().log(Level.WARNING, "cant write result or read result set", ex);
-			this.out.print(createErrorResponse(new RequestException(500)));
-			this.out.flush();
+			this.sendErrorResponse(sqlExc, creds, new RequestException(500), requestString);
 		}
 		Logger.getGlobal().log(Level.INFO, "Response sent to client");
 		this.closeThread();
@@ -336,6 +313,30 @@ public class ClientRequestThread extends Thread {
 	 */
 	private synchronized String createErrorResponse(Exception ex) {
 		return createErrorResponse(ex.getMessage());
+	}
+
+	private synchronized void sendErrorResponse(SqlExecutor sqlExc, Credentials credentials, Exception ex, String clientRequest) {
+		final String errorResponse = this.createErrorResponse(ex);
+		final Credentials creds = credentials;
+		final String request = clientRequest;
+		Logger.getGlobal().log(Level.SEVERE, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
+		try {
+			if (credentials != null) {
+				ResultSet app = sqlExc.executePreparedStatement("getAllAppInfoByName", new StatementPreparer() {
+					@Override
+					public void prepareStatement(PreparedStatement ps) throws SQLException {
+						ps.setString(1, creds.getAppName());
+						ps.setString(1, request);
+						ps.setString(1, errorResponse);
+					}
+				});
+			}
+		} catch (SQLException ex1) {
+			Logger.getGlobal().log(Level.SEVERE, "CRT-{0}: Failed to add failure");
+		}
+		this.out.print(errorResponse);
+		this.out.flush();
+		this.closeThread();
 	}
 
 	/**

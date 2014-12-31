@@ -65,4 +65,14 @@ VALUES (?,?,(SELECT PERMISSIONGROUP_ID FROM PERMISSION_GROUPS WHERE PERMISSION_N
 		</arguments>
 		<query>DELETE FROM APPS WHERE APP_NAME = ?</query>
 	</preparedSql>
+	<preparedSql name="AddFailure">
+		<description>adds an error record</description>
+		<arguments>
+			<argument id="1">app name</argument>
+			<argument id="2">request string</argument>
+			<argument id="3">response string</argument>
+		</arguments>
+		<query>INSERT INTO REQUEST_FAILURES (appid, request, response)
+VALUES ((SELECT APP_ID FROM APPS WHERE APP_NAME = ?),?,?);</query>
+	</preparedSql>
 </talnet>
