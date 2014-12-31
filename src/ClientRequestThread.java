@@ -322,12 +322,12 @@ public class ClientRequestThread extends Thread {
 		Logger.getGlobal().log(Level.SEVERE, "CRT-{0}: RESPONSE: {1}", new Object[]{ID, errorResponse});
 		try {
 			if (credentials != null) {
-				ResultSet app = sqlExc.executePreparedStatement("getAllAppInfoByName", new StatementPreparer() {
+				ResultSet app = sqlExc.executePreparedStatement("AddFailure", new StatementPreparer() {
 					@Override
 					public void prepareStatement(PreparedStatement ps) throws SQLException {
 						ps.setString(1, creds.getAppName());
-						ps.setString(1, request);
-						ps.setString(1, errorResponse);
+						ps.setString(2, request);
+						ps.setString(3, errorResponse);
 					}
 				});
 			}
