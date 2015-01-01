@@ -5,8 +5,8 @@
 		</description>
 		<requestArguments>
 			<requestArgument type="String" name="appName" key="appName" defvalue="{creds:appname}">the application name to examine</requestArgument>
-			<requestArgument type="Integer" name="from" key="start" defvalue="0">the index number of the first record</requestArgument>
-			<requestArgument type="Integer" name="to" key="index">the index number of the last record</requestArgument>
+			<requestArgument type="Integer" name="row_count" key="size">the index number of the last record</requestArgument>
+			<requestArgument type="Integer" name="offset" key="offset" defvalue="0">the index number of the first record</requestArgument>
 		</requestArguments>
 		<validation>
 			<credentials type="isMasterApplication" errorid="13">
@@ -18,8 +18,8 @@
 		<performance>
 			<sqlExecute query="GetFailures" return="return">
 				<argument id="1">{appName}</argument>
-				<argument id="2" type="Integer">{from}</argument>
-				<argument id="3" type="Integer">{to}</argument>
+				<argument id="2" type="Integer">{offset}</argument>
+				<argument id="3" type="Integer">{row_count}</argument>
 			</sqlExecute>
 		</performance>
 	</request>
