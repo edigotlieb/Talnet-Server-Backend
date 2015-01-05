@@ -77,6 +77,11 @@ VALUES ((SELECT APP_ID FROM APPS WHERE APP_NAME = ?),?,?);</query>
 	</preparedSql>
 	<preparedSql name="GetFailures">
 		<description>returns the error record</description>
+		<columns>
+			<column name="timestamp">the ts of the failure</column>
+			<column name="request">the failed request</column>
+			<column name="response">the failure response (message)</column>
+		</columns>
 		<arguments>
 			<argument id="1">app name</argument>
 			<argument id="2">from error number</argument>
@@ -88,6 +93,9 @@ VALUES ((SELECT APP_ID FROM APPS WHERE APP_NAME = ?),?,?);</query>
 	</preparedSql>
 	<preparedSql name="CountFailures">
 		<description>returns the number of error records</description>
+		<columns>
+			<column name="failures">the number of failures</column>
+		</columns>
 		<arguments>
 			<argument id="1">app name</argument>
 		</arguments>
