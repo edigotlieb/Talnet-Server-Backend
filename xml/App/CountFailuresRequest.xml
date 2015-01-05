@@ -1,5 +1,5 @@
 <talnet type="request">
-	<request type="APP" name="GET_RECENT_FAILURES">
+	<request type="APP" name="COUNT_FAILURES">
 		<description>
 			Returns the number of failures of an app
 		</description>
