@@ -86,4 +86,13 @@ VALUES ((SELECT APP_ID FROM APPS WHERE APP_NAME = ?),?,?);</query>
 		LEFT JOIN APPS ON APPS.APP_ID = REQUEST_FAILURES.appid
 		WHERE APPS.APP_NAME = ? ORDER BY REQUEST_FAILURES.timestamp DESC LIMIT ?, ?</query>
 	</preparedSql>
+	<preparedSql name="CountFailures">
+		<description>returns the number of error records</description>
+		<arguments>
+			<argument id="1">app name</argument>
+		</arguments>
+		<query>SELECT COUNT(*) as failures FROM REQUEST_FAILURES
+		LEFT JOIN APPS ON APPS.APP_ID = REQUEST_FAILURES.appid
+		WHERE APPS.APP_NAME = ?</query>
+	</preparedSql>
 </talnet>
