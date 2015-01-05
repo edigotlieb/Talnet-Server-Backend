@@ -1,0 +1,15 @@
+<talnet type="request">
+	<request type="APP" name="GET_ALL_APPS">
+		<description>
+			This request returns all applications in talnet
+		</description>
+		<requestArguments>
+		</requestArguments>
+		<validation>
+		</validation>
+		<performance>
+			<sqlExecute query="getAllApps" return="return">
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

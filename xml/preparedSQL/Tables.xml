@@ -1,0 +1,25 @@
+<talnet type="preparedSQL">
+	<preparedSql name="AddTable">
+		<description>adds a new table</description>
+		<arguments>
+			<argument id="1">the new full table name</argument>
+			<argument id="2">the new table app name</argument>
+		</arguments>
+		<query>INSERT INTO DYNAMIC_TABLES (TABLE_NAME,APP_ID)
+VALUES (?,(SELECT APP_ID FROM APPS WHERE APP_NAME = ?));</query>
+	</preparedSql>
+	<preparedSql name="DeleteAppTables">
+		<description>deletes all tables of a given application</description>
+		<arguments>
+			<argument id="1">the app name</argument>
+		</arguments>
+		<query>DELETE FROM DYNAMIC_TABLES WHERE APP_ID = (SELECT APP_ID FROM APPS WHERE APPS.APP_NAME = ?)</query>
+	</preparedSql>
+	<preparedSql name="DeleteTable">
+		<description>deletes a given table</description>
+		<arguments>
+			<argument id="1">the table name</argument>
+		</arguments>
+		<query>DELETE FROM DYNAMIC_TABLES WHERE TABLE_NAME = ?</query>
+	</preparedSql>
+</talnet>

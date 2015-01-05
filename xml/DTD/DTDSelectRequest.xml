@@ -1,0 +1,46 @@
+<talnet type="request">
+	<request type="DTD" name="SELECT">
+		<description>
+			DTD Select
+		</description>
+		<requestArguments>
+			<requestArgumentList name="tableNames" key="from">
+				<requestArgument type="String" name="tableName" key="tableName"></requestArgument>
+			</requestArgumentList>
+			<requestArgument type="Statement" name="where" key="WHERE"></requestArgument>
+			<requestArgument type="String" name="orderBy" key="orderBy" defvalue=""></requestArgument>
+			<requestArgument type="OrderOrientation" name="orie" key="dir" defvalue="ASC"></requestArgument>
+			<requestArgument type="String" name="appName" key="appName" defvalue="{creds:appname}"></requestArgument>
+		</requestArguments>
+		<validation>
+			<foreach argname="tableNames" errorid="15">
+				<string target="{appName}_{tableName}" type="isAlphaNumeric" errorid="15">
+				</string>
+				<existence type="TableByName" errorid="12">
+					<argument id="1">{appName}_{tableName}</argument>
+				</existence>
+				<permission type="TablePermissionUser" errorid="6">
+					<argument id="1">{appName}_{tableName}</argument>
+					<argument id="2">{creds:username}</argument>
+					<argument id="3">SELECT</argument>
+					<argument id="4">{appName}</argument>
+				</permission>
+			</foreach>
+			<atleast argname="tableNames" errorid="15">
+				<string target="{appName}_{tableName}" type="isAlphaNumeric" errorid="15">
+				</string>
+			</atleast>
+			<statement target="{where}" type="validateOperands" errorid="19">
+			</statement>
+		</validation>
+		<performance>
+			<dynamicSqlExecute query="select" return="return">
+				<argument id="1">{appName}</argument>
+				<argument id="2">{tableNames}</argument>
+				<argument id="3">{where}</argument>
+				<argument id="4">{orderBy}</argument>
+				<argument id="5">{orie}</argument>
+			</dynamicSqlExecute>
+		</performance>
+	</request>
+</talnet>

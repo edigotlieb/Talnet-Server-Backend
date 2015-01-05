@@ -1,0 +1,27 @@
+<talnet type="request">
+	<request type="APP" name="GET_TABLE_INFO">
+		<description>
+			This request returns the description of a dynamic table
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="appName" key="appName">The name of the application</requestArgument>
+			<requestArgument type="String" name="tableName" key="tableName">The name of the table</requestArgument>
+		</requestArguments>
+		<validation>
+			<existence type="AppByName" errorid="1">
+				<argument id="1">{appName}</argument>
+			</existence>
+			<credentials type="AppAdmin" errorid="6">
+				<argument id="1">{appName}</argument>
+			</credentials>
+			<existence type="TableByName" errorid="8">
+				<argument id="1">{appName}_{tableName}</argument>
+			</existence>
+		</validation>
+		<performance>
+			<dynamicSqlExecute query="descTable" return="return">
+				<argument id="1">{appName}_{tableName}</argument>
+			</dynamicSqlExecute>
+		</performance>
+	</request>
+</talnet>

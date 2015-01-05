@@ -1,0 +1,49 @@
+<talnet type="request">
+	<request type="USER" name="SIGN_UP">
+		<description>
+			this request registers a new user into talnet
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="username" key="username">the username to use</requestArgument>
+			<requestArgument type="String" name="password" key="password">the user password (plain)</requestArgument>
+			<requestArgument type="String" name="first_name" key="firstName">the user first name</requestArgument>
+			<requestArgument type="String" name="last_name" key="lastName">the user last name</requestArgument>
+			<requestArgument type="String" name="disp_name" key="displayName">the user display name</requestArgument>
+			<requestArgument type="String" name="email" key="email">the user email</requestArgument>
+			<requestArgument type="Integer" name="room" key="room">the user room</requestArgument>
+			<requestArgument type="Integer" name="year" key="year">the user year</requestArgument>
+			<requestArgument type="String" name="phonePre" key="phonePre">the user phone prefix</requestArgument>
+			<requestArgument type="String" name="phoneSuf" key="phoneSuf">the user phone suffix</requestArgument>
+		</requestArguments>
+		<validation>
+			<string target="{BackendParams:register_activated}" type="equals" errorid="31">
+				<argument id="1">1</argument>
+			</string>
+			<existence type="UserByUsername" gate="not" errorid="27">
+				<argument id="1">{username}</argument>
+			</existence>
+			<string target="{creds:username}" type="equals" errorid="10">
+				<argument id="1">{Const:Anonymous}</argument>
+			</string>
+			<credentials type="isMasterApplication" errorid="13"></credentials>
+		</validation>
+		<performance>
+			<sqlExecute query="AddUser">
+				<argument id="1">{username}</argument>
+				<argument id="2"  function="md5">{password}</argument>
+				<argument id="3">{first_name}</argument>
+				<argument id="4">{last_name}</argument>
+				<argument id="5">{disp_name}</argument>
+				<argument id="6">{email}</argument>
+				<argument id="7">{room}</argument>
+				<argument id="8">{year}</argument>
+				<argument id="9">{phonePre}</argument>
+				<argument id="10">{phoneSuf}</argument>
+			</sqlExecute>
+			<sqlExecute query="AddUserPermissionGroup">
+				<argument id="1">{username}</argument>
+				<argument id="2">User</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

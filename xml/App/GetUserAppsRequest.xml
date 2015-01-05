@@ -1,0 +1,17 @@
+<talnet type="request">
+	<request type="APP" name="GET_USER_APPS">
+		<description>
+			This request returns a list of all apps in talnet where the authenticated user is
+			in their admin permission group
+		</description>
+		<requestArguments>
+		</requestArguments>
+		<validation>
+		</validation>
+		<performance>
+			<sqlExecute query="getAllAppsUser" return="return">
+				<argument id="1">{creds:username}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

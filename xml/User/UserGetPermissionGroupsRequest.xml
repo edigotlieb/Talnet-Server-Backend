@@ -1,0 +1,16 @@
+<talnet type="request">
+	<request type="USER" name="GET_GROUPS">
+		<description>
+			this request returns a list of all permission groups in talnet
+		</description>
+		<requestArguments>
+		</requestArguments>
+		<validation>
+		</validation>
+		<performance>
+			<sqlExecute query="getUserPermissionGroupsNoPass" return="return">
+				<argument id="1">{creds:username}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

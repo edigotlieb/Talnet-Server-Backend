@@ -1,0 +1,26 @@
+<talnet type="request">
+	<request type="USER" name="SELECT">
+		<description>
+			this request is used to dynamically select users from the USERS table
+		</description>
+		<requestArguments>
+			<requestArgument type="Statement" name="where" key="WHERE">the where clause statement</requestArgument>
+		</requestArguments>
+		<validation>
+			<statement target="{where}" type="isColumnIn" gate="not" errorid="18">
+				<argument id="1">{Const:USER_TABLE_PASSWORD_COLUMN}</argument>
+			</statement>
+			<statement target="{where}" type="validateOperands" errorid="19">
+			</statement>
+			<permission type="UserInGroup" errorid="32">
+				<argument id="1">{creds:username}</argument>
+				<argument id="2">{Const:USER_PERMISSION_GROUP}</argument>
+			</permission>
+		</validation>
+		<performance>
+			<dynamicSqlExecute query="userSelect" return="return">
+				<argument id="1">{where}</argument>
+			</dynamicSqlExecute>
+		</performance>
+	</request>
+</talnet>

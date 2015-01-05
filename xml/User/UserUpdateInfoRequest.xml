@@ -1,0 +1,39 @@
+<talnet type="request">
+	<request type="USER" name="UPDATE_INFO">
+		<description>
+			this requests updates a user's information
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="userToChange" key="username">the user to update</requestArgument>
+			<requestArgument type="String" name="first_name" key="newFirstName">the new first name</requestArgument>
+			<requestArgument type="String" name="last_name" key="newLastName">the new last name</requestArgument>
+			<requestArgument type="String" name="disp_name" key="newDisplayName">the new display name</requestArgument>
+			<requestArgument type="String" name="email" key="newEmail">the new email</requestArgument>
+			<requestArgument type="Integer" name="room" key="newRoom">the new room</requestArgument>
+			<requestArgument type="Integer" name="year" key="newYear">the new year</requestArgument>
+			<requestArgument type="String" name="phonePre" key="phonePre">the new phone prefix</requestArgument>
+			<requestArgument type="String" name="phoneSuf" key="phoneSuf">the new phone suffix</requestArgument>
+		</requestArguments>
+		<validation>
+			<string gate="not" target="{creds:username}" type="equals" errorid="28">
+				<argument id="1">{Const:Anonymous}</argument>
+			</string>
+			<string target="{creds:username}" type="equals" errorid="6">
+				<argument id="1">{userToChange}</argument>
+			</string>
+		</validation>
+		<performance>
+			<sqlExecute query="UpdateUser">
+				<argument id="1">{first_name}</argument>
+				<argument id="2">{last_name}</argument>
+				<argument id="3">{disp_name}</argument>
+				<argument id="4">{email}</argument>
+				<argument id="5">{room}</argument>
+				<argument id="6">{year}</argument>
+				<argument id="7">{phonePre}</argument>
+				<argument id="8">{phoneSuf}</argument>
+				<argument id="9">{userToChange}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

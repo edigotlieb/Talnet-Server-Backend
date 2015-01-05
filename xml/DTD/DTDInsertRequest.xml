@@ -1,0 +1,33 @@
+<talnet type="request">
+	<request type="DTD" name="INSERT">
+		<description>
+			DTD Insert
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="tableName" key="into"></requestArgument>
+			<requestArgument type="Map" name="data" key="data"></requestArgument>
+			<requestArgument type="String" name="appName" key="appName" defvalue="{creds:appname}"></requestArgument>
+		</requestArguments>
+		<validation>
+			<string target="{creds:appname}_{tableName}" type="isAlphaNumeric" errorid="15">
+			</string>
+			<map target="{data}" type="areKeysAlphaNumeric" errorid="15">
+			</map>
+			<existence type="TableByName" errorid="12">
+				<argument id="1">{appName}_{tableName}</argument>
+			</existence>
+			<permission type="TablePermissionUser" errorid="6">
+				<argument id="1">{appName}_{tableName}</argument>
+				<argument id="2">{creds:username}</argument>
+				<argument id="3">INSERT</argument>
+				<argument id="4">{appName}</argument>
+			</permission>
+		</validation>
+		<performance>
+			<dynamicSqlExecute query="insert" return="return">
+				<argument id="1">{appName}_{tableName}</argument>
+				<argument id="2">{data}</argument>
+			</dynamicSqlExecute>
+		</performance>
+	</request>
+</talnet>

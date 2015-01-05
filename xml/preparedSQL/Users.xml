@@ -1,0 +1,105 @@
+<talnet type="preparedSQL">
+	<preparedSql name="getAllUserInfoByUsername">
+		<description>returns all user information by username</description>
+		<arguments>
+			<argument id="1">the user name</argument>
+		</arguments>
+		<columns>
+			<column name="USER_ID">the user id</column>
+			<column name="USERNAME">the username</column>
+			<column name="PASSWORD">the user md5 hashed password</column>
+			<column name="FIRST_NAME">the user first name</column>
+			<column name="LAST_NAME">the user last name</column>
+			<column name="DISPLAY_NAME">the user display name (nuckname)</column>
+			<column name="EMAIL">the user email</column>
+			<column name="ROOM_NUM">the user room number</column>
+			<column name="YEAR">the user year</column>
+			<column name="PHONE_PRE">the user phone prefix</column>
+			<column name="PHONE_SUF">the user phone suffix</column>
+		</columns>
+		<query>SELECT * from USERS WHERE USERNAME = ?</query>
+	</preparedSql>
+	<preparedSql name="getAllUserInfoByUsernameNoPass">
+		<description>returns all user information (except password) by username</description>
+		<arguments>
+			<argument id="1">the user name</argument>
+		</arguments>
+		<columns>
+			<column name="USER_ID">the user id</column>
+			<column name="USERNAME">the username</column>
+			<column name="FIRST_NAME">the user first name</column>
+			<column name="LAST_NAME">the user last name</column>
+			<column name="NAME">the user full name</column>
+			<column name="DISPLAY_NAME">the user display name (nuckname)</column>
+			<column name="EMAIL">the user email</column>
+			<column name="ROOM_NUM">the user room number</column>
+			<column name="YEAR">the user year</column>
+			<column name="PHONE_PRE">the user phone prefix</column>
+			<column name="PHONE_SUF">the user phone suffix</column>
+			<column name="ACTIVE">whether the user is active</column>
+		</columns>
+		<query>SELECT USERS.USER_ID, USERS.USERNAME, USERS.FIRST_NAME, USERS.LAST_NAME, CONCAT_WS(' ',USERS.FIRST_NAME,USERS.LAST_NAME) AS NAME, USERS.EMAIL, USERS.DATE_REGISTERED, USERS.YEAR, USERS.DISPLAY_NAME, USERS.ROOM_NUM, USERS.PHONE_PRE, USERS.PHONE_SUF, USERS.ACTIVE
+FROM USERS WHERE USERNAME = ?</query>
+	</preparedSql>
+	<preparedSql name="UpdateUserPassword">
+		<description>changes a user password</description>
+		<arguments>
+			<argument id="1">the new md5 hashed password</argument>
+			<argument id="1">the username</argument>
+		</arguments>
+		<query>UPDATE USERS SET PASSWORD = ? WHERE USERNAME = ?</query>
+	</preparedSql>
+	<preparedSql name="UpdateUser">
+		<description>updates a user information</description>
+		<arguments>
+			<argument id="1">new first name</argument>
+			<argument id="2">new last name</argument>
+			<argument id="3">new display name</argument>
+			<argument id="4">new email </argument>
+			<argument id="5">new room number</argument>
+			<argument id="6">new year</argument>
+			<argument id="7">new phone prefix</argument>
+			<argument id="8">new phone suffix</argument>
+			<argument id="9">the user name</argument>
+		</arguments>
+		<query>UPDATE USERS SET FIRST_NAME = ?,LAST_NAME = ?,DISPLAY_NAME = ?,EMAIL = ?,ROOM_NUM = ?,YEAR = ?,PHONE_PRE = ?,PHONE_SUF = ?  WHERE USERNAME = ?</query>
+	</preparedSql>
+	<preparedSql name="AddUser">
+		<description>adds a new user</description>
+		<arguments>
+			<argument id="1">new user name</argument>
+			<argument id="2">new user md5 hashed password</argument>
+			<argument id="3">new first name</argument>
+			<argument id="4">new last name</argument>
+			<argument id="5">new display name</argument>
+			<argument id="6">new email </argument>
+			<argument id="7">new room number</argument>
+			<argument id="8">new year</argument>
+			<argument id="9">new phone prefix</argument>
+			<argument id="10">new phone suffix</argument>
+		</arguments>
+		<query>INSERT INTO USERS (USERNAME,PASSWORD,FIRST_NAME,LAST_NAME,DISPLAY_NAME,EMAIL,ROOM_NUM,YEAR,PHONE_PRE, PHONE_SUF, ACTIVE)
+VALUES (?,?,?,?,?,?,?,?,?,?,1);</query>
+	</preparedSql>
+	<preparedSql name="DeleteUser">
+		<description>deletes an existing user</description>
+		<arguments>
+			<argument id="1">the user name</argument>
+		</arguments>
+		<query>DELETE FROM USERS WHERE USERNAME = ?</query>
+	</preparedSql>
+	<preparedSql name="ActivateUser">
+		<description>activates an existing user</description>
+		<arguments>
+			<argument id="1">the user name</argument>
+		</arguments>
+		<query>UPDATE USERS SET ACTIVE=1 WHERE USERNAME = ?</query>
+	</preparedSql>
+	<preparedSql name="DeactivateUser">
+		<description>deactivates an existing user</description>
+		<arguments>
+			<argument id="1">the user name</argument>
+		</arguments>
+		<query>UPDATE USERS SET ACTIVE=0 WHERE USERNAME = ?</query>
+	</preparedSql>
+</talnet>

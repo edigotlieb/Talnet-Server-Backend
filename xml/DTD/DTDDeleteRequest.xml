@@ -1,0 +1,31 @@
+<talnet type="request">
+	<request type="DTD" name="DELETE">
+		<description>
+			DTD Delete
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="tableName" key="from"></requestArgument>
+			<requestArgument type="Statement" name="where" key="WHERE"></requestArgument>
+			<requestArgument type="String" name="appName" key="appName" defvalue="{creds:appname}"></requestArgument>
+		</requestArguments>
+		<validation>
+			<string target="{creds:appname}_{tableName}" type="isAlphaNumeric" errorid="15">
+			</string>
+			<existence type="TableByName" errorid="12">
+				<argument id="1">{appName}_{tableName}</argument>
+			</existence>
+			<permission type="TablePermissionUser" errorid="6">
+				<argument id="1">{appName}_{tableName}</argument>
+				<argument id="2">{creds:username}</argument>
+				<argument id="3">Delete</argument>
+				<argument id="4">{appName}</argument>
+			</permission>
+		</validation>
+		<performance>
+			<dynamicSqlExecute query="delete" return="return">
+				<argument id="1">{appName}_{tableName}</argument>
+				<argument id="2">{where}</argument>
+			</dynamicSqlExecute>
+		</performance>
+	</request>
+</talnet>

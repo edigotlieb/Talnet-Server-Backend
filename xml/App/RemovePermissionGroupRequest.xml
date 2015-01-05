@@ -1,0 +1,36 @@
+<talnet type="request">
+	<request type="APP" name="REMOVE_PERMISSIONGROUP">
+		<description>
+			this request deletes a permission group from talnet
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="permissionGroupName" key="permissionGroupName">The name of the permission group to delete</requestArgument>
+		</requestArguments>
+		<validation>
+			<existence type="PermissionGroupByName" errorid="11">
+				<argument id="1">{permissionGroupName}</argument>
+			</existence>
+			<string gate="not" target="{permissionGroupName}" type="endsWith" errorid="17">
+				<argument id="1">_{Const:APP_ADMIN_PERMISSION_GROUP_SUFFIX}</argument>
+			</string>
+			<string gate="not" target="{permissionGroupName}" type="matches" errorid="17">
+				<argument id="1">{Const:SUPER_ADMIN_PERMISSION_GROUP}|{Const:USER_PERMISSION_GROUP}|{Const:ANONYMOUS_PERMISSION_GROUP}|{Const:DEVELOPER_PERMISSION_GROUP}</argument>
+			</string>
+			<permission type="PermissionGroupAdmin" errorid="6">
+				<argument id="1">{permissionGroupName}</argument>
+				<argument id="2">{creds:username}</argument>
+			</permission>
+		</validation>
+		<performance>
+			<sqlExecute query="DeletePermissionUsers">
+				<argument id="1">{permissionGroupName}</argument>
+			</sqlExecute>
+			<sqlExecute query="DeleteAppPermissionsByPermissionName">
+				<argument id="1">{permissionGroupName}</argument>
+			</sqlExecute>
+			<sqlExecute query="DeletePermission">
+				<argument id="1">{permissionGroupName}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

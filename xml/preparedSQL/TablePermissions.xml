@@ -1,0 +1,91 @@
+<talnet type="preparedSQL">
+	<preparedSql name="getTableInfoByName">
+		<description>returns information of a table by its name</description>
+		<arguments>
+			<argument id="1">the table name</argument>
+		</arguments>
+		<columns>
+			<column name="TABLE_NAME">table name</column>
+			<column name="APP_NAME">app name</column>
+			<column name="APP_KEY">app key</column>
+		</columns>
+		<query>SELECT DYNAMIC_TABLES.TABLE_NAME, APPS.APP_NAME, APPS.APP_KEY FROM DYNAMIC_TABLES
+LEFT JOIN APPS ON APPS.APP_ID = DYNAMIC_TABLES.APP_ID
+WHERE DYNAMIC_TABLES.TABLE_NAME = ?</query>
+	</preparedSql>
+	<preparedSql name="getTablePermissionForGroup">
+		<description>returns a record of table permission by table name, permisison group name, and permission type</description>
+		<arguments>
+			<argument id="1">full table name</argument>
+			<argument id="2">the permission group name</argument>
+			<argument id="3">the permission type</argument>
+		</arguments>
+		<columns>
+			<column name="PERMISSION_TYPE">the permission type</column>
+		</columns>
+		<query>SELECT APP_PERMISSIONS.PERMISSION_TYPE FROM APP_PERMISSIONS
+LEFT JOIN DYNAMIC_TABLES ON DYNAMIC_TABLES.TABLE_ID = APP_PERMISSIONS.TABLE_ID
+LEFT JOIN PERMISSION_GROUPS ON PERMISSION_GROUPS.PERMISSIONGROUP_ID = APP_PERMISSIONS.PERMISSIONGROUP_ID
+WHERE DYNAMIC_TABLES.TABLE_NAME = ? AND PERMISSION_GROUPS.PERMISSION_NAME = ? AND APP_PERMISSIONS.PERMISSION_TYPE = ?</query>
+	</preparedSql>
+	<preparedSql name="getTablePermissions">
+		<description>returns a list of permissions of a table</description>
+		<arguments>
+			<argument id="1">the name of the table</argument>
+		</arguments>
+		<columns>
+			<column name="PERMISSION_NAME">the permission group name</column>
+			<column name="PERMISSION_TYPE">the permission type</column>
+		</columns>
+		<query>SELECT PERMISSION_GROUPS.PERMISSION_NAME,APP_PERMISSIONS.PERMISSION_TYPE FROM APP_PERMISSIONS
+LEFT JOIN DYNAMIC_TABLES ON DYNAMIC_TABLES.TABLE_ID = APP_PERMISSIONS.TABLE_ID
+LEFT JOIN PERMISSION_GROUPS ON PERMISSION_GROUPS.PERMISSIONGROUP_ID = APP_PERMISSIONS.PERMISSIONGROUP_ID
+WHERE DYNAMIC_TABLES.TABLE_NAME = ?</query>
+	</preparedSql>
+	<preparedSql name="AddPermissionGroupForTable">
+		<description>adds a new permission for a table</description>
+		<arguments>
+			<argument id="1">the app name</argument>
+			<argument id="2">the table name</argument>
+			<argument id="3">the permission type</argument>
+			<argument id="4">the permission group name</argument>
+		</arguments>
+		<query>INSERT INTO APP_PERMISSIONS (APP_ID,TABLE_ID,PERMISSION_TYPE,PERMISSIONGROUP_ID)
+VALUES ((SELECT APP_ID FROM APPS WHERE APPS.APP_NAME = ?),
+(SELECT TABLE_ID FROM DYNAMIC_TABLES WHERE DYNAMIC_TABLES.TABLE_NAME = ?), ?,
+(SELECT PERMISSIONGROUP_ID FROM PERMISSION_GROUPS WHERE PERMISSION_GROUPS.PERMISSION_NAME = ?));</query>
+	</preparedSql>
+	<preparedSql name="DeleteSingleAppPermission">
+		<description>deletes a table permission</description>
+		<arguments>
+			<argument id="1">the table name</argument>
+			<argument id="2">the permission name</argument>
+			<argument id="3">the permission type</argument>
+		</arguments>
+		<query>DELETE FROM APP_PERMISSIONS
+WHERE TABLE_ID = (SELECT TABLE_ID FROM DYNAMIC_TABLES WHERE DYNAMIC_TABLES.TABLE_NAME = ?)
+AND PERMISSIONGROUP_ID = (SELECT PERMISSIONGROUP_ID FROM PERMISSION_GROUPS WHERE PERMISSION_GROUPS.PERMISSION_NAME = ?)
+AND PERMISSION_TYPE = ?</query>
+	</preparedSql>
+	<preparedSql name="DeleteAppPermissionsByTableName">
+		<description>deletes all table permission of a given table</description>
+		<arguments>
+			<argument id="1">the table name</argument>
+		</arguments>
+		<query>DELETE FROM APP_PERMISSIONS WHERE TABLE_ID = (SELECT TABLE_ID FROM DYNAMIC_TABLES WHERE DYNAMIC_TABLES.TABLE_NAME = ?)</query>
+	</preparedSql>
+	<preparedSql name="DeleteAppPermissionsByAppName">
+		<description>deletes all table permission of a given application</description>
+		<arguments>
+			<argument id="1">the app name</argument>
+		</arguments>
+		<query>DELETE FROM APP_PERMISSIONS WHERE APP_ID = (SELECT APP_ID FROM APPS WHERE APPS.APP_NAME = ?)</query>
+	</preparedSql>
+	<preparedSql name="DeleteAppPermissionsByPermissionName">
+		<description>deletes all table permissions of a given permission group</description>
+		<arguments>
+			<argument id="1">the permission group name</argument>
+		</arguments>
+		<query>DELETE FROM APP_PERMISSIONS WHERE PERMISSIONGROUP_ID = (SELECT PERMISSIONGROUP_ID FROM PERMISSION_GROUPS WHERE PERMISSION_GROUPS.PERMISSION_NAME = ?)</query>
+	</preparedSql>
+</talnet>

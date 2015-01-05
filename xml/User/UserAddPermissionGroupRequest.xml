@@ -1,0 +1,36 @@
+<talnet type="request">
+	<request type="USER" name="ADD_PERMISSION">
+		<description>
+			this request adds a user to an existing permission group
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="userToAddTo" key="username">the user to add</requestArgument>
+			<requestArgument type="String" name="groupName" key="permissionGroupName">the permission group to add to</requestArgument>
+		</requestArguments>
+		<validation>
+			<string gate="not" target="{userToAddTo}" type="equals" errorid="3">
+				<argument id="1">{Const:Anonymous}</argument>
+			</string>
+			<existence type="UserByUsername" errorid="3">
+				<argument id="1">{userToAddTo}</argument>
+			</existence>
+			<existence type="PermissionGroupByName" errorid="11">
+				<argument id="1">{groupName}</argument>
+			</existence>
+			<permission type="PermissionGroupAdmin" errorid="6">
+				<argument id="1">{groupName}</argument>
+				<argument id="2">{creds:username}</argument>
+			</permission>
+			<permission gate="not" type="UserInGroup" errorid="27">
+				<argument id="1">{userToAddTo}</argument>
+				<argument id="2">{groupName}</argument>
+			</permission>
+		</validation>
+		<performance>
+			<sqlExecute query="AddUserPermissionGroup">
+				<argument id="1">{userToAddTo}</argument>
+				<argument id="2">{groupName}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

@@ -1,0 +1,36 @@
+<talnet type="request">
+	<request type="USER" name="DELETE_USER">
+		<description>
+			this request deletes an exisiting user from talnet
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="userToDelete" key="userToDelete">the user to delete</requestArgument>
+		</requestArguments>
+		<validation>
+			<permission type="UserInGroup" errorid="6">
+				<argument id="1">{creds:username}</argument>
+				<argument id="2">{Const:SUPER_ADMIN_PERMISSION_GROUP}</argument>
+			</permission>
+			<string gate="not" target="{userToDelete}" type="equals" errorid="28">
+				<argument id="1">{Const:Anonymous}</argument>
+			</string>
+			<existence type="UserByUsername" errorid="3">
+				<argument id="1">{userToDelete}</argument>
+			</existence>
+			<string gate="not" target="{userToDelete}" type="equals" errorid="33">
+				<argument id="1">{creds:username}</argument>
+			</string>
+			<permission gate="not" type="AnyPermissionGroupAdmin" errorid="24">
+				<argument id="1">{userToDelete}</argument>
+			</permission>
+		</validation>
+		<performance>
+			<sqlExecute query="DeletePermissionUsersByUser">
+				<argument id="1">{userToDelete}</argument>
+			</sqlExecute>
+			<sqlExecute query="DeleteUser">
+				<argument id="1">{userToDelete}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

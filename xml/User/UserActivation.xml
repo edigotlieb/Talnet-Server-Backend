@@ -1,0 +1,24 @@
+<talnet type="request">
+	<request type="USER" name="ACTIVATE">
+		<description>
+			this request activates a user
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="username" key="userToActivate">the user to activate</requestArgument>
+		</requestArguments>
+		<validation>
+			<permission type="UserInGroup" errorid="6">
+				<argument id="1">{creds:username}</argument>
+				<argument id="2">{Const:SUPER_ADMIN_PERMISSION_GROUP}</argument>
+			</permission>
+			<existence type="UserByUsername" errorid="3">
+				<argument id="1">{username}</argument>
+			</existence>
+		</validation>
+		<performance>
+			<sqlExecute query="ActivateUser" return="return">
+				<argument id="1">{username}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>

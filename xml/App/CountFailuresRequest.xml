@@ -1,0 +1,22 @@
+<talnet type="request">
+	<request type="APP" name="COUNT_FAILURES">
+		<description>
+			Returns the number of failures of an app
+		</description>
+		<requestArguments>
+			<requestArgument type="String" name="appName" key="appName" defvalue="{creds:appname}">the application name to examine</requestArgument>
+		</requestArguments>
+		<validation>
+			<credentials type="isMasterApplication" errorid="13">
+			</credentials>
+			<credentials type="AppAdmin" errorid="6">
+				<argument id="1">{appName}</argument>
+			</credentials>
+		</validation>
+		<performance>
+			<sqlExecute query="CountFailures" return="return">
+				<argument id="1">{appName}</argument>
+			</sqlExecute>
+		</performance>
+	</request>
+</talnet>
